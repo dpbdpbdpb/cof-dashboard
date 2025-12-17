@@ -52,28 +52,28 @@ const swimlanes = [
 
 const columnDescriptions = {
   "new-product": {
-    "Funnel": "Request received, initial triage",
-    "Reviewing": "Evidence gathering, clinical review",
-    "Analyzing": "Financial modeling, 3-pillar prep",
-    "Backlog": "Awaiting Kaizen scheduling",
-    "Implementing": "Pilot/rollout in progress",
-    "Done": "Formulary decision complete",
+    "Funnel": "K1: Request received, champion identified",
+    "Reviewing": "K2: Coalition forming, Kaizen scheduled",
+    "Analyzing": "K3-K4: 8-agent analysis, Kaizen decision",
+    "Backlog": "K5: APPROVED, awaiting implementation capacity",
+    "Implementing": "K5-K6: Pilot/rollout in progress",
+    "Done": "K8: Lookback complete, formulary finalized",
   },
   "re-evaluation": {
-    "Funnel": "Trigger identified (safety, evidence)",
-    "Reviewing": "Lookback data collection",
-    "Analyzing": "Impact assessment, alternatives",
-    "Backlog": "Awaiting reassessment Kaizen",
-    "Implementing": "Sustain/Modify/Remove action",
-    "Done": "Reassessment complete",
+    "Funnel": "K1: Trigger identified (safety, evidence, utilization)",
+    "Reviewing": "K2: Stakeholders engaged, Kaizen scheduled",
+    "Analyzing": "K3-K4: Lookback analysis, Kaizen decision",
+    "Backlog": "K5: APPROVED, awaiting implementation capacity",
+    "Implementing": "K5-K6: Sustain/Modify/Remove executing",
+    "Done": "K8: Formulary updated, transition complete",
   },
   "sourcing": {
-    "Funnel": "Category identified, RFI/RFP prep",
-    "Reviewing": "Vendor submissions, evaluations",
-    "Analyzing": "Clinical equivalence, pricing",
-    "Backlog": "Awaiting strategy Kaizen",
-    "Implementing": "Contract execution, transition",
-    "Done": "Contract live, savings realized",
+    "Funnel": "S0/K1: Category assessed, urgency documented",
+    "Reviewing": "S1/K2: Coalition building, Kaizen scheduled",
+    "Analyzing": "S2-S3/K3-K4: Equivalence analysis, Kaizen decision",
+    "Backlog": "K5: Strategy APPROVED, awaiting contract execution",
+    "Implementing": "S4/K5-K6: Contract execution, vendor transition",
+    "Done": "S5/K8: Contract live, savings realized",
   },
 };
 ```
@@ -84,30 +84,30 @@ const columnDescriptions = {
 // ============================================
 
 const cardiovascularIssues = [
-  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
 ];
 
 const orthopedicIssues = [
-  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106 to 4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106 to 4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
 ];
 
 const neuroscienceIssues = [
-  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, projectedRevenue: null, serviceLine: "neuroscience" },
-  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, projectedRevenue: null, labels: ["blocked"], serviceLine: "neuroscience" },
+  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "neuroscience" },
+  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, labels: ["blocked"], serviceLine: "neuroscience" },
 ];
 
 const womensChildrensIssues = [
-  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Larry Shields, MD", archetype: "re-evaluation", completion: 80, projectedSavings: null, projectedRevenue: null, serviceLine: "womens-childrens" },
+  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Larry Shields, MD", archetype: "re-evaluation", completion: 80, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "womens-childrens" },
 ];
 
 const allData = {
@@ -123,20 +123,70 @@ const allIssues = [...cardiovascularIssues, ...orthopedicIssues, ...neuroscience
 
 ```js
 // ============================================
-// VIEW SELECTOR (Portfolio or Service Line)
+// VIEW STATE (Using Mutable for tab navigation)
 // ============================================
 
 const viewOptions = [
-  { id: "portfolio", name: "Portfolio Overview", icon: "📊", color: brand.gray },
+  { id: "portfolio", name: "Portfolio", icon: "📊", color: brand.gray },
   ...serviceLines
 ];
 
-const selectedView = view(Inputs.select(viewOptions, {
-  label: "View",
-  format: v => `${v.icon} ${v.name}`,
-  value: viewOptions[0]
-}));
+const selectedViewState = Mutable("portfolio");
+const selectedViewId = selectedViewState.generator;
+
+function setView(id) {
+  selectedViewState.value = id;
+}
 ```
+
+```js
+// ============================================
+// TAB NAVIGATION BAR
+// ============================================
+
+const selectedView = viewOptions.find(v => v.id === selectedViewId) || viewOptions[0];
+
+html`<div style="
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 6px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow-x: auto;
+  flex-wrap: wrap;
+">
+  ${viewOptions.map(v => {
+    const isActive = v.id === selectedViewId;
+    return html`
+      <button
+        onclick=${() => setView(v.id)}
+        style="
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+          background: ${isActive ? v.color : 'transparent'};
+          color: ${isActive ? 'white' : brand.gray};
+          box-shadow: ${isActive ? '0 2px 8px rgba(0,0,0,0.15)' : 'none'};
+        "
+        onmouseover=${(e) => { if (!isActive) { e.target.style.background = '#f1f5f9'; }}}
+        onmouseout=${(e) => { if (!isActive) { e.target.style.background = 'transparent'; }}}
+      >
+        <span style="font-size: 18px;">${v.icon}</span>
+        <span>${v.name}</span>
+      </button>
+    `;
+  })}
+</div>`
 
 ```js
 // ============================================
@@ -153,34 +203,56 @@ const currentLeaders = isPortfolioView ? null : pillarLeaders[selectedView.id];
 // HELPER FUNCTIONS
 // ============================================
 
-function calculateSavings(issues) {
-  let low = 0, high = 0;
-  issues.forEach(i => {
-    if (i.projectedSavings) {
-      const match = i.projectedSavings.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
-      if (match) {
-        low += parseFloat(match[1]);
-        high += match[2] ? parseFloat(match[2]) : parseFloat(match[1]);
-      }
-    }
-  });
-  if (low === 0) return "—";
+function parseFinancialValue(value) {
+  if (!value) return { low: 0, high: 0 };
+  const match = value.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
+  if (match) {
+    const low = parseFloat(match[1]);
+    const high = match[2] ? parseFloat(match[2]) : low;
+    return { low, high };
+  }
+  return { low: 0, high: 0 };
+}
+
+function formatFinancialValue(low, high) {
+  if (low === 0 && high === 0) return "—";
   return low === high ? `$${low}M` : `$${low}-${high}M`;
 }
 
-function calculateRevenue(issues) {
+function calculateSavings(issues, type = "projected") {
   let low = 0, high = 0;
+  const field = type === "realized" ? "realizedSavings" : "projectedSavings";
   issues.forEach(i => {
-    if (i.projectedRevenue) {
-      const match = i.projectedRevenue.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
-      if (match) {
-        low += parseFloat(match[1]);
-        high += match[2] ? parseFloat(match[2]) : parseFloat(match[1]);
-      }
-    }
+    const parsed = parseFinancialValue(i[field]);
+    low += parsed.low;
+    high += parsed.high;
   });
-  if (low === 0) return "—";
-  return low === high ? `$${low}M` : `$${low}-${high}M`;
+  return formatFinancialValue(low, high);
+}
+
+function calculateRevenue(issues, type = "projected") {
+  let low = 0, high = 0;
+  const field = type === "realized" ? "realizedRevenue" : "projectedRevenue";
+  issues.forEach(i => {
+    const parsed = parseFinancialValue(i[field]);
+    low += parsed.low;
+    high += parsed.high;
+  });
+  return formatFinancialValue(low, high);
+}
+
+function calculateTotalSavings(issues) {
+  return {
+    projected: calculateSavings(issues, "projected"),
+    realized: calculateSavings(issues, "realized")
+  };
+}
+
+function calculateTotalRevenue(issues) {
+  return {
+    projected: calculateRevenue(issues, "projected"),
+    realized: calculateRevenue(issues, "realized")
+  };
 }
 
 function getUpcomingKaizens(issues) {
@@ -210,7 +282,7 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(6, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Total Items</div>
       <div style="font-size: 36px; font-weight: 800;">${allIssues.length}</div>
@@ -221,11 +293,19 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateSavings(allIssues)}</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "projected")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">New Revenue</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateRevenue(allIssues)}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Savings</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "realized")}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "projected")}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Revenue</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "realized")}</div>
     </div>
   </div>
 </div>` : html`<div class="hero-section compact">
@@ -237,22 +317,24 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(5, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
       <div style="font-size: 36px; font-weight: 800;">${currentIssues.length}</div>
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateSavings(currentIssues)}</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(currentIssues, "projected")}</div>
+      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateSavings(currentIssues, "realized")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">New Revenue</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateRevenue(currentIssues)}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(currentIssues, "projected")}</div>
+      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateRevenue(currentIssues, "realized")}</div>
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
-      <div style="font-size: 18px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
+      <div style="font-size: 16px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
     </div>
   </div>
 </div>`
@@ -271,7 +353,10 @@ isPortfolioView ? html`
     const implementing = issues.filter(i => i.status === "Implementing").length;
     const blocked = issues.filter(i => i.labels?.some(l => l.toLowerCase().includes("blocked"))).length;
     return html`
-      <div class="card" style="border-top: 4px solid ${sl.color}; cursor: pointer;" onclick="document.querySelector('select').value = '${sl.id}'; document.querySelector('select').dispatchEvent(new Event('input'));">
+      <div class="card" style="border-top: 4px solid ${sl.color}; cursor: pointer; transition: all 0.2s ease;"
+        onclick=${() => setView(sl.id)}
+        onmouseover=${(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)'; }}
+        onmouseout=${(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = ''; }}>
         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
           <div style="font-size: 32px;">${sl.icon}</div>
           <div>
@@ -287,14 +372,28 @@ isPortfolioView ? html`
           <span style="color: ${brand.grayLight};">In Progress</span>
           <span style="font-weight: 700; color: ${brand.magenta};">${implementing}</span>
         </div>
-        ${blocked > 0 ? html`
         <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
           <span style="color: ${brand.grayLight};">Blocked</span>
-          <span style="font-weight: 700; color: #ef4444;">${blocked}</span>
-        </div>` : ""}
+          <span style="font-weight: 700; color: ${blocked > 0 ? '#ef4444' : brand.grayLight};">${blocked}</span>
+        </div>
         <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Savings</span>
-          <span style="font-weight: 700; color: ${brand.teal};">${calculateSavings(issues)}</span>
+          <span style="color: ${brand.grayLight};">Proj. Savings</span>
+          <span style="font-weight: 700; color: ${brand.teal};">${calculateSavings(issues, "projected")}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
+          <span style="color: ${brand.grayLight};">Realized Savings</span>
+          <span style="font-weight: 700; color: #10B981;">${calculateSavings(issues, "realized")}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
+          <span style="color: ${brand.grayLight};">Proj. Revenue</span>
+          <span style="font-weight: 700; color: ${brand.magenta};">${calculateRevenue(issues, "projected")}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
+          <span style="color: ${brand.grayLight};">Realized Revenue</span>
+          <span style="font-weight: 700; color: #10B981;">${calculateRevenue(issues, "realized")}</span>
+        </div>
+        <div style="margin-top: 12px; text-align: center; font-size: 12px; color: ${sl.color}; font-weight: 600;">
+          View Details →
         </div>
       </div>
     `;
@@ -435,10 +534,12 @@ function renderKanban(issues, showServiceLine = false) {
                           </div>
                           ${showServiceLine ? html`<div style="font-size: 10px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
                           <div style="font-size: 10px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
-                          ${issue.projectedSavings || issue.projectedRevenue ? html`
+                          ${issue.projectedSavings || issue.realizedSavings || issue.projectedRevenue || issue.realizedRevenue ? html`
                             <div style="font-size: 10px; margin-top: 6px; font-weight: 600;">
-                              ${issue.projectedSavings ? html`<span style="color: ${brand.teal};">${issue.projectedSavings}</span>` : ""}
-                              ${issue.projectedRevenue ? html`<span style="color: ${brand.magenta}; margin-left: 6px;">+${issue.projectedRevenue}</span>` : ""}
+                              ${issue.projectedSavings ? html`<span style="color: ${brand.teal};" title="Projected Savings">📊 ${issue.projectedSavings}</span>` : ""}
+                              ${issue.realizedSavings ? html`<span style="color: #10B981; margin-left: 4px;" title="Realized Savings">✓ ${issue.realizedSavings}</span>` : ""}
+                              ${issue.projectedRevenue ? html`<span style="color: ${brand.magenta}; margin-left: 6px;" title="Projected Revenue">📊 +${issue.projectedRevenue}</span>` : ""}
+                              ${issue.realizedRevenue ? html`<span style="color: #10B981; margin-left: 4px;" title="Realized Revenue">✓ +${issue.realizedRevenue}</span>` : ""}
                             </div>
                           ` : ""}
                           <div style="font-size: 10px; color: ${brand.purple}; margin-top: 6px;">
@@ -463,41 +564,60 @@ function renderKanban(issues, showServiceLine = false) {
 renderKanban(currentIssues, isPortfolioView)
 ```
 
-## Quantified Items
+## Financial Impact
 
 ```js
-const savingsItems = currentIssues.filter(i => i.projectedSavings);
-const revenueItems = currentIssues.filter(i => i.projectedRevenue);
-const quantifiedCount = new Set([...savingsItems, ...revenueItems].map(i => i.id)).size;
+const projectedSavingsItems = currentIssues.filter(i => i.projectedSavings);
+const realizedSavingsItems = currentIssues.filter(i => i.realizedSavings);
+const projectedRevenueItems = currentIssues.filter(i => i.projectedRevenue);
+const realizedRevenueItems = currentIssues.filter(i => i.realizedRevenue);
+const quantifiedCount = new Set([...projectedSavingsItems, ...projectedRevenueItems].map(i => i.id)).size;
+const realizedCount = new Set([...realizedSavingsItems, ...realizedRevenueItems].map(i => i.id)).size;
 ```
 
 ```js
 html`<div class="card">
-  <h4 style="margin-bottom: 16px;">Financial Quantification Progress</h4>
+  <h4 style="margin-bottom: 16px;">Financial Impact Summary</h4>
 
-  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-    <span style="color: ${brand.grayLight}; font-size: 14px;">Items quantified</span>
-    <span style="font-weight: 600;">${quantifiedCount} of ${currentIssues.length}</span>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+    <div style="padding: 12px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid ${brand.teal};">
+      <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Projected</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${quantifiedCount} items quantified</div>
+      <div style="font-size: 18px; font-weight: 700; color: ${brand.teal}; margin-top: 4px;">${calculateSavings(currentIssues, "projected")} savings</div>
+      <div style="font-size: 14px; color: ${brand.magenta};">${calculateRevenue(currentIssues, "projected")} revenue</div>
+    </div>
+    <div style="padding: 12px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #10B981;">
+      <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Realized</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${realizedCount} items realized</div>
+      <div style="font-size: 18px; font-weight: 700; color: #10B981; margin-top: 4px;">${calculateSavings(currentIssues, "realized")} savings</div>
+      <div style="font-size: 14px; color: #10B981;">${calculateRevenue(currentIssues, "realized")} revenue</div>
+    </div>
   </div>
 
-  <div style="width: 100%; height: 8px; background: #f1f5f9; border-radius: 4px; margin-bottom: 20px;">
-    <div style="width: ${(quantifiedCount / Math.max(currentIssues.length, 1)) * 100}%; height: 100%; background: ${brand.teal}; border-radius: 4px;"></div>
-  </div>
-
-  ${savingsItems.length > 0 || revenueItems.length > 0 ? html`
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      ${savingsItems.map(item => {
+  ${projectedSavingsItems.length > 0 || realizedSavingsItems.length > 0 ? html`
+    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Savings Detail</h5>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+      ${projectedSavingsItems.map(item => {
         const sl = serviceLines.find(s => s.id === item.serviceLine);
         return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0fdfa; border-radius: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0f9ff; border-radius: 6px;">
           <div>
             <span style="color: ${brand.gray};">${item.title}</span>
             ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
           </div>
-          <span style="font-weight: 600; color: ${brand.teal};">${item.projectedSavings}</span>
+          <div style="text-align: right;">
+            <div style="font-weight: 600; color: ${brand.teal};">📊 ${item.projectedSavings}</div>
+            ${item.realizedSavings ? html`<div style="font-size: 12px; color: #10B981;">✓ ${item.realizedSavings}</div>` : ""}
+          </div>
         </div>
       `})}
-      ${revenueItems.map(item => {
+    </div>
+  ` : ""}
+
+  ${projectedRevenueItems.length > 0 || realizedRevenueItems.length > 0 ? html`
+    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Revenue Detail</h5>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      ${projectedRevenueItems.map(item => {
         const sl = serviceLines.find(s => s.id === item.serviceLine);
         return html`
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #fdf4f8; border-radius: 6px;">
@@ -505,11 +625,16 @@ html`<div class="card">
             <span style="color: ${brand.gray};">${item.title}</span>
             ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
           </div>
-          <span style="font-weight: 600; color: ${brand.magenta};">+${item.projectedRevenue}</span>
+          <div style="text-align: right;">
+            <div style="font-weight: 600; color: ${brand.magenta};">📊 +${item.projectedRevenue}</div>
+            ${item.realizedRevenue ? html`<div style="font-size: 12px; color: #10B981;">✓ +${item.realizedRevenue}</div>` : ""}
+          </div>
         </div>
       `})}
     </div>
-  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
+  ` : ""}
+
+  ${projectedSavingsItems.length === 0 && projectedRevenueItems.length === 0 ? html`<p style="color: ${brand.grayLight};">No items quantified yet</p>` : ""}
 </div>`
 ```
 
