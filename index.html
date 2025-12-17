@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.3">
+<title>COF Portfolio Dashboard</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_import/style.6ae57e22.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_import/style.6ae57e22.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.fedf0981.js">
+<link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.eabb1795.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.5ca2ce9b.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.fedf0981.js";
+
+define({id: "89a72429", outputs: ["brand","serviceLines","pillarLeaders","kanbanStates","swimlanes","columnDescriptions"], body: () => {
+// ============================================
+// CONFIGURATION & BRAND COLORS
+// ============================================
+
+const brand = {
+  magenta: "#C4177A",
+  magentaLight: "#E91E8C",
+  magentaDark: "#9E1362",
+  gray: "#54585A",
+  grayLight: "#7A7D80",
+  grayDark: "#3D4042",
+  purple: "#6B3FA0",
+  teal: "#008B8B",
+  white: "#FFFFFF",
+  warmWhite: "#FAFAFA",
+  warmGray: "#F5F5F5"
+};
+
+const serviceLines = [
+  { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", color: brand.magenta, champion: "Dr. Nezar Falluji" },
+  { id: "orthopedic", name: "Orthopedic", icon: "🦴", color: brand.teal, champion: "Dr. Ranjan Gupta" },
+  { id: "neuroscience", name: "Neuroscience", icon: "🧠", color: brand.purple, champion: "Dr. Tom Devlin" },
+];
+
+const pillarLeaders = {
+  cardiovascular: { clinical: "Dr. Nezar Falluji", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
+  orthopedic: { clinical: "Dr. Ranjan Gupta", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
+  neuroscience: { clinical: "Dr. Tom Devlin", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
+};
+
+const kanbanStates = [
+  { id: "Funnel", label: "Funnel", color: brand.grayLight },
+  { id: "Reviewing", label: "Reviewing", color: brand.purple },
+  { id: "Analyzing", label: "Analyzing", color: brand.teal },
+  { id: "Backlog", label: "Backlog", color: "#D97706" },
+  { id: "Implementing", label: "Implementing", color: brand.magenta },
+  { id: "Done", label: "Done", color: brand.gray },
+];
+
+const swimlanes = [
+  { id: "new-product", label: "📦 New Product Evaluation", color: brand.teal },
+  { id: "re-evaluation", label: "🔄 Product Re-evaluation", color: "#D97706" },
+  { id: "sourcing", label: "🎯 Sourcing Strategy", color: brand.magenta },
+];
+
+const columnDescriptions = {
+  "new-product": {
+    "Funnel": "Request received, initial triage",
+    "Reviewing": "Evidence gathering, clinical review",
+    "Analyzing": "Financial modeling, 3-pillar prep",
+    "Backlog": "Awaiting Kaizen scheduling",
+    "Implementing": "Pilot/rollout in progress",
+    "Done": "Formulary decision complete",
+  },
+  "re-evaluation": {
+    "Funnel": "Trigger identified (safety, evidence)",
+    "Reviewing": "Lookback data collection",
+    "Analyzing": "Impact assessment, alternatives",
+    "Backlog": "Awaiting reassessment Kaizen",
+    "Implementing": "Sustain/Modify/Remove action",
+    "Done": "Reassessment complete",
+  },
+  "sourcing": {
+    "Funnel": "Category identified, RFI/RFP prep",
+    "Reviewing": "Vendor submissions, evaluations",
+    "Analyzing": "Clinical equivalence, pricing",
+    "Backlog": "Awaiting strategy Kaizen",
+    "Implementing": "Contract execution, transition",
+    "Done": "Contract live, savings realized",
+  },
+};
+return {brand,serviceLines,pillarLeaders,kanbanStates,swimlanes,columnDescriptions};
+}});
+
+define({id: "35ce4ed9", outputs: ["cardiovascularIssues","orthopedicIssues","neuroscienceIssues","allData"], body: () => {
+// ============================================
+// SAMPLE DATA (Replace with Linear API later)
+// ============================================
+
+const cardiovascularIssues = [
+  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, projectedRevenue: null },
+];
+
+const orthopedicIssues = [
+  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106→4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", projectedRevenue: null },
+  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, projectedRevenue: null },
+];
+
+const neuroscienceIssues = [
+  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, projectedRevenue: null, labels: ["blocked"] },
+];
+
+const allData = {
+  cardiovascular: cardiovascularIssues,
+  orthopedic: orthopedicIssues,
+  neuroscience: neuroscienceIssues,
+};
+return {cardiovascularIssues,orthopedicIssues,neuroscienceIssues,allData};
+}});
+
+define({id: "18d06d0c", inputs: ["view","Inputs","serviceLines"], outputs: ["serviceLineSelect"], body: (view,Inputs,serviceLines) => {
+// ============================================
+// SERVICE LINE SELECTOR
+// ============================================
+
+const serviceLineSelect = view(Inputs.select(serviceLines, {
+  label: "Service Line",
+  format: sl => `${sl.icon} ${sl.name}`,
+  value: serviceLines[0]
+}));
+return {serviceLineSelect};
+}});
+
+define({id: "51e4d9f7", inputs: ["serviceLineSelect","allData","pillarLeaders"], outputs: ["currentSL","currentIssues","currentLeaders"], body: (serviceLineSelect,allData,pillarLeaders) => {
+// ============================================
+// CURRENT DATA
+// ============================================
+
+const currentSL = serviceLineSelect;
+const currentIssues = allData[currentSL.id] || [];
+const currentLeaders = pillarLeaders[currentSL.id];
+return {currentSL,currentIssues,currentLeaders};
+}});
+
+define({id: "1e1864af", outputs: ["calculateSavings","calculateRevenue"], body: () => {
+// ============================================
+// HELPER FUNCTIONS
+// ============================================
+
+function calculateSavings(issues) {
+  let low = 0, high = 0;
+  issues.forEach(i => {
+    if (i.projectedSavings) {
+      const match = i.projectedSavings.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
+      if (match) {
+        low += parseFloat(match[1]);
+        high += match[2] ? parseFloat(match[2]) : parseFloat(match[1]);
+      }
+    }
+  });
+  if (low === 0) return "—";
+  return low === high ? `$${low}M` : `$${low}-${high}M`;
+}
+
+function calculateRevenue(issues) {
+  let low = 0, high = 0;
+  issues.forEach(i => {
+    if (i.projectedRevenue) {
+      const match = i.projectedRevenue.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
+      if (match) {
+        low += parseFloat(match[1]);
+        high += match[2] ? parseFloat(match[2]) : parseFloat(match[1]);
+      }
+    }
+  });
+  if (low === 0) return "—";
+  return low === high ? `$${low}M` : `$${low}-${high}M`;
+}
+return {calculateSavings,calculateRevenue};
+}});
+
+define({id: "53bb77af", mode: "inline", inputs: ["currentSL","display"], body: async (currentSL,display) => {
+display(await(
+currentSL.icon
+))
+}});
+
+define({id: "f32b4bad", mode: "inline", inputs: ["currentSL","display"], body: async (currentSL,display) => {
+display(await(
+currentSL.name
+))
+}});
+
+define({id: "01dbbb6c", mode: "inline", inputs: ["currentIssues","display"], body: async (currentIssues,display) => {
+display(await(
+currentIssues.length
+))
+}});
+
+define({id: "3a96c3aa", mode: "inline", inputs: ["calculateSavings","currentIssues","display"], body: async (calculateSavings,currentIssues,display) => {
+display(await(
+calculateSavings(currentIssues)
+))
+}});
+
+define({id: "f48fb7f0", mode: "inline", inputs: ["calculateRevenue","currentIssues","display"], body: async (calculateRevenue,currentIssues,display) => {
+display(await(
+calculateRevenue(currentIssues)
+))
+}});
+
+define({id: "c89a398a", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
+display(await(
+currentLeaders.clinical
+))
+}});
+
+define({id: "c89a398a-1", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
+display(await(
+currentLeaders.clinical
+))
+}});
+
+define({id: "242d720f", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
+display(await(
+currentLeaders.operations
+))
+}});
+
+define({id: "7a865cd4", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
+display(await(
+currentLeaders.financial
+))
+}});
+
+define({id: "65aecac3", inputs: ["kanbanStates","html","brand","swimlanes","columnDescriptions"], outputs: ["renderKanban"], body: (kanbanStates,html,brand,swimlanes,columnDescriptions) => {
+// Render Kanban board
+function renderKanban(issues) {
+  const columns = kanbanStates;
+  
+  return html`
+    <div class="card" style="padding: 24px; overflow-x: auto;">
+      <!-- Column Headers -->
+      <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 12px; min-width: 1000px;">
+        <div style="font-size: 11px; color: ${brand.grayLight}; padding: 4px 8px;">Archetype</div>
+        ${columns.map(col => html`
+          <div style="font-size: 11px; font-weight: 600; color: white; background: ${col.color}; padding: 8px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            ${col.label}
+          </div>
+        `)}
+      </div>
+      
+      <!-- Swimlanes -->
+      ${swimlanes.map(swimlane => {
+        const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
+        const descriptions = columnDescriptions[swimlane.id];
+        
+        return html`
+          <div style="margin-bottom: 20px; min-width: 1000px;">
+            <!-- Swimlane Header -->
+            <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 4px;">
+              <div style="font-size: 12px; font-weight: 600; color: ${swimlane.color}; background: ${swimlane.color}15; padding: 10px; border-radius: 8px; overflow: hidden;">
+                ${swimlane.label}
+              </div>
+              ${columns.map(col => html`
+                <div style="font-size: 10px; color: ${brand.grayLight}; padding: 4px; line-height: 1.3; overflow: hidden;">
+                  ${descriptions[col.id]}
+                </div>
+              `)}
+            </div>
+            
+            <!-- Issue Cards -->
+            <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px;">
+              <div></div>
+              ${columns.map(col => {
+                const cellIssues = swimlaneIssues.filter(i => i.status === col.id);
+                return html`
+                  <div style="min-height: 60px; background: #f8fafc; border-radius: 6px; padding: 6px;">
+                    ${cellIssues.map(issue => {
+                      const isBlocked = issue.labels?.some(l => l.toLowerCase().includes("blocked"));
+                      return html`
+                        <a href="https://linear.app/commonspirit/issue/${issue.id}" target="_blank" style="display: block; background: white; border-radius: 6px; padding: 10px; margin-bottom: 6px; border: 1px solid ${isBlocked ? '#fca5a5' : '#e2e8f0'}; border-left: ${isBlocked ? '4px solid #ef4444' : '1px solid #e2e8f0'}; text-decoration: none; transition: all 0.2s;">
+                          <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div style="font-size: 12px; font-weight: 600; color: ${brand.gray};">${issue.title}</div>
+                            ${isBlocked ? html`<div style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444; flex-shrink: 0;"></div>` : ""}
+                          </div>
+                          <div style="font-size: 10px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
+                          ${issue.projectedSavings || issue.projectedRevenue ? html`
+                            <div style="font-size: 10px; margin-top: 6px; font-weight: 600;">
+                              ${issue.projectedSavings ? html`<span style="color: ${brand.teal};">${issue.projectedSavings}</span>` : ""}
+                              ${issue.projectedRevenue ? html`<span style="color: ${brand.magenta}; margin-left: 6px;">+${issue.projectedRevenue}</span>` : ""}
+                            </div>
+                          ` : ""}
+                          <div style="font-size: 10px; color: ${brand.purple}; margin-top: 6px;">
+                            🎯 ${issue.kaizenDate || "TBD"}
+                          </div>
+                        </a>
+                      `;
+                    })}
+                  </div>
+                `;
+              })}
+            </div>
+          </div>
+        `;
+      })}
+    </div>
+  `;
+}
+return {renderKanban};
+}});
+
+define({id: "8e8c6a42", mode: "inline", inputs: ["renderKanban","currentIssues","display"], body: async (renderKanban,currentIssues,display) => {
+display(await(
+renderKanban(currentIssues)
+))
+}});
+
+define({id: "9fab95ae", inputs: ["currentIssues"], outputs: ["savingsItems","revenueItems","quantifiedCount"], body: (currentIssues) => {
+const savingsItems = currentIssues.filter(i => i.projectedSavings);
+const revenueItems = currentIssues.filter(i => i.projectedRevenue);
+const quantifiedCount = new Set([...savingsItems, ...revenueItems].map(i => i.id)).size;
+return {savingsItems,revenueItems,quantifiedCount};
+}});
+
+define({id: "55b81901", mode: "inline", inputs: ["quantifiedCount","display"], body: async (quantifiedCount,display) => {
+display(await(
+quantifiedCount
+))
+}});
+
+define({id: "01dbbb6c-1", mode: "inline", inputs: ["currentIssues","display"], body: async (currentIssues,display) => {
+display(await(
+currentIssues.length
+))
+}});
+
+define({id: "a8ab2c50", mode: "inline", inputs: ["savingsItems","revenueItems","html","brand","display"], body: async (savingsItems,revenueItems,html,brand,display) => {
+display(await(
+savingsItems.length > 0 || revenueItems.length > 0 ? html`
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      ${savingsItems.map(item => html`
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0fdfa; border-radius: 6px;">
+          <span style="color: ${brand.gray};">${item.title}</span>
+          <span style="font-weight: 600; color: ${brand.teal};">${item.projectedSavings}</span>
+        </div>
+      `)}
+      ${revenueItems.map(item => html`
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #fdf4f8; border-radius: 6px;">
+          <span style="color: ${brand.gray};">${item.title}</span>
+          <span style="font-weight: 600; color: ${brand.magenta};">+${item.projectedRevenue}</span>
+        </div>
+      `)}
+    </div>
+  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`
+))
+}});
+
+</script>
+</head>
+<body>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#three-pillar-representatives">Three-Pillar Representatives</a></li>
+<li class="observablehq-secondary-link"><a href="#product-and-sourcing-kanban">Product &amp; Sourcing Kanban</a></li>
+<li class="observablehq-secondary-link"><a href="#quantified-items">Quantified Items</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<div class="observablehq observablehq--block"><!--:89a72429:--></div>
+<div class="observablehq observablehq--block"><!--:35ce4ed9:--></div>
+<div class="observablehq observablehq--block"><!--:18d06d0c:--></div>
+<div class="observablehq observablehq--block"><!--:51e4d9f7:--></div>
+<div class="observablehq observablehq--block"><!--:1e1864af:--></div>
+<!-- Hero Section -->
+<div class="hero-section compact">
+  <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+    <div style="font-size: 48px;"><observablehq-loading></observablehq-loading><!--:53bb77af:--></div>
+    <div>
+      <h1><observablehq-loading></observablehq-loading><!--:f32b4bad:--> Service Line</h1>
+      <p style="opacity: 0.9; margin: 0;">Clinical-Operational-Financial Three-Pillar Governance</p>
+    </div>
+  </div>
+  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
+      <div style="font-size: 36px; font-weight: 800;"><observablehq-loading></observablehq-loading><!--:01dbbb6c:--></div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">💰 Projected Savings</div>
+      <div style="font-size: 28px; font-weight: 800;"><observablehq-loading></observablehq-loading><!--:3a96c3aa:--></div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">📈 New Revenue</div>
+      <div style="font-size: 28px; font-weight: 800;"><observablehq-loading></observablehq-loading><!--:f48fb7f0:--></div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
+      <div style="font-size: 18px; font-weight: 700;"><observablehq-loading></observablehq-loading><!--:c89a398a:--></div>
+    </div>
+  </div>
+</div>
+<h2 id="three-pillar-representatives" tabindex="-1"><a class="observablehq-header-anchor" href="#three-pillar-representatives">Three-Pillar Representatives</a></h2>
+<div class="grid-3" style="margin-bottom: 32px;">
+  <div class="card" style="border-left: 4px solid ${brand.magenta};">
+    <h4 style="color: ${brand.magenta}; margin-bottom: 8px;">Clinical Pillar</h4>
+    <div style="font-size: 16px; font-weight: 600;"><observablehq-loading></observablehq-loading><!--:c89a398a-1:--></div>
+  </div>
+  <div class="card" style="border-left: 4px solid ${brand.purple};">
+    <h4 style="color: ${brand.purple}; margin-bottom: 8px;">Operations Pillar</h4>
+    <div style="font-size: 16px; font-weight: 600;"><observablehq-loading></observablehq-loading><!--:242d720f:--></div>
+  </div>
+  <div class="card" style="border-left: 4px solid ${brand.teal};">
+    <h4 style="color: ${brand.teal}; margin-bottom: 8px;">Financial Pillar</h4>
+    <div style="font-size: 16px; font-weight: 600;"><observablehq-loading></observablehq-loading><!--:7a865cd4:--></div>
+  </div>
+</div>
+<h2 id="product-and-sourcing-kanban" tabindex="-1"><a class="observablehq-header-anchor" href="#product-and-sourcing-kanban">Product &amp; Sourcing Kanban</a></h2>
+<div class="observablehq observablehq--block"><!--:65aecac3:--></div>
+<p><observablehq-loading></observablehq-loading><!--:8e8c6a42:--></p>
+<h2 id="quantified-items" tabindex="-1"><a class="observablehq-header-anchor" href="#quantified-items">Quantified Items</a></h2>
+<div class="observablehq observablehq--block"><!--:9fab95ae:--></div>
+<div class="card">
+  <h4 style="margin-bottom: 16px;">📊 Financial Quantification Progress</h4>
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span style="color: ${brand.grayLight}; font-size: 14px;">Items quantified</span>
+    <span style="font-weight: 600;"><observablehq-loading></observablehq-loading><!--:55b81901:--> of <observablehq-loading></observablehq-loading><!--:01dbbb6c-1:--></span>
+  </div>
+  <div style="width: 100%; height: 8px; background: #f1f5f9; border-radius: 4px; margin-bottom: 20px;">
+    <div style="width: ${(quantifiedCount / Math.max(currentIssues.length, 1)) * 100}%; height: 100%; background: ${brand.teal}; border-radius: 4px;"></div>
+  </div>
+<p><observablehq-loading></observablehq-loading><!--:a8ab2c50:--></p>
+</div>
+<hr>
+<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px; margin-top: 32px;">
+  <a href="https://linear.app/commonspirit" target="_blank" style="color: ${brand.purple};" rel="noopener noreferrer">Open Linear →</a>
+</div>
+</main>
+</div>
+</body>
+</html>
