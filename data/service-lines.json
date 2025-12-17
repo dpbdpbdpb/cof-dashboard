@@ -1,0 +1,97 @@
+{
+  "serviceLines": [
+    {
+      "id": "cardiovascular",
+      "name": "Cardiovascular",
+      "icon": "❤️",
+      "color": "#C4177A",
+      "champion": "Dr. Nezar Falluji",
+      "projectId": "67cab51b-1c35-4d13-b4fa-20800fafb8fa"
+    },
+    {
+      "id": "orthopedic", 
+      "name": "Orthopedic",
+      "icon": "🦴",
+      "color": "#008B8B",
+      "champion": "Dr. Ranjan Gupta",
+      "projectId": "f94960e7-254e-4987-92bc-a2d36d643cf5"
+    },
+    {
+      "id": "neuroscience",
+      "name": "Neuroscience", 
+      "icon": "🧠",
+      "color": "#6B3FA0",
+      "champion": "Dr. Tom Devlin",
+      "projectId": "14140c87-a1a4-4c2a-bcf7-936ad14174f7"
+    }
+  ],
+  "pillarLeaders": {
+    "cardiovascular": {
+      "clinical": "Dr. Nezar Falluji",
+      "operations": "TBD (Terika Designee)",
+      "financial": "TBD (JP Designee)"
+    },
+    "orthopedic": {
+      "clinical": "Dr. Ranjan Gupta",
+      "operations": "TBD (Terika Designee)",
+      "financial": "TBD (JP Designee)"
+    },
+    "neuroscience": {
+      "clinical": "Dr. Tom Devlin",
+      "operations": "TBD (Terika Designee)",
+      "financial": "TBD (JP Designee)"
+    }
+  },
+  "kanbanStates": [
+    { "id": "Funnel", "label": "Funnel", "color": "#7A7D80" },
+    { "id": "Reviewing", "label": "Reviewing", "color": "#6B3FA0" },
+    { "id": "Analyzing", "label": "Analyzing", "color": "#008B8B" },
+    { "id": "Backlog", "label": "Backlog", "color": "#D97706" },
+    { "id": "Implementing", "label": "Implementing", "color": "#C4177A" },
+    { "id": "Done", "label": "Done", "color": "#54585A" }
+  ],
+  "swimlanes": [
+    { "id": "new-product", "label": "📦 New Product Evaluation", "color": "#008B8B" },
+    { "id": "re-evaluation", "label": "🔄 Product Re-evaluation", "color": "#D97706" },
+    { "id": "sourcing", "label": "🎯 Sourcing Strategy", "color": "#C4177A" }
+  ],
+  "columnDescriptions": {
+    "new-product": {
+      "Funnel": "Request received, initial triage",
+      "Reviewing": "Evidence gathering, clinical review",
+      "Analyzing": "Financial modeling, 3-pillar prep",
+      "Backlog": "Awaiting Kaizen scheduling",
+      "Implementing": "Pilot/rollout in progress",
+      "Done": "Formulary decision complete"
+    },
+    "re-evaluation": {
+      "Funnel": "Trigger identified (safety, evidence)",
+      "Reviewing": "Lookback data collection",
+      "Analyzing": "Impact assessment, alternatives",
+      "Backlog": "Awaiting reassessment Kaizen",
+      "Implementing": "Sustain/Modify/Remove action",
+      "Done": "Reassessment complete"
+    },
+    "sourcing": {
+      "Funnel": "Category identified, RFI/RFP prep",
+      "Reviewing": "Vendor submissions, evaluations",
+      "Analyzing": "Clinical equivalence, pricing",
+      "Backlog": "Awaiting strategy Kaizen",
+      "Implementing": "Contract execution, transition",
+      "Done": "Contract live, savings realized"
+    }
+  },
+  "brand": {
+    "magenta": "#C4177A",
+    "magentaLight": "#E91E8C",
+    "magentaDark": "#9E1362",
+    "gray": "#54585A",
+    "grayLight": "#7A7D80",
+    "grayDark": "#3D4042",
+    "purple": "#6B3FA0",
+    "teal": "#008B8B",
+    "white": "#FFFFFF",
+    "warmWhite": "#FAFAFA",
+    "warmGray": "#F5F5F5"
+  }
+}
