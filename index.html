@@ -158,6 +158,68 @@ function setView(id) {
 return {viewOptions,selectedViewState,selectedViewId,setView};
 }});
 
+define({id: "4ba7ae9a", inputs: ["viewOptions","selectedViewId","html","setView","brand"], outputs: ["selectedView"], body: (viewOptions,selectedViewId,html,setView,brand) => {
+// ============================================
+// TAB NAVIGATION BAR
+// ============================================
+
+const selectedView = viewOptions.find(v => v.id === selectedViewId) || viewOptions[0];
+
+html`<div style="
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 6px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow-x: auto;
+  flex-wrap: wrap;
+">
+  ${viewOptions.map(v => {
+    const isActive = v.id === selectedViewId;
+    return html`
+      <button
+        onclick=${() => setView(v.id)}
+        style="
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 8px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          white-space: nowrap;
+          background: ${isActive ? v.color : 'transparent'};
+          color: ${isActive ? 'white' : brand.gray};
+          box-shadow: ${isActive ? '0 2px 8px rgba(0,0,0,0.15)' : 'none'};
+        "
+        onmouseover=${(e) => { if (!isActive) { e.target.style.background = '#f1f5f9'; }}}
+        onmouseout=${(e) => { if (!isActive) { e.target.style.background = 'transparent'; }}}
+      >
+        <span style="font-size: 18px;">${v.icon}</span>
+        <span>${v.name}</span>
+      </button>
+    `;
+  })}
+</div>`
+return {selectedView};
+}});
+
+define({id: "8a3b3b72", inputs: ["selectedView","allIssues","allData","pillarLeaders"], outputs: ["isPortfolioView","currentIssues","currentLeaders"], body: (selectedView,allIssues,allData,pillarLeaders) => {
+// ============================================
+// CURRENT DATA BASED ON VIEW
+// ============================================
+
+const isPortfolioView = selectedView.id === "portfolio";
+const currentIssues = isPortfolioView ? allIssues : (allData[selectedView.id] || []);
+const currentLeaders = isPortfolioView ? null : pillarLeaders[selectedView.id];
+return {isPortfolioView,currentIssues,currentLeaders};
+}});
+
 define({id: "82b9df95", inputs: ["serviceLines"], outputs: ["parseFinancialValue","formatFinancialValue","calculateSavings","calculateRevenue","calculateTotalSavings","calculateTotalRevenue","getUpcomingKaizens","getServiceLineName"], body: (serviceLines) => {
 // ============================================
 // HELPER FUNCTIONS
@@ -635,9 +697,8 @@ html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px;
 <div class="observablehq observablehq--block"><!--:a8130a37:--></div>
 <div class="observablehq observablehq--block"><!--:9f43d801:--></div>
 <div class="observablehq observablehq--block"><!--:1224a20d:--></div>
-<div class="observablehq observablehq--block">
-  <div class="observablehq--inspect observablehq--error">SyntaxError: Unterminated template (49:3)</div>
-</div>
+<div class="observablehq observablehq--block"><!--:4ba7ae9a:--></div>
+<div class="observablehq observablehq--block"><!--:8a3b3b72:--></div>
 <div class="observablehq observablehq--block"><!--:82b9df95:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:41c4d0c9:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:1ed7ae8e:--></div>
