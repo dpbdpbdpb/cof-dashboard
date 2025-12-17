@@ -137,7 +137,10 @@ const activeFilter = filterState.generator;
 
 function setFilter(id) {
   // Toggle: if already filtered to this, clear filter
-  filterState.value = (filterState.value === id) ? null : id;
+  const newValue = (filterState.value === id) ? null : id;
+  console.log("setFilter called:", { id, currentValue: filterState.value, newValue });
+  filterState.value = newValue;
+  console.log("filterState.value after set:", filterState.value);
 }
 
 function clearFilter() {
@@ -150,9 +153,11 @@ function clearFilter() {
 // FILTERED DATA
 // ============================================
 
+console.log("Filtered data cell running, activeFilter:", activeFilter);
 const isFiltered = activeFilter != null && activeFilter !== undefined;
 const currentIssues = isFiltered ? (allData[activeFilter] || []) : allIssues;
 const activeServiceLine = isFiltered ? serviceLines.find(s => s.id === activeFilter) : null;
+console.log("Filtered data result:", { isFiltered, issueCount: currentIssues.length, activeServiceLine: activeServiceLine?.name });
 ```
 
 
