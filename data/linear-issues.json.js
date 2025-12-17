@@ -11,6 +11,13 @@ const PROJECT_IDS = {
   cardiovascular: "67cab51b-1c35-4d13-b4fa-20800fafb8fa",
   orthopedic: "f94960e7-254e-4987-92bc-a2d36d643cf5", 
   neuroscience: "14140c87-a1a4-4c2a-bcf7-936ad14174f7",
+  crossDisciplinary: "1541827a-2a47-43ed-bdbb-ed1892c17b43",
+  womensChildren: "34d99d83-890a-46f3-a939-d8f8f703220e",
+  gastroenterology: "4cc643cb-34fd-4f79-90ee-b690bcb66714",
+  acuteCare: "c2b32fff-82b6-41f3-8689-a98034cffb1e",
+  cofEnablers: "42026ff6-39b8-429e-ac75-48d8ae82f8ff",
+  enterprisePartnerships: "6dd46767-43ae-45b3-b81d-402ac15009f9",
+  innovationVentures: "2160b056-5391-491b-ab94-f3f3ed349e95",
 };
 
 // State mapping: Linear status → COF Kanban
@@ -149,26 +156,74 @@ function extractKaizenDate(description) {
   return match ? match[1] : null;
 }
 
-// Fetch all service lines
+// Fetch all service lines and portfolios
 export default async function() {
-  const [cardiovascular, orthopedic, neuroscience] = await Promise.all([
-    fetchProjectIssues(PROJECT_IDS.cardiovascular, "cardiovascular"),
-    fetchProjectIssues(PROJECT_IDS.orthopedic, "orthopedic"),
-    fetchProjectIssues(PROJECT_IDS.neuroscience, "neuroscience"),
-  ]);
-
-  return {
+  const [
     cardiovascular,
     orthopedic,
     neuroscience,
-    all: [...cardiovascular, ...orthopedic, ...neuroscience],
+    crossDisciplinary,
+    womensChildren,
+    gastroenterology,
+    acuteCare,
+    cofEnablers,
+    enterprisePartnerships,
+    innovationVentures,
+  ] = await Promise.all([
+    fetchProjectIssues(PROJECT_IDS.cardiovascular, "cardiovascular"),
+    fetchProjectIssues(PROJECT_IDS.orthopedic, "orthopedic"),
+    fetchProjectIssues(PROJECT_IDS.neuroscience, "neuroscience"),
+    fetchProjectIssues(PROJECT_IDS.crossDisciplinary, "crossDisciplinary"),
+    fetchProjectIssues(PROJECT_IDS.womensChildren, "womensChildren"),
+    fetchProjectIssues(PROJECT_IDS.gastroenterology, "gastroenterology"),
+    fetchProjectIssues(PROJECT_IDS.acuteCare, "acuteCare"),
+    fetchProjectIssues(PROJECT_IDS.cofEnablers, "cofEnablers"),
+    fetchProjectIssues(PROJECT_IDS.enterprisePartnerships, "enterprisePartnerships"),
+    fetchProjectIssues(PROJECT_IDS.innovationVentures, "innovationVentures"),
+  ]);
+
+  const all = [
+    ...cardiovascular,
+    ...orthopedic,
+    ...neuroscience,
+    ...crossDisciplinary,
+    ...womensChildren,
+    ...gastroenterology,
+    ...acuteCare,
+    ...cofEnablers,
+    ...enterprisePartnerships,
+    ...innovationVentures,
+  ];
+
+  return {
+    // Service Lines
+    cardiovascular,
+    orthopedic,
+    neuroscience,
+    crossDisciplinary,
+    womensChildren,
+    gastroenterology,
+    acuteCare,
+    // Enabler Portfolios
+    cofEnablers,
+    enterprisePartnerships,
+    innovationVentures,
+    // Aggregates
+    all,
     metadata: {
       lastUpdated: new Date().toISOString(),
       counts: {
         cardiovascular: cardiovascular.length,
         orthopedic: orthopedic.length,
         neuroscience: neuroscience.length,
-        total: cardiovascular.length + orthopedic.length + neuroscience.length,
+        crossDisciplinary: crossDisciplinary.length,
+        womensChildren: womensChildren.length,
+        gastroenterology: gastroenterology.length,
+        acuteCare: acuteCare.length,
+        cofEnablers: cofEnablers.length,
+        enterprisePartnerships: enterprisePartnerships.length,
+        innovationVentures: innovationVentures.length,
+        total: all.length,
       }
     }
   };

@@ -301,7 +301,7 @@ html`
 // ============================================
 
 html`
-<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 16px;">
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 12px; align-items: stretch;">
   ${serviceLines.map(sl => {
     const issues = allData[sl.id] || [];
     const implementing = issues.filter(i => i.status === "Implementing").length;
@@ -309,22 +309,22 @@ html`
     const blocked = issues.filter(i => i.labels?.some(l => l.toLowerCase().includes("blocked"))).length;
     const isActive = activeFilter === sl.id;
     return html`
-      <div class="card" style="border-top: 3px solid ${sl.color}; cursor: pointer; transition: all 0.2s ease; padding: 16px; ${isActive ? `background: ${sl.color}10; box-shadow: 0 0 0 2px ${sl.color};` : ''}"
+      <div class="card" style="border-top: 3px solid ${sl.color}; cursor: pointer; transition: all 0.2s ease; padding: 10px 12px; display: flex; flex-direction: column; height: 100%; ${isActive ? `background: ${sl.color}10; box-shadow: 0 0 0 2px ${sl.color};` : ''}"
         onclick=${() => setFilter(sl.id)}
         onmouseover=${(e) => { if (!isActive) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'; }}}
         onmouseout=${(e) => { if (!isActive) { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = ''; }}}>
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
           <span style="font-size: 26px;">${sl.icon}</span>
           <div>
             <div style="font-weight: 700; font-size: 16px; color: ${brand.gray};">${sl.name}</div>
           </div>
         </div>
-        <div style="font-size: 13px; color: ${brand.grayLight}; margin-bottom: 10px; line-height: 1.5;">
+        <div style="font-size: 13px; color: ${brand.grayLight}; margin-bottom: 6px; line-height: 1.35; flex: 1;">
           <div><strong style="color: ${brand.gray};">Clinical:</strong> ${sl.champion} <span style="opacity: 0.5;">·</span> <strong style="color: ${brand.gray};">Admin:</strong> ${sl.dyad}</div>
           <div><strong style="color: ${brand.gray};">Operations:</strong> ${pillarLeaders[sl.id]?.operations || "TBD"}</div>
           <div><strong style="color: ${brand.gray};">Financial:</strong> ${pillarLeaders[sl.id]?.financial || "TBD"}</div>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; font-size: 15px; text-align: center;">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; font-size: 15px; text-align: center; margin-top: auto;">
           <div>
             <div style="font-weight: 700; color: ${brand.gray};">${issues.length}</div>
             <div style="color: ${brand.grayLight}; font-size: 12px;">Items</div>
@@ -398,45 +398,45 @@ function renderKanban(issues, showServiceLine = false) {
   const swimlaneCount = swimlanes.length;
 
   return html`
-    <div class="card" style="padding: 16px; overflow-x: auto; display: flex; flex-direction: column; height: calc(100vh - 520px); min-height: 300px;">
+    <div class="card" style="padding: 12px; overflow-x: auto; display: flex; flex-direction: column; height: calc(100vh - 380px); min-height: 300px;">
       <!-- Column Headers -->
-      <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 8px; min-width: 1000px; flex-shrink: 0;">
+      <div style="display: grid; grid-template-columns: 140px repeat(${columns.length}, 1fr); gap: 6px; margin-bottom: 6px; min-width: 1000px; flex-shrink: 0;">
         <div></div>
         ${columns.map(col => html`
-          <div style="font-size: 11px; font-weight: 600; color: white; background: ${col.color}; padding: 6px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <div style="font-size: 10px; font-weight: 600; color: white; background: ${col.color}; padding: 5px; border-radius: 5px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
             ${col.label}
           </div>
         `)}
       </div>
 
       <!-- Swimlanes Container -->
-      <div style="flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 1000px; overflow: hidden;">
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 1000px; overflow: hidden;">
         ${swimlanes.map(swimlane => {
           const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
           const descriptions = columnDescriptions[swimlane.id];
 
           return html`
-            <div style="flex: 1; display: flex; flex-direction: column; min-height: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+            <div style="flex: 1 1 0; display: flex; flex-direction: column; min-height: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
               <!-- Swimlane Header -->
-              <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px; padding: 8px; background: ${swimlane.color}08; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;">
-                <div style="font-size: 12px; font-weight: 600; color: ${swimlane.color}; overflow: hidden;">
+              <div style="display: grid; grid-template-columns: 140px repeat(${columns.length}, 1fr); gap: 6px; padding: 5px; background: ${swimlane.color}08; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;">
+                <div style="font-size: 11px; font-weight: 600; color: ${swimlane.color}; overflow: hidden;">
                   ${swimlane.label}
                 </div>
                 ${columns.map(col => html`
-                  <div style="font-size: 10px; color: ${brand.grayLight}; line-height: 1.3; overflow: hidden;">
+                  <div style="font-size: 9px; color: ${brand.grayLight}; line-height: 1.25; overflow: hidden;">
                     ${descriptions[col.id]}
                   </div>
                 `)}
               </div>
 
               <!-- Issue Cards (Scrollable) -->
-              <div style="flex: 1; overflow-y: auto; padding: 8px;">
-                <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px;">
+              <div style="flex: 1; overflow-y: auto; padding: 5px;">
+                <div style="display: grid; grid-template-columns: 140px repeat(${columns.length}, 1fr); gap: 5px;">
                   <div></div>
                   ${columns.map(col => {
                     const cellIssues = swimlaneIssues.filter(i => i.status === col.id);
                     return html`
-                      <div style="min-height: 40px; background: #f8fafc; border-radius: 6px; padding: 6px;">
+                      <div style="min-height: 36px; background: #f8fafc; border-radius: 6px; padding: 4px;">
                         ${cellIssues.map(issue => {
                       const isBlocked = issue.labels?.some(l => l.toLowerCase().includes("blocked"));
                       const sl = serviceLines.find(s => s.id === issue.serviceLine);
@@ -444,17 +444,17 @@ function renderKanban(issues, showServiceLine = false) {
                       const projectedImpact = getIssueImpact(issue, "projected");
                       const realizedImpact = getIssueImpact(issue, "realized");
                       return html`
-                        <a href="https://linear.app/commonspirit/issue/${issue.id}" target="_blank" style="display: block; background: white; border-radius: 6px; padding: 10px; margin-bottom: 6px; border: 1px solid ${isBlocked ? '#fca5a5' : '#e2e8f0'}; border-left: 4px solid ${showServiceLine ? (sl?.color || '#e2e8f0') : (isBlocked ? '#ef4444' : '#e2e8f0')}; text-decoration: none; transition: all 0.2s;">
+                        <a href="https://linear.app/commonspirit/issue/${issue.id}" target="_blank" style="display: block; background: white; border-radius: 5px; padding: 8px; margin-bottom: 4px; border: 1px solid ${isBlocked ? '#fca5a5' : '#e2e8f0'}; border-left: 3px solid ${showServiceLine ? (sl?.color || '#e2e8f0') : (isBlocked ? '#ef4444' : '#e2e8f0')}; text-decoration: none; transition: all 0.2s;">
                           <div style="display: flex; justify-content: space-between; align-items: start;">
-                            <div style="font-size: 13px; font-weight: 600; color: ${brand.gray};">${issue.title}</div>
-                            ${isBlocked ? html`<div style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444; flex-shrink: 0;"></div>` : ""}
+                            <div style="font-size: 12px; font-weight: 600; color: ${brand.gray}; line-height: 1.3;">${issue.title}</div>
+                            ${isBlocked ? html`<div style="width: 7px; height: 7px; border-radius: 50%; background: #ef4444; flex-shrink: 0;"></div>` : ""}
                           </div>
-                          ${showServiceLine ? html`<div style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
-                          <div style="font-size: 11px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
-                          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 8px;">
-                            <div style="font-size: 11px; color: ${brand.purple};">${issue.kaizenDate || "TBD"}</div>
+                          ${showServiceLine ? html`<div style="font-size: 10px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
+                          <div style="font-size: 10px; color: ${brand.grayLight}; margin-top: 3px; line-height: 1.3;">${issue.brief}</div>
+                          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 4px;">
+                            <div style="font-size: 10px; color: ${brand.purple};">${issue.kaizenDate || "TBD"}</div>
                             ${hasFinancial ? html`
-                              <div style="font-size: 11px; font-weight: 600; text-align: right;">
+                              <div style="font-size: 10px; font-weight: 600; text-align: right;">
                                 ${projectedImpact !== "—" ? html`<div style="color: ${brand.teal};">📊 ${projectedImpact}</div>` : ""}
                                 ${realizedImpact !== "—" ? html`<div style="color: #10B981;">✓ ${realizedImpact}</div>` : ""}
                               </div>
