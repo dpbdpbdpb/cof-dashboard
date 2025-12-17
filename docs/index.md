@@ -279,16 +279,16 @@ isPortfolioView ? html`<div class="hero-section" style="padding: 16px 24px; marg
     </div>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <div style="text-align: center;">
-        <div style="font-size: 24px; font-weight: 800;">${allIssues.length}</div>
-        <div style="font-size: 10px; text-transform: uppercase; opacity: 0.8;">Items</div>
+        <div style="font-size: 26px; font-weight: 800;">${allIssues.length}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Items</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 24px; font-weight: 800;">${calculateImpact(allIssues, "projected")}</div>
-        <div style="font-size: 10px; text-transform: uppercase; opacity: 0.8;">Projected</div>
+        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(allIssues, "projected")}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Projected</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 24px; font-weight: 800;">${calculateImpact(allIssues, "realized")}</div>
-        <div style="font-size: 10px; text-transform: uppercase; opacity: 0.8;">Realized</div>
+        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(allIssues, "realized")}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Realized</div>
       </div>
     </div>
   </div>
@@ -300,20 +300,20 @@ isPortfolioView ? html`<div class="hero-section" style="padding: 16px 24px; marg
     </div>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <div style="text-align: center;">
-        <div style="font-size: 24px; font-weight: 800;">${currentIssues.length}</div>
-        <div style="font-size: 10px; text-transform: uppercase; opacity: 0.8;">Items</div>
+        <div style="font-size: 26px; font-weight: 800;">${currentIssues.length}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Items</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 24px; font-weight: 800;">${calculateImpact(currentIssues, "projected")}</div>
-        <div style="font-size: 10px; text-transform: uppercase; opacity: 0.8;">Projected</div>
+        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(currentIssues, "projected")}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Projected</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 24px; font-weight: 800;">${calculateImpact(currentIssues, "realized")}</div>
-        <div style="font-size: 10px; text-transform: uppercase; opacity: 0.8;">Realized</div>
+        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(currentIssues, "realized")}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Realized</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 14px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
-        <div style="font-size: 10px; text-transform: uppercase; opacity: 0.8;">Champion</div>
+        <div style="font-size: 15px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Champion</div>
       </div>
     </div>
   </div>
@@ -332,8 +332,8 @@ isPortfolioView ? html`
       const count = allIssues.filter(i => i.status === state.id).length;
       return html`
         <div style="text-align: center;">
-          <div style="font-size: 24px; font-weight: 800; color: ${state.color};">${count}</div>
-          <div style="font-size: 10px; font-weight: 600; color: white; background: ${state.color}; padding: 2px 6px; border-radius: 4px;">${state.label}</div>
+          <div style="font-size: 26px; font-weight: 800; color: ${state.color};">${count}</div>
+          <div style="font-size: 12px; font-weight: 600; color: white; background: ${state.color}; padding: 3px 8px; border-radius: 4px;">${state.label}</div>
         </div>
       `;
     })}
@@ -353,34 +353,34 @@ isPortfolioView ? html`
     const implementing = issues.filter(i => i.status === "Implementing").length;
     const blocked = issues.filter(i => i.labels?.some(l => l.toLowerCase().includes("blocked"))).length;
     return html`
-      <div class="card" style="border-top: 3px solid ${sl.color}; cursor: pointer; transition: all 0.2s ease; padding: 12px;"
+      <div class="card" style="border-top: 3px solid ${sl.color}; cursor: pointer; transition: all 0.2s ease; padding: 14px;"
         onclick=${() => setView(sl.id)}
         onmouseover=${(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'; }}
         onmouseout=${(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = ''; }}>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-          <span style="font-size: 20px;">${sl.icon}</span>
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+          <span style="font-size: 22px;">${sl.icon}</span>
           <div>
-            <div style="font-weight: 700; font-size: 13px; color: ${brand.gray};">${sl.name}</div>
-            <div style="font-size: 10px; color: ${brand.grayLight};">${sl.champion}</div>
+            <div style="font-weight: 700; font-size: 14px; color: ${brand.gray};">${sl.name}</div>
+            <div style="font-size: 12px; color: ${brand.grayLight};">${sl.champion}</div>
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 11px; text-align: center;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 13px; text-align: center;">
           <div>
             <div style="font-weight: 700; color: ${brand.gray};">${issues.length}</div>
-            <div style="color: ${brand.grayLight}; font-size: 9px;">Items</div>
+            <div style="color: ${brand.grayLight}; font-size: 11px;">Items</div>
           </div>
           <div>
             <div style="font-weight: 700; color: ${brand.magenta};">${implementing}</div>
-            <div style="color: ${brand.grayLight}; font-size: 9px;">Active</div>
+            <div style="color: ${brand.grayLight}; font-size: 11px;">Active</div>
           </div>
           <div>
             <div style="font-weight: 700; color: ${blocked > 0 ? '#ef4444' : brand.grayLight};">${blocked}</div>
-            <div style="color: ${brand.grayLight}; font-size: 9px;">Blocked</div>
+            <div style="color: ${brand.grayLight}; font-size: 11px;">Blocked</div>
           </div>
         </div>
-        <div style="margin-top: 8px; display: flex; justify-content: space-between; font-size: 11px;">
-          <span style="color: ${brand.teal};">${calculateImpact(issues, "projected")}</span>
-          <span style="color: #10B981;">${calculateImpact(issues, "realized")}</span>
+        <div style="margin-top: 10px; display: flex; justify-content: space-between; font-size: 13px;">
+          <span style="color: ${brand.teal};" title="Projected Impact">📊 ${calculateImpact(issues, "projected")}</span>
+          <span style="color: #10B981;" title="Realized Impact">✓ ${calculateImpact(issues, "realized")}</span>
         </div>
       </div>
     `;
@@ -395,17 +395,17 @@ isPortfolioView ? html`
 
 !isPortfolioView && currentLeaders ? html`
 <div class="grid-3" style="margin-bottom: 16px;">
-  <div class="card" style="border-left: 3px solid ${brand.magenta}; padding: 12px;">
-    <div style="font-size: 10px; text-transform: uppercase; color: ${brand.magenta}; margin-bottom: 4px;">Clinical</div>
-    <div style="font-size: 13px; font-weight: 600;">${currentLeaders.clinical}</div>
+  <div class="card" style="border-left: 3px solid ${brand.magenta}; padding: 14px;">
+    <div style="font-size: 12px; text-transform: uppercase; color: ${brand.magenta}; margin-bottom: 4px;">Clinical</div>
+    <div style="font-size: 14px; font-weight: 600;">${currentLeaders.clinical}</div>
   </div>
-  <div class="card" style="border-left: 3px solid ${brand.purple}; padding: 12px;">
-    <div style="font-size: 10px; text-transform: uppercase; color: ${brand.purple}; margin-bottom: 4px;">Operations</div>
-    <div style="font-size: 13px; font-weight: 600;">${currentLeaders.operations}</div>
+  <div class="card" style="border-left: 3px solid ${brand.purple}; padding: 14px;">
+    <div style="font-size: 12px; text-transform: uppercase; color: ${brand.purple}; margin-bottom: 4px;">Operations</div>
+    <div style="font-size: 14px; font-weight: 600;">${currentLeaders.operations}</div>
   </div>
-  <div class="card" style="border-left: 3px solid ${brand.teal}; padding: 12px;">
-    <div style="font-size: 10px; text-transform: uppercase; color: ${brand.teal}; margin-bottom: 4px;">Financial</div>
-    <div style="font-size: 13px; font-weight: 600;">${currentLeaders.financial}</div>
+  <div class="card" style="border-left: 3px solid ${brand.teal}; padding: 14px;">
+    <div style="font-size: 12px; text-transform: uppercase; color: ${brand.teal}; margin-bottom: 4px;">Financial</div>
+    <div style="font-size: 14px; font-weight: 600;">${currentLeaders.financial}</div>
   </div>
 </div>` : ""
 ```
@@ -418,18 +418,18 @@ isPortfolioView ? html`
 const upcomingKaizens = getUpcomingKaizens(allIssues);
 
 isPortfolioView && upcomingKaizens.length > 0 ? html`
-<div class="card" style="margin-bottom: 16px; padding: 12px;">
-  <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Upcoming Kaizens</div>
-  <div style="display: flex; flex-direction: column; gap: 6px;">
+<div class="card" style="margin-bottom: 16px; padding: 14px;">
+  <div style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 10px;">Upcoming Kaizens</div>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
     ${upcomingKaizens.map(item => {
       const sl = serviceLines.find(s => s.id === item.serviceLine);
       return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f8fafc; border-radius: 6px; border-left: 3px solid ${sl?.color || brand.gray};">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8fafc; border-radius: 6px; border-left: 3px solid ${sl?.color || brand.gray};">
           <div>
-            <div style="font-weight: 600; font-size: 12px; color: ${brand.gray};">${item.title}</div>
-            <div style="font-size: 10px; color: ${brand.grayLight};">${sl?.name || item.serviceLine}</div>
+            <div style="font-weight: 600; font-size: 14px; color: ${brand.gray};">${item.title}</div>
+            <div style="font-size: 12px; color: ${brand.grayLight};">${sl?.name || item.serviceLine}</div>
           </div>
-          <div style="font-weight: 700; font-size: 11px; color: ${brand.purple};">${item.kaizenDate}</div>
+          <div style="font-weight: 700; font-size: 13px; color: ${brand.purple};">${item.kaizenDate}</div>
         </div>
       `;
     })}
@@ -444,13 +444,24 @@ isPortfolioView && upcomingKaizens.length > 0 ? html`
 function renderKanban(issues, showServiceLine = false) {
   const columns = kanbanStates;
 
+  // Helper to calculate combined impact for a single issue
+  function getIssueImpact(issue, type) {
+    const savingsField = type === "realized" ? "realizedSavings" : "projectedSavings";
+    const revenueField = type === "realized" ? "realizedRevenue" : "projectedRevenue";
+    const savings = parseFinancialValue(issue[savingsField]);
+    const revenue = parseFinancialValue(issue[revenueField]);
+    const low = savings.low + revenue.low;
+    const high = savings.high + revenue.high;
+    return formatFinancialValue(low, high);
+  }
+
   return html`
     <div class="card" style="padding: 24px; overflow-x: auto;">
       <!-- Column Headers -->
       <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 12px; min-width: 1000px;">
-        <div style="font-size: 11px; color: ${brand.grayLight}; padding: 4px 8px;">Archetype</div>
+        <div style="font-size: 12px; color: ${brand.grayLight}; padding: 4px 8px;">Archetype</div>
         ${columns.map(col => html`
-          <div style="font-size: 11px; font-weight: 600; color: white; background: ${col.color}; padding: 8px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <div style="font-size: 12px; font-weight: 600; color: white; background: ${col.color}; padding: 8px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
             ${col.label}
           </div>
         `)}
@@ -465,11 +476,11 @@ function renderKanban(issues, showServiceLine = false) {
           <div style="margin-bottom: 20px; min-width: 1000px;">
             <!-- Swimlane Header -->
             <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 4px;">
-              <div style="font-size: 12px; font-weight: 600; color: ${swimlane.color}; background: ${swimlane.color}15; padding: 10px; border-radius: 8px; overflow: hidden;">
+              <div style="font-size: 13px; font-weight: 600; color: ${swimlane.color}; background: ${swimlane.color}15; padding: 10px; border-radius: 8px; overflow: hidden;">
                 ${swimlane.label}
               </div>
               ${columns.map(col => html`
-                <div style="font-size: 10px; color: ${brand.grayLight}; padding: 4px; line-height: 1.3; overflow: hidden;">
+                <div style="font-size: 11px; color: ${brand.grayLight}; padding: 4px; line-height: 1.3; overflow: hidden;">
                   ${descriptions[col.id]}
                 </div>
               `)}
@@ -485,23 +496,24 @@ function renderKanban(issues, showServiceLine = false) {
                     ${cellIssues.map(issue => {
                       const isBlocked = issue.labels?.some(l => l.toLowerCase().includes("blocked"));
                       const sl = serviceLines.find(s => s.id === issue.serviceLine);
+                      const hasFinancial = issue.projectedSavings || issue.realizedSavings || issue.projectedRevenue || issue.realizedRevenue;
+                      const projectedImpact = getIssueImpact(issue, "projected");
+                      const realizedImpact = getIssueImpact(issue, "realized");
                       return html`
                         <a href="https://linear.app/commonspirit/issue/${issue.id}" target="_blank" style="display: block; background: white; border-radius: 6px; padding: 10px; margin-bottom: 6px; border: 1px solid ${isBlocked ? '#fca5a5' : '#e2e8f0'}; border-left: 4px solid ${showServiceLine ? (sl?.color || '#e2e8f0') : (isBlocked ? '#ef4444' : '#e2e8f0')}; text-decoration: none; transition: all 0.2s;">
                           <div style="display: flex; justify-content: space-between; align-items: start;">
-                            <div style="font-size: 12px; font-weight: 600; color: ${brand.gray};">${issue.title}</div>
+                            <div style="font-size: 13px; font-weight: 600; color: ${brand.gray};">${issue.title}</div>
                             ${isBlocked ? html`<div style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444; flex-shrink: 0;"></div>` : ""}
                           </div>
-                          ${showServiceLine ? html`<div style="font-size: 10px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
-                          <div style="font-size: 10px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
-                          ${issue.projectedSavings || issue.realizedSavings || issue.projectedRevenue || issue.realizedRevenue ? html`
-                            <div style="font-size: 10px; margin-top: 6px; font-weight: 600;">
-                              ${issue.projectedSavings ? html`<span style="color: ${brand.teal};" title="Projected Savings">📊 ${issue.projectedSavings}</span>` : ""}
-                              ${issue.realizedSavings ? html`<span style="color: #10B981; margin-left: 4px;" title="Realized Savings">✓ ${issue.realizedSavings}</span>` : ""}
-                              ${issue.projectedRevenue ? html`<span style="color: ${brand.magenta}; margin-left: 6px;" title="Projected Revenue">📊 +${issue.projectedRevenue}</span>` : ""}
-                              ${issue.realizedRevenue ? html`<span style="color: #10B981; margin-left: 4px;" title="Realized Revenue">✓ +${issue.realizedRevenue}</span>` : ""}
+                          ${showServiceLine ? html`<div style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
+                          <div style="font-size: 11px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
+                          ${hasFinancial ? html`
+                            <div style="font-size: 12px; margin-top: 6px; font-weight: 600; display: flex; flex-direction: column; gap: 2px;">
+                              ${projectedImpact !== "—" ? html`<div style="color: ${brand.teal};">📊 ${projectedImpact} <span style="font-weight: 400; font-size: 10px;">projected</span></div>` : ""}
+                              ${realizedImpact !== "—" ? html`<div style="color: #10B981;">✓ ${realizedImpact} <span style="font-weight: 400; font-size: 10px;">realized</span></div>` : ""}
                             </div>
                           ` : ""}
-                          <div style="font-size: 10px; color: ${brand.purple}; margin-top: 6px;">
+                          <div style="font-size: 11px; color: ${brand.purple}; margin-top: 6px;">
                             ${issue.kaizenDate || "TBD"}
                           </div>
                         </a>
@@ -521,57 +533,6 @@ function renderKanban(issues, showServiceLine = false) {
 
 ```js
 renderKanban(currentIssues, isPortfolioView)
-```
-
-## Financial Impact
-
-```js
-const quantifiedItems = currentIssues.filter(i => i.projectedSavings || i.projectedRevenue);
-const realizedItems = currentIssues.filter(i => i.realizedSavings || i.realizedRevenue);
-```
-
-```js
-html`<div class="card">
-  <h4 style="margin-bottom: 16px;">Financial Impact Summary</h4>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-    <div style="padding: 12px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid ${brand.teal};">
-      <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Projected</div>
-      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${quantifiedItems.length} items quantified</div>
-      <div style="font-size: 24px; font-weight: 700; color: ${brand.teal}; margin-top: 4px;">${calculateImpact(currentIssues, "projected")}</div>
-    </div>
-    <div style="padding: 12px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #10B981;">
-      <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Realized</div>
-      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${realizedItems.length} items realized</div>
-      <div style="font-size: 24px; font-weight: 700; color: #10B981; margin-top: 4px;">${calculateImpact(currentIssues, "realized")}</div>
-    </div>
-  </div>
-
-  ${quantifiedItems.length > 0 ? html`
-    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Item Detail</h5>
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      ${quantifiedItems.map(item => {
-        const sl = serviceLines.find(s => s.id === item.serviceLine);
-        const hasSavings = item.projectedSavings || item.realizedSavings;
-        const hasRevenue = item.projectedRevenue || item.realizedRevenue;
-        return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f8fafc; border-radius: 6px;">
-          <div>
-            <span style="color: ${brand.gray};">${item.title}</span>
-            ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
-            <div style="font-size: 11px; color: ${brand.grayLight}; margin-top: 2px;">${hasSavings ? "Savings" : ""}${hasSavings && hasRevenue ? " + " : ""}${hasRevenue ? "Revenue" : ""}</div>
-          </div>
-          <div style="text-align: right;">
-            ${item.projectedSavings ? html`<div style="font-weight: 600; color: ${brand.teal};">📊 ${item.projectedSavings}</div>` : ""}
-            ${item.projectedRevenue ? html`<div style="font-weight: 600; color: ${brand.magenta};">📊 +${item.projectedRevenue}</div>` : ""}
-            ${item.realizedSavings ? html`<div style="font-size: 12px; color: #10B981;">✓ ${item.realizedSavings}</div>` : ""}
-            ${item.realizedRevenue ? html`<div style="font-size: 12px; color: #10B981;">✓ +${item.realizedRevenue}</div>` : ""}
-          </div>
-        </div>
-      `})}
-    </div>
-  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
-</div>`
 ```
 
 ---
