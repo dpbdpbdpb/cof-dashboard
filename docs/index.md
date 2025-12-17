@@ -169,8 +169,12 @@ function calculateRevenue(issues) {
 }
 ```
 
-<!-- Hero Section -->
-<div class="hero-section compact">
+```js
+// ============================================
+// HERO SECTION
+// ============================================
+
+html`<div class="hero-section compact">
   <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
     <div style="font-size: 48px;">${currentSL.icon}</div>
     <div>
@@ -178,7 +182,7 @@ function calculateRevenue(issues) {
       <p style="opacity: 0.9; margin: 0;">Clinical-Operational-Financial Three-Pillar Governance</p>
     </div>
   </div>
-  
+
   <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
@@ -197,11 +201,17 @@ function calculateRevenue(issues) {
       <div style="font-size: 18px; font-weight: 700;">${currentLeaders.clinical}</div>
     </div>
   </div>
-</div>
+</div>`
+```
 
 ## Three-Pillar Representatives
 
-<div class="grid-3" style="margin-bottom: 32px;">
+```js
+// ============================================
+// PILLAR CARDS
+// ============================================
+
+html`<div class="grid-3" style="margin-bottom: 32px;">
   <div class="card" style="border-left: 4px solid ${brand.magenta};">
     <h4 style="color: ${brand.magenta}; margin-bottom: 8px;">Clinical Pillar</h4>
     <div style="font-size: 16px; font-weight: 600;">${currentLeaders.clinical}</div>
@@ -214,7 +224,8 @@ function calculateRevenue(issues) {
     <h4 style="color: ${brand.teal}; margin-bottom: 8px;">Financial Pillar</h4>
     <div style="font-size: 16px; font-weight: 600;">${currentLeaders.financial}</div>
   </div>
-</div>
+</div>`
+```
 
 ## Product & Sourcing Kanban
 
@@ -222,7 +233,7 @@ function calculateRevenue(issues) {
 // Render Kanban board
 function renderKanban(issues) {
   const columns = kanbanStates;
-  
+
   return html`
     <div class="card" style="padding: 24px; overflow-x: auto;">
       <!-- Column Headers -->
@@ -234,12 +245,12 @@ function renderKanban(issues) {
           </div>
         `)}
       </div>
-      
+
       <!-- Swimlanes -->
       ${swimlanes.map(swimlane => {
         const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
         const descriptions = columnDescriptions[swimlane.id];
-        
+
         return html`
           <div style="margin-bottom: 20px; min-width: 1000px;">
             <!-- Swimlane Header -->
@@ -253,7 +264,7 @@ function renderKanban(issues) {
                 </div>
               `)}
             </div>
-            
+
             <!-- Issue Cards -->
             <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px;">
               <div></div>
@@ -294,7 +305,9 @@ function renderKanban(issues) {
 }
 ```
 
-${renderKanban(currentIssues)}
+```js
+renderKanban(currentIssues)
+```
 
 ## Quantified Items
 
@@ -304,18 +317,23 @@ const revenueItems = currentIssues.filter(i => i.projectedRevenue);
 const quantifiedCount = new Set([...savingsItems, ...revenueItems].map(i => i.id)).size;
 ```
 
-<div class="card">
+```js
+// ============================================
+// QUANTIFIED ITEMS CARD
+// ============================================
+
+html`<div class="card">
   <h4 style="margin-bottom: 16px;">📊 Financial Quantification Progress</h4>
-  
+
   <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
     <span style="color: ${brand.grayLight}; font-size: 14px;">Items quantified</span>
     <span style="font-weight: 600;">${quantifiedCount} of ${currentIssues.length}</span>
   </div>
-  
+
   <div style="width: 100%; height: 8px; background: #f1f5f9; border-radius: 4px; margin-bottom: 20px;">
     <div style="width: ${(quantifiedCount / Math.max(currentIssues.length, 1)) * 100}%; height: 100%; background: ${brand.teal}; border-radius: 4px;"></div>
   </div>
-  
+
   ${savingsItems.length > 0 || revenueItems.length > 0 ? html`
     <div style="display: flex; flex-direction: column; gap: 8px;">
       ${savingsItems.map(item => html`
@@ -332,10 +350,17 @@ const quantifiedCount = new Set([...savingsItems, ...revenueItems].map(i => i.id
       `)}
     </div>
   ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
-</div>
+</div>`
+```
 
 ---
 
-<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px; margin-top: 32px;">
+```js
+// ============================================
+// FOOTER
+// ============================================
+
+html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px; margin-top: 32px;">
   <a href="https://linear.app/commonspirit" target="_blank" style="color: ${brand.purple};">Open Linear →</a>
-</div>
+</div>`
+```
