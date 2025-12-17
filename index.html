@@ -194,65 +194,71 @@ function calculateRevenue(issues) {
 return {calculateSavings,calculateRevenue};
 }});
 
-define({id: "53bb77af", mode: "inline", inputs: ["currentSL","display"], body: async (currentSL,display) => {
+define({id: "0f43f5a9", inputs: ["html","currentSL","currentIssues","calculateSavings","calculateRevenue","currentLeaders","display"], body: async (html,currentSL,currentIssues,calculateSavings,calculateRevenue,currentLeaders,display) => {
 display(await(
-currentSL.icon
+// ============================================
+// HERO SECTION
+// ============================================
+
+html`<div class="hero-section compact">
+  <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+    <div style="font-size: 48px;">${currentSL.icon}</div>
+    <div>
+      <h1>${currentSL.name} Service Line</h1>
+      <p style="opacity: 0.9; margin: 0;">Clinical-Operational-Financial Three-Pillar Governance</p>
+    </div>
+  </div>
+
+  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
+      <div style="font-size: 36px; font-weight: 800;">${currentIssues.length}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">💰 Projected Savings</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateSavings(currentIssues)}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">📈 New Revenue</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateRevenue(currentIssues)}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
+      <div style="font-size: 18px; font-weight: 700;">${currentLeaders.clinical}</div>
+    </div>
+  </div>
+</div>`
 ))
 }});
 
-define({id: "f32b4bad", mode: "inline", inputs: ["currentSL","display"], body: async (currentSL,display) => {
+define({id: "4c36cf3e", inputs: ["html","brand","currentLeaders","display"], body: async (html,brand,currentLeaders,display) => {
 display(await(
-currentSL.name
+// ============================================
+// PILLAR CARDS
+// ============================================
+
+html`<div class="grid-3" style="margin-bottom: 32px;">
+  <div class="card" style="border-left: 4px solid ${brand.magenta};">
+    <h4 style="color: ${brand.magenta}; margin-bottom: 8px;">Clinical Pillar</h4>
+    <div style="font-size: 16px; font-weight: 600;">${currentLeaders.clinical}</div>
+  </div>
+  <div class="card" style="border-left: 4px solid ${brand.purple};">
+    <h4 style="color: ${brand.purple}; margin-bottom: 8px;">Operations Pillar</h4>
+    <div style="font-size: 16px; font-weight: 600;">${currentLeaders.operations}</div>
+  </div>
+  <div class="card" style="border-left: 4px solid ${brand.teal};">
+    <h4 style="color: ${brand.teal}; margin-bottom: 8px;">Financial Pillar</h4>
+    <div style="font-size: 16px; font-weight: 600;">${currentLeaders.financial}</div>
+  </div>
+</div>`
 ))
 }});
 
-define({id: "01dbbb6c", mode: "inline", inputs: ["currentIssues","display"], body: async (currentIssues,display) => {
-display(await(
-currentIssues.length
-))
-}});
-
-define({id: "3a96c3aa", mode: "inline", inputs: ["calculateSavings","currentIssues","display"], body: async (calculateSavings,currentIssues,display) => {
-display(await(
-calculateSavings(currentIssues)
-))
-}});
-
-define({id: "f48fb7f0", mode: "inline", inputs: ["calculateRevenue","currentIssues","display"], body: async (calculateRevenue,currentIssues,display) => {
-display(await(
-calculateRevenue(currentIssues)
-))
-}});
-
-define({id: "c89a398a", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
-display(await(
-currentLeaders.clinical
-))
-}});
-
-define({id: "c89a398a-1", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
-display(await(
-currentLeaders.clinical
-))
-}});
-
-define({id: "242d720f", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
-display(await(
-currentLeaders.operations
-))
-}});
-
-define({id: "7a865cd4", mode: "inline", inputs: ["currentLeaders","display"], body: async (currentLeaders,display) => {
-display(await(
-currentLeaders.financial
-))
-}});
-
-define({id: "65aecac3", inputs: ["kanbanStates","html","brand","swimlanes","columnDescriptions"], outputs: ["renderKanban"], body: (kanbanStates,html,brand,swimlanes,columnDescriptions) => {
+define({id: "ccb4f70f", inputs: ["kanbanStates","html","brand","swimlanes","columnDescriptions"], outputs: ["renderKanban"], body: (kanbanStates,html,brand,swimlanes,columnDescriptions) => {
 // Render Kanban board
 function renderKanban(issues) {
   const columns = kanbanStates;
-  
+
   return html`
     <div class="card" style="padding: 24px; overflow-x: auto;">
       <!-- Column Headers -->
@@ -264,12 +270,12 @@ function renderKanban(issues) {
           </div>
         `)}
       </div>
-      
+
       <!-- Swimlanes -->
       ${swimlanes.map(swimlane => {
         const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
         const descriptions = columnDescriptions[swimlane.id];
-        
+
         return html`
           <div style="margin-bottom: 20px; min-width: 1000px;">
             <!-- Swimlane Header -->
@@ -283,7 +289,7 @@ function renderKanban(issues) {
                 </div>
               `)}
             </div>
-            
+
             <!-- Issue Cards -->
             <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px;">
               <div></div>
@@ -325,7 +331,7 @@ function renderKanban(issues) {
 return {renderKanban};
 }});
 
-define({id: "8e8c6a42", mode: "inline", inputs: ["renderKanban","currentIssues","display"], body: async (renderKanban,currentIssues,display) => {
+define({id: "74ab0535", inputs: ["renderKanban","currentIssues","display"], body: async (renderKanban,currentIssues,display) => {
 display(await(
 renderKanban(currentIssues)
 ))
@@ -338,21 +344,25 @@ const quantifiedCount = new Set([...savingsItems, ...revenueItems].map(i => i.id
 return {savingsItems,revenueItems,quantifiedCount};
 }});
 
-define({id: "55b81901", mode: "inline", inputs: ["quantifiedCount","display"], body: async (quantifiedCount,display) => {
+define({id: "33a1f338", inputs: ["html","brand","quantifiedCount","currentIssues","savingsItems","revenueItems","display"], body: async (html,brand,quantifiedCount,currentIssues,savingsItems,revenueItems,display) => {
 display(await(
-quantifiedCount
-))
-}});
+// ============================================
+// QUANTIFIED ITEMS CARD
+// ============================================
 
-define({id: "01dbbb6c-1", mode: "inline", inputs: ["currentIssues","display"], body: async (currentIssues,display) => {
-display(await(
-currentIssues.length
-))
-}});
+html`<div class="card">
+  <h4 style="margin-bottom: 16px;">📊 Financial Quantification Progress</h4>
 
-define({id: "a8ab2c50", mode: "inline", inputs: ["savingsItems","revenueItems","html","brand","display"], body: async (savingsItems,revenueItems,html,brand,display) => {
-display(await(
-savingsItems.length > 0 || revenueItems.length > 0 ? html`
+  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+    <span style="color: ${brand.grayLight}; font-size: 14px;">Items quantified</span>
+    <span style="font-weight: 600;">${quantifiedCount} of ${currentIssues.length}</span>
+  </div>
+
+  <div style="width: 100%; height: 8px; background: #f1f5f9; border-radius: 4px; margin-bottom: 20px;">
+    <div style="width: ${(quantifiedCount / Math.max(currentIssues.length, 1)) * 100}%; height: 100%; background: ${brand.teal}; border-radius: 4px;"></div>
+  </div>
+
+  ${savingsItems.length > 0 || revenueItems.length > 0 ? html`
     <div style="display: flex; flex-direction: column; gap: 8px;">
       ${savingsItems.map(item => html`
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0fdfa; border-radius: 6px;">
@@ -367,7 +377,20 @@ savingsItems.length > 0 || revenueItems.length > 0 ? html`
         </div>
       `)}
     </div>
-  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`
+  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
+</div>`
+))
+}});
+
+define({id: "901c2034", inputs: ["html","brand","display"], body: async (html,brand,display) => {
+display(await(
+// ============================================
+// FOOTER
+// ============================================
+
+html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px; margin-top: 32px;">
+  <a href="https://linear.app/commonspirit" target="_blank" style="color: ${brand.purple};">Open Linear →</a>
+</div>`
 ))
 }});
 
@@ -391,69 +414,17 @@ savingsItems.length > 0 || revenueItems.length > 0 ? html`
 <div class="observablehq observablehq--block"><!--:18d06d0c:--></div>
 <div class="observablehq observablehq--block"><!--:51e4d9f7:--></div>
 <div class="observablehq observablehq--block"><!--:1e1864af:--></div>
-<!-- Hero Section -->
-<div class="hero-section compact">
-  <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-    <div style="font-size: 48px;"><observablehq-loading></observablehq-loading><!--:53bb77af:--></div>
-    <div>
-      <h1><observablehq-loading></observablehq-loading><!--:f32b4bad:--> Service Line</h1>
-      <p style="opacity: 0.9; margin: 0;">Clinical-Operational-Financial Three-Pillar Governance</p>
-    </div>
-  </div>
-  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
-      <div style="font-size: 36px; font-weight: 800;"><observablehq-loading></observablehq-loading><!--:01dbbb6c:--></div>
-    </div>
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">💰 Projected Savings</div>
-      <div style="font-size: 28px; font-weight: 800;"><observablehq-loading></observablehq-loading><!--:3a96c3aa:--></div>
-    </div>
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">📈 New Revenue</div>
-      <div style="font-size: 28px; font-weight: 800;"><observablehq-loading></observablehq-loading><!--:f48fb7f0:--></div>
-    </div>
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
-      <div style="font-size: 18px; font-weight: 700;"><observablehq-loading></observablehq-loading><!--:c89a398a:--></div>
-    </div>
-  </div>
-</div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:0f43f5a9:--></div>
 <h2 id="three-pillar-representatives" tabindex="-1"><a class="observablehq-header-anchor" href="#three-pillar-representatives">Three-Pillar Representatives</a></h2>
-<div class="grid-3" style="margin-bottom: 32px;">
-  <div class="card" style="border-left: 4px solid ${brand.magenta};">
-    <h4 style="color: ${brand.magenta}; margin-bottom: 8px;">Clinical Pillar</h4>
-    <div style="font-size: 16px; font-weight: 600;"><observablehq-loading></observablehq-loading><!--:c89a398a-1:--></div>
-  </div>
-  <div class="card" style="border-left: 4px solid ${brand.purple};">
-    <h4 style="color: ${brand.purple}; margin-bottom: 8px;">Operations Pillar</h4>
-    <div style="font-size: 16px; font-weight: 600;"><observablehq-loading></observablehq-loading><!--:242d720f:--></div>
-  </div>
-  <div class="card" style="border-left: 4px solid ${brand.teal};">
-    <h4 style="color: ${brand.teal}; margin-bottom: 8px;">Financial Pillar</h4>
-    <div style="font-size: 16px; font-weight: 600;"><observablehq-loading></observablehq-loading><!--:7a865cd4:--></div>
-  </div>
-</div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4c36cf3e:--></div>
 <h2 id="product-and-sourcing-kanban" tabindex="-1"><a class="observablehq-header-anchor" href="#product-and-sourcing-kanban">Product &amp; Sourcing Kanban</a></h2>
-<div class="observablehq observablehq--block"><!--:65aecac3:--></div>
-<p><observablehq-loading></observablehq-loading><!--:8e8c6a42:--></p>
+<div class="observablehq observablehq--block"><!--:ccb4f70f:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:74ab0535:--></div>
 <h2 id="quantified-items" tabindex="-1"><a class="observablehq-header-anchor" href="#quantified-items">Quantified Items</a></h2>
 <div class="observablehq observablehq--block"><!--:9fab95ae:--></div>
-<div class="card">
-  <h4 style="margin-bottom: 16px;">📊 Financial Quantification Progress</h4>
-  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-    <span style="color: ${brand.grayLight}; font-size: 14px;">Items quantified</span>
-    <span style="font-weight: 600;"><observablehq-loading></observablehq-loading><!--:55b81901:--> of <observablehq-loading></observablehq-loading><!--:01dbbb6c-1:--></span>
-  </div>
-  <div style="width: 100%; height: 8px; background: #f1f5f9; border-radius: 4px; margin-bottom: 20px;">
-    <div style="width: ${(quantifiedCount / Math.max(currentIssues.length, 1)) * 100}%; height: 100%; background: ${brand.teal}; border-radius: 4px;"></div>
-  </div>
-<p><observablehq-loading></observablehq-loading><!--:a8ab2c50:--></p>
-</div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:33a1f338:--></div>
 <hr>
-<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px; margin-top: 32px;">
-  <a href="https://linear.app/commonspirit" target="_blank" style="color: ${brand.purple};" rel="noopener noreferrer">Open Linear →</a>
-</div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:901c2034:--></div>
 </main>
 </div>
 </body>
