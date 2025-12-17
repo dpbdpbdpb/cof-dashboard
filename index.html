@@ -308,7 +308,7 @@ html`
 ))
 }});
 
-define({id: "f3212fcd", inputs: ["html","serviceLines","allData","activeFilter","setFilter","brand","calculateImpact","display"], body: async (html,serviceLines,allData,activeFilter,setFilter,brand,calculateImpact,display) => {
+define({id: "c929cf6b", inputs: ["html","serviceLines","allData","activeFilter","setFilter","brand","pillarLeaders","calculateImpact","display"], body: async (html,serviceLines,allData,activeFilter,setFilter,brand,pillarLeaders,calculateImpact,display) => {
 display(await(
 // ============================================
 // SERVICE LINE CARDS (Filter buttons)
@@ -334,7 +334,10 @@ html`
           </div>
         </div>
         <div style="font-size: 11px; color: ${brand.grayLight}; margin-bottom: 8px;">
-          <div>${sl.champion} <span style="opacity: 0.6;">·</span> ${sl.dyad}</div>
+          <div><strong style="color: ${brand.gray};">Clinical:</strong> ${sl.champion}</div>
+          <div><strong style="color: ${brand.gray};">Operations:</strong> ${pillarLeaders[sl.id]?.operations || "TBD"}</div>
+          <div><strong style="color: ${brand.gray};">Financial:</strong> ${pillarLeaders[sl.id]?.financial || "TBD"}</div>
+          <div style="margin-top: 2px;"><strong style="color: ${brand.gray};">Dyad:</strong> ${sl.dyad}</div>
         </div>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; font-size: 13px; text-align: center;">
           <div>
@@ -517,7 +520,7 @@ display(renderKanban(currentIssues, !isFiltered))
 <div class="observablehq observablehq--block"><!--:18a399ee:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:99be97d5:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:dd963e73:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:f3212fcd:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:c929cf6b:--></div>
 <div class="observablehq observablehq--block"><!--:ebae053c:--></div>
 <div class="observablehq observablehq--block"><!--:18e9c1ef:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:6b0bf2d2:--></div>
