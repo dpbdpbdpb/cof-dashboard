@@ -69,7 +69,7 @@ const columnDescriptions = {
   },
   "sourcing": {
     "Funnel": "S0/K1: Category assessed, urgency documented",
-    "Reviewing": "S1/K2: Coalition building, Kaizen scheduled",
+    "Reviewing": "S1/K2: Coalition building, analysis, Kaizen scheduled",
     "Analyzing": "S2-S3/K3-K4: Equivalence analysis, Kaizen decision",
     "Backlog": "K5: Strategy APPROVED, awaiting contract execution",
     "Implementing": "S4/K5-K6: Contract execution, vendor transition",
@@ -242,18 +242,17 @@ function calculateRevenue(issues, type = "projected") {
   return formatFinancialValue(low, high);
 }
 
-function calculateTotalSavings(issues) {
-  return {
-    projected: calculateSavings(issues, "projected"),
-    realized: calculateSavings(issues, "realized")
-  };
-}
-
-function calculateTotalRevenue(issues) {
-  return {
-    projected: calculateRevenue(issues, "projected"),
-    realized: calculateRevenue(issues, "realized")
-  };
+function calculateImpact(issues, type = "projected") {
+  let low = 0, high = 0;
+  const savingsField = type === "realized" ? "realizedSavings" : "projectedSavings";
+  const revenueField = type === "realized" ? "realizedRevenue" : "projectedRevenue";
+  issues.forEach(i => {
+    const savings = parseFinancialValue(i[savingsField]);
+    const revenue = parseFinancialValue(i[revenueField]);
+    low += savings.low + revenue.low;
+    high += savings.high + revenue.high;
+  });
+  return formatFinancialValue(low, high);
 }
 
 function getUpcomingKaizens(issues) {
@@ -283,7 +282,7 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(6, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Total Items</div>
       <div style="font-size: 36px; font-weight: 800;">${allIssues.length}</div>
@@ -293,20 +292,12 @@ isPortfolioView ? html`<div class="hero-section">
       <div style="font-size: 36px; font-weight: 800;">${serviceLines.length}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "projected")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(allIssues, "projected")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Savings</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "realized")}</div>
-    </div>
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "projected")}</div>
-    </div>
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Revenue</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "realized")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(allIssues, "realized")}</div>
     </div>
   </div>
 </div>` : html`<div class="hero-section compact">
@@ -318,20 +309,18 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(5, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
       <div style="font-size: 36px; font-weight: 800;">${currentIssues.length}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(currentIssues, "projected")}</div>
-      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateSavings(currentIssues, "realized")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(currentIssues, "projected")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(currentIssues, "projected")}</div>
-      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateRevenue(currentIssues, "realized")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(currentIssues, "realized")}</div>
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
@@ -378,20 +367,12 @@ isPortfolioView ? html`
           <span style="font-weight: 700; color: ${blocked > 0 ? '#ef4444' : brand.grayLight};">${blocked}</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Proj. Savings</span>
-          <span style="font-weight: 700; color: ${brand.teal};">${calculateSavings(issues, "projected")}</span>
+          <span style="color: ${brand.grayLight};">Proj. Impact</span>
+          <span style="font-weight: 700; color: ${brand.teal};">${calculateImpact(issues, "projected")}</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Realized Savings</span>
-          <span style="font-weight: 700; color: #10B981;">${calculateSavings(issues, "realized")}</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Proj. Revenue</span>
-          <span style="font-weight: 700; color: ${brand.magenta};">${calculateRevenue(issues, "projected")}</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Realized Revenue</span>
-          <span style="font-weight: 700; color: #10B981;">${calculateRevenue(issues, "realized")}</span>
+          <span style="color: ${brand.grayLight};">Realized Impact</span>
+          <span style="font-weight: 700; color: #10B981;">${calculateImpact(issues, "realized")}</span>
         </div>
         <div style="margin-top: 12px; text-align: center; font-size: 12px; color: ${sl.color}; font-weight: 600;">
           View Details →
@@ -568,12 +549,8 @@ renderKanban(currentIssues, isPortfolioView)
 ## Financial Impact
 
 ```js
-const projectedSavingsItems = currentIssues.filter(i => i.projectedSavings);
-const realizedSavingsItems = currentIssues.filter(i => i.realizedSavings);
-const projectedRevenueItems = currentIssues.filter(i => i.projectedRevenue);
-const realizedRevenueItems = currentIssues.filter(i => i.realizedRevenue);
-const quantifiedCount = new Set([...projectedSavingsItems, ...projectedRevenueItems].map(i => i.id)).size;
-const realizedCount = new Set([...realizedSavingsItems, ...realizedRevenueItems].map(i => i.id)).size;
+const quantifiedItems = currentIssues.filter(i => i.projectedSavings || i.projectedRevenue);
+const realizedItems = currentIssues.filter(i => i.realizedSavings || i.realizedRevenue);
 ```
 
 ```js
@@ -583,59 +560,40 @@ html`<div class="card">
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
     <div style="padding: 12px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid ${brand.teal};">
       <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Projected</div>
-      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${quantifiedCount} items quantified</div>
-      <div style="font-size: 18px; font-weight: 700; color: ${brand.teal}; margin-top: 4px;">${calculateSavings(currentIssues, "projected")} savings</div>
-      <div style="font-size: 14px; color: ${brand.magenta};">${calculateRevenue(currentIssues, "projected")} revenue</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${quantifiedItems.length} items quantified</div>
+      <div style="font-size: 24px; font-weight: 700; color: ${brand.teal}; margin-top: 4px;">${calculateImpact(currentIssues, "projected")}</div>
     </div>
     <div style="padding: 12px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #10B981;">
       <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Realized</div>
-      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${realizedCount} items realized</div>
-      <div style="font-size: 18px; font-weight: 700; color: #10B981; margin-top: 4px;">${calculateSavings(currentIssues, "realized")} savings</div>
-      <div style="font-size: 14px; color: #10B981;">${calculateRevenue(currentIssues, "realized")} revenue</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${realizedItems.length} items realized</div>
+      <div style="font-size: 24px; font-weight: 700; color: #10B981; margin-top: 4px;">${calculateImpact(currentIssues, "realized")}</div>
     </div>
   </div>
 
-  ${projectedSavingsItems.length > 0 || realizedSavingsItems.length > 0 ? html`
-    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Savings Detail</h5>
-    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-      ${projectedSavingsItems.map(item => {
-        const sl = serviceLines.find(s => s.id === item.serviceLine);
-        return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0f9ff; border-radius: 6px;">
-          <div>
-            <span style="color: ${brand.gray};">${item.title}</span>
-            ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
-          </div>
-          <div style="text-align: right;">
-            <div style="font-weight: 600; color: ${brand.teal};">📊 ${item.projectedSavings}</div>
-            ${item.realizedSavings ? html`<div style="font-size: 12px; color: #10B981;">✓ ${item.realizedSavings}</div>` : ""}
-          </div>
-        </div>
-      `})}
-    </div>
-  ` : ""}
-
-  ${projectedRevenueItems.length > 0 || realizedRevenueItems.length > 0 ? html`
-    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Revenue Detail</h5>
+  ${quantifiedItems.length > 0 ? html`
+    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Item Detail</h5>
     <div style="display: flex; flex-direction: column; gap: 8px;">
-      ${projectedRevenueItems.map(item => {
+      ${quantifiedItems.map(item => {
         const sl = serviceLines.find(s => s.id === item.serviceLine);
+        const hasSavings = item.projectedSavings || item.realizedSavings;
+        const hasRevenue = item.projectedRevenue || item.realizedRevenue;
         return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #fdf4f8; border-radius: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f8fafc; border-radius: 6px;">
           <div>
             <span style="color: ${brand.gray};">${item.title}</span>
             ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
+            <div style="font-size: 11px; color: ${brand.grayLight}; margin-top: 2px;">${hasSavings ? "Savings" : ""}${hasSavings && hasRevenue ? " + " : ""}${hasRevenue ? "Revenue" : ""}</div>
           </div>
           <div style="text-align: right;">
-            <div style="font-weight: 600; color: ${brand.magenta};">📊 +${item.projectedRevenue}</div>
+            ${item.projectedSavings ? html`<div style="font-weight: 600; color: ${brand.teal};">📊 ${item.projectedSavings}</div>` : ""}
+            ${item.projectedRevenue ? html`<div style="font-weight: 600; color: ${brand.magenta};">📊 +${item.projectedRevenue}</div>` : ""}
+            ${item.realizedSavings ? html`<div style="font-size: 12px; color: #10B981;">✓ ${item.realizedSavings}</div>` : ""}
             ${item.realizedRevenue ? html`<div style="font-size: 12px; color: #10B981;">✓ +${item.realizedRevenue}</div>` : ""}
           </div>
         </div>
       `})}
     </div>
-  ` : ""}
-
-  ${projectedSavingsItems.length === 0 && projectedRevenueItems.length === 0 ? html`<p style="color: ${brand.grayLight};">No items quantified yet</p>` : ""}
+  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
 </div>`
 ```
 
