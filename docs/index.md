@@ -25,12 +25,14 @@ const serviceLines = [
   { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", color: brand.magenta, champion: "Dr. Nezar Falluji" },
   { id: "orthopedic", name: "Orthopedic", icon: "🦴", color: brand.teal, champion: "Dr. Ranjan Gupta" },
   { id: "neuroscience", name: "Neuroscience", icon: "🧠", color: brand.purple, champion: "Dr. Tom Devlin" },
+  { id: "womens-childrens", name: "Women's & Children's", icon: "👶", color: brand.magentaLight, champion: "Larry Shields, MD" },
 ];
 
 const pillarLeaders = {
   cardiovascular: { clinical: "Dr. Nezar Falluji", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   orthopedic: { clinical: "Dr. Ranjan Gupta", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   neuroscience: { clinical: "Dr. Tom Devlin", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
+  "womens-childrens": { clinical: "Larry Shields, MD", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
 };
 
 const kanbanStates = [
@@ -82,55 +84,68 @@ const columnDescriptions = {
 // ============================================
 
 const cardiovascularIssues = [
-  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
 ];
 
 const orthopedicIssues = [
-  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106→4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", projectedRevenue: null },
-  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, projectedRevenue: null },
+  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106 to 4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", projectedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
 ];
 
 const neuroscienceIssues = [
-  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, projectedRevenue: null },
-  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, projectedRevenue: null, labels: ["blocked"] },
+  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, projectedRevenue: null, serviceLine: "neuroscience" },
+  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, projectedRevenue: null, labels: ["blocked"], serviceLine: "neuroscience" },
+];
+
+const womensChildrensIssues = [
+  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Larry Shields, MD", archetype: "re-evaluation", completion: 80, projectedSavings: null, projectedRevenue: null, serviceLine: "womens-childrens" },
 ];
 
 const allData = {
   cardiovascular: cardiovascularIssues,
   orthopedic: orthopedicIssues,
   neuroscience: neuroscienceIssues,
+  "womens-childrens": womensChildrensIssues,
 };
+
+// Combined data for portfolio view
+const allIssues = [...cardiovascularIssues, ...orthopedicIssues, ...neuroscienceIssues, ...womensChildrensIssues];
 ```
 
 ```js
 // ============================================
-// SERVICE LINE SELECTOR
+// VIEW SELECTOR (Portfolio or Service Line)
 // ============================================
 
-const serviceLineSelect = view(Inputs.select(serviceLines, {
-  label: "Service Line",
-  format: sl => `${sl.icon} ${sl.name}`,
-  value: serviceLines[0]
+const viewOptions = [
+  { id: "portfolio", name: "Portfolio Overview", icon: "📊", color: brand.gray },
+  ...serviceLines
+];
+
+const selectedView = view(Inputs.select(viewOptions, {
+  label: "View",
+  format: v => `${v.icon} ${v.name}`,
+  value: viewOptions[0]
 }));
 ```
 
 ```js
 // ============================================
-// CURRENT DATA
+// CURRENT DATA BASED ON VIEW
 // ============================================
 
-const currentSL = serviceLineSelect;
-const currentIssues = allData[currentSL.id] || [];
-const currentLeaders = pillarLeaders[currentSL.id];
+const isPortfolioView = selectedView.id === "portfolio";
+const currentIssues = isPortfolioView ? allIssues : (allData[selectedView.id] || []);
+const currentLeaders = isPortfolioView ? null : pillarLeaders[selectedView.id];
 ```
 
 ```js
@@ -167,18 +182,57 @@ function calculateRevenue(issues) {
   if (low === 0) return "—";
   return low === high ? `$${low}M` : `$${low}-${high}M`;
 }
+
+function getUpcomingKaizens(issues) {
+  return issues
+    .filter(i => i.kaizenDate)
+    .sort((a, b) => new Date(a.kaizenDate) - new Date(b.kaizenDate))
+    .slice(0, 5);
+}
+
+function getServiceLineName(id) {
+  const sl = serviceLines.find(s => s.id === id);
+  return sl ? sl.name : id;
+}
 ```
 
 ```js
 // ============================================
-// HERO SECTION
+// PORTFOLIO HERO SECTION
 // ============================================
 
-html`<div class="hero-section compact">
+isPortfolioView ? html`<div class="hero-section">
   <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-    <div style="font-size: 48px;">${currentSL.icon}</div>
+    <div style="font-size: 48px;">📊</div>
     <div>
-      <h1>${currentSL.name} Service Line</h1>
+      <h1>COF Portfolio Overview</h1>
+      <p style="opacity: 0.9; margin: 0;">Clinical-Operational-Financial Three-Pillar Governance</p>
+    </div>
+  </div>
+
+  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Total Items</div>
+      <div style="font-size: 36px; font-weight: 800;">${allIssues.length}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Service Lines</div>
+      <div style="font-size: 36px; font-weight: 800;">${serviceLines.length}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateSavings(allIssues)}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">New Revenue</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateRevenue(allIssues)}</div>
+    </div>
+  </div>
+</div>` : html`<div class="hero-section compact">
+  <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+    <div style="font-size: 48px;">${selectedView.icon}</div>
+    <div>
+      <h1>${selectedView.name} Service Line</h1>
       <p style="opacity: 0.9; margin: 0;">Clinical-Operational-Financial Three-Pillar Governance</p>
     </div>
   </div>
@@ -189,29 +243,73 @@ html`<div class="hero-section compact">
       <div style="font-size: 36px; font-weight: 800;">${currentIssues.length}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">💰 Projected Savings</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
       <div style="font-size: 28px; font-weight: 800;">${calculateSavings(currentIssues)}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">📈 New Revenue</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">New Revenue</div>
       <div style="font-size: 28px; font-weight: 800;">${calculateRevenue(currentIssues)}</div>
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
-      <div style="font-size: 18px; font-weight: 700;">${currentLeaders.clinical}</div>
+      <div style="font-size: 18px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
     </div>
   </div>
 </div>`
 ```
 
-## Three-Pillar Representatives
+```js
+// ============================================
+// SERVICE LINE CARDS (Portfolio View Only)
+// ============================================
+
+isPortfolioView ? html`
+<h2 style="margin-bottom: 16px;">Service Lines</h2>
+<div class="grid-4" style="margin-bottom: 32px;">
+  ${serviceLines.map(sl => {
+    const issues = allData[sl.id] || [];
+    const implementing = issues.filter(i => i.status === "Implementing").length;
+    const blocked = issues.filter(i => i.labels?.some(l => l.toLowerCase().includes("blocked"))).length;
+    return html`
+      <div class="card" style="border-top: 4px solid ${sl.color}; cursor: pointer;" onclick="document.querySelector('select').value = '${sl.id}'; document.querySelector('select').dispatchEvent(new Event('input'));">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <div style="font-size: 32px;">${sl.icon}</div>
+          <div>
+            <h4 style="margin: 0; color: ${brand.gray};">${sl.name}</h4>
+            <div style="font-size: 12px; color: ${brand.grayLight};">${sl.champion}</div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px;">
+          <span style="color: ${brand.grayLight};">Items</span>
+          <span style="font-weight: 700; color: ${brand.gray};">${issues.length}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
+          <span style="color: ${brand.grayLight};">In Progress</span>
+          <span style="font-weight: 700; color: ${brand.magenta};">${implementing}</span>
+        </div>
+        ${blocked > 0 ? html`
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
+          <span style="color: ${brand.grayLight};">Blocked</span>
+          <span style="font-weight: 700; color: #ef4444;">${blocked}</span>
+        </div>` : ""}
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
+          <span style="color: ${brand.grayLight};">Savings</span>
+          <span style="font-weight: 700; color: ${brand.teal};">${calculateSavings(issues)}</span>
+        </div>
+      </div>
+    `;
+  })}
+</div>` : ""
+```
 
 ```js
 // ============================================
-// PILLAR CARDS
+// THREE-PILLAR REPRESENTATIVES (Service Line View Only)
 // ============================================
 
-html`<div class="grid-3" style="margin-bottom: 32px;">
+!isPortfolioView && currentLeaders ? html`
+<h2 style="margin-bottom: 16px;">Three-Pillar Representatives</h2>
+<div class="grid-3" style="margin-bottom: 32px;">
   <div class="card" style="border-left: 4px solid ${brand.magenta};">
     <h4 style="color: ${brand.magenta}; margin-bottom: 8px;">Clinical Pillar</h4>
     <div style="font-size: 16px; font-weight: 600;">${currentLeaders.clinical}</div>
@@ -224,14 +322,68 @@ html`<div class="grid-3" style="margin-bottom: 32px;">
     <h4 style="color: ${brand.teal}; margin-bottom: 8px;">Financial Pillar</h4>
     <div style="font-size: 16px; font-weight: 600;">${currentLeaders.financial}</div>
   </div>
-</div>`
+</div>` : ""
+```
+
+```js
+// ============================================
+// UPCOMING KAIZENS (Portfolio View Only)
+// ============================================
+
+const upcomingKaizens = getUpcomingKaizens(allIssues);
+
+isPortfolioView && upcomingKaizens.length > 0 ? html`
+<h2 style="margin-bottom: 16px;">Upcoming Kaizens</h2>
+<div class="card" style="margin-bottom: 32px;">
+  <div style="display: flex; flex-direction: column; gap: 12px;">
+    ${upcomingKaizens.map(item => {
+      const sl = serviceLines.find(s => s.id === item.serviceLine);
+      return html`
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8fafc; border-radius: 8px; border-left: 4px solid ${sl?.color || brand.gray};">
+          <div>
+            <div style="font-weight: 600; color: ${brand.gray};">${item.title}</div>
+            <div style="font-size: 12px; color: ${brand.grayLight};">${sl?.name || item.serviceLine} - ${item.champion}</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: 700; color: ${brand.purple};">${item.kaizenDate}</div>
+            <div style="font-size: 12px; color: ${brand.grayLight};">${item.archetype}</div>
+          </div>
+        </div>
+      `;
+    })}
+  </div>
+</div>` : ""
+```
+
+```js
+// ============================================
+// PIPELINE BY STATUS (Portfolio View Only)
+// ============================================
+
+isPortfolioView ? html`
+<h2 style="margin-bottom: 16px;">Pipeline by Status</h2>
+<div class="card" style="margin-bottom: 32px;">
+  <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;">
+    ${kanbanStates.map(state => {
+      const count = allIssues.filter(i => i.status === state.id).length;
+      const percentage = Math.round((count / allIssues.length) * 100) || 0;
+      return html`
+        <div style="text-align: center;">
+          <div style="font-size: 32px; font-weight: 800; color: ${state.color};">${count}</div>
+          <div style="font-size: 11px; font-weight: 600; color: white; background: ${state.color}; padding: 4px 8px; border-radius: 4px; margin-top: 4px;">${state.label}</div>
+          <div style="font-size: 11px; color: ${brand.grayLight}; margin-top: 4px;">${percentage}%</div>
+        </div>
+      `;
+    })}
+  </div>
+</div>` : ""
 ```
 
 ## Product & Sourcing Kanban
 
 ```js
 // Render Kanban board
-function renderKanban(issues) {
+function renderKanban(issues, showServiceLine = false) {
   const columns = kanbanStates;
 
   return html`
@@ -274,12 +426,14 @@ function renderKanban(issues) {
                   <div style="min-height: 60px; background: #f8fafc; border-radius: 6px; padding: 6px;">
                     ${cellIssues.map(issue => {
                       const isBlocked = issue.labels?.some(l => l.toLowerCase().includes("blocked"));
+                      const sl = serviceLines.find(s => s.id === issue.serviceLine);
                       return html`
-                        <a href="https://linear.app/commonspirit/issue/${issue.id}" target="_blank" style="display: block; background: white; border-radius: 6px; padding: 10px; margin-bottom: 6px; border: 1px solid ${isBlocked ? '#fca5a5' : '#e2e8f0'}; border-left: ${isBlocked ? '4px solid #ef4444' : '1px solid #e2e8f0'}; text-decoration: none; transition: all 0.2s;">
+                        <a href="https://linear.app/commonspirit/issue/${issue.id}" target="_blank" style="display: block; background: white; border-radius: 6px; padding: 10px; margin-bottom: 6px; border: 1px solid ${isBlocked ? '#fca5a5' : '#e2e8f0'}; border-left: 4px solid ${showServiceLine ? (sl?.color || '#e2e8f0') : (isBlocked ? '#ef4444' : '#e2e8f0')}; text-decoration: none; transition: all 0.2s;">
                           <div style="display: flex; justify-content: space-between; align-items: start;">
                             <div style="font-size: 12px; font-weight: 600; color: ${brand.gray};">${issue.title}</div>
                             ${isBlocked ? html`<div style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444; flex-shrink: 0;"></div>` : ""}
                           </div>
+                          ${showServiceLine ? html`<div style="font-size: 10px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
                           <div style="font-size: 10px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
                           ${issue.projectedSavings || issue.projectedRevenue ? html`
                             <div style="font-size: 10px; margin-top: 6px; font-weight: 600;">
@@ -288,7 +442,7 @@ function renderKanban(issues) {
                             </div>
                           ` : ""}
                           <div style="font-size: 10px; color: ${brand.purple}; margin-top: 6px;">
-                            🎯 ${issue.kaizenDate || "TBD"}
+                            ${issue.kaizenDate || "TBD"}
                           </div>
                         </a>
                       `;
@@ -306,7 +460,7 @@ function renderKanban(issues) {
 ```
 
 ```js
-renderKanban(currentIssues)
+renderKanban(currentIssues, isPortfolioView)
 ```
 
 ## Quantified Items
@@ -318,12 +472,8 @@ const quantifiedCount = new Set([...savingsItems, ...revenueItems].map(i => i.id
 ```
 
 ```js
-// ============================================
-// QUANTIFIED ITEMS CARD
-// ============================================
-
 html`<div class="card">
-  <h4 style="margin-bottom: 16px;">📊 Financial Quantification Progress</h4>
+  <h4 style="margin-bottom: 16px;">Financial Quantification Progress</h4>
 
   <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
     <span style="color: ${brand.grayLight}; font-size: 14px;">Items quantified</span>
@@ -336,18 +486,28 @@ html`<div class="card">
 
   ${savingsItems.length > 0 || revenueItems.length > 0 ? html`
     <div style="display: flex; flex-direction: column; gap: 8px;">
-      ${savingsItems.map(item => html`
+      ${savingsItems.map(item => {
+        const sl = serviceLines.find(s => s.id === item.serviceLine);
+        return html`
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0fdfa; border-radius: 6px;">
-          <span style="color: ${brand.gray};">${item.title}</span>
+          <div>
+            <span style="color: ${brand.gray};">${item.title}</span>
+            ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
+          </div>
           <span style="font-weight: 600; color: ${brand.teal};">${item.projectedSavings}</span>
         </div>
-      `)}
-      ${revenueItems.map(item => html`
+      `})}
+      ${revenueItems.map(item => {
+        const sl = serviceLines.find(s => s.id === item.serviceLine);
+        return html`
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #fdf4f8; border-radius: 6px;">
-          <span style="color: ${brand.gray};">${item.title}</span>
+          <div>
+            <span style="color: ${brand.gray};">${item.title}</span>
+            ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
+          </div>
           <span style="font-weight: 600; color: ${brand.magenta};">+${item.projectedRevenue}</span>
         </div>
-      `)}
+      `})}
     </div>
   ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
 </div>`
@@ -356,10 +516,6 @@ html`<div class="card">
 ---
 
 ```js
-// ============================================
-// FOOTER
-// ============================================
-
 html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px; margin-top: 32px;">
   <a href="https://linear.app/commonspirit" target="_blank" style="color: ${brand.purple};">Open Linear →</a>
 </div>`
