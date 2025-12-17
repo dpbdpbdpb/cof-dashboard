@@ -18,7 +18,7 @@
 
 import {define} from "./_observablehq/client.fedf0981.js";
 
-define({id: "e976c6e0", outputs: ["brand","serviceLines","pillarLeaders","kanbanStates","swimlanes","columnDescriptions"], body: () => {
+define({id: "9ec8e7a3", outputs: ["brand","serviceLines","pillarLeaders","kanbanStates","swimlanes","columnDescriptions"], body: () => {
 // ============================================
 // CONFIGURATION & BRAND COLORS
 // ============================================
@@ -68,63 +68,63 @@ const swimlanes = [
 
 const columnDescriptions = {
   "new-product": {
-    "Funnel": "Request received, initial triage",
-    "Reviewing": "Evidence gathering, clinical review",
-    "Analyzing": "Financial modeling, 3-pillar prep",
-    "Backlog": "Awaiting Kaizen scheduling",
-    "Implementing": "Pilot/rollout in progress",
-    "Done": "Formulary decision complete",
+    "Funnel": "K1: Request received, champion identified",
+    "Reviewing": "K2-K3: 8-agent framework initiated, coalition forming",
+    "Analyzing": "K3-K4: All 8 agents complete, decision package ready",
+    "Backlog": "K4-K5: Kaizen scheduled, awaiting capacity",
+    "Implementing": "K5: GO approved, pilot/rollout in progress",
+    "Done": "K8: Lookback complete, formulary finalized",
   },
   "re-evaluation": {
-    "Funnel": "Trigger identified (safety, evidence)",
-    "Reviewing": "Lookback data collection",
-    "Analyzing": "Impact assessment, alternatives",
-    "Backlog": "Awaiting reassessment Kaizen",
-    "Implementing": "Sustain/Modify/Remove action",
-    "Done": "Reassessment complete",
+    "Funnel": "K1: Trigger identified (safety, evidence, utilization)",
+    "Reviewing": "K2-K3: Lookback data collection, stakeholders engaged",
+    "Analyzing": "K3-K4: Impact assessment, alternatives evaluated",
+    "Backlog": "K4-K5: Kaizen scheduled for reassessment decision",
+    "Implementing": "K5: Sustain/Modify/Remove action executing",
+    "Done": "K8: Formulary updated, transition complete",
   },
   "sourcing": {
-    "Funnel": "Category identified, RFI/RFP prep",
-    "Reviewing": "Vendor submissions, evaluations",
-    "Analyzing": "Clinical equivalence, pricing",
-    "Backlog": "Awaiting strategy Kaizen",
-    "Implementing": "Contract execution, transition",
-    "Done": "Contract live, savings realized",
+    "Funnel": "S0/K1: Category assessed, urgency documented",
+    "Reviewing": "S1/K2: Coalition building, vendor submissions",
+    "Analyzing": "S2/K3: Clinical equivalence, business case complete",
+    "Backlog": "S3/K4: Strategy Kaizen scheduled, negotiation ready",
+    "Implementing": "S4/K5: Contract execution, vendor transition",
+    "Done": "S5/K8: Contract live, savings realized",
   },
 };
 return {brand,serviceLines,pillarLeaders,kanbanStates,swimlanes,columnDescriptions};
 }});
 
-define({id: "6bda6829", outputs: ["cardiovascularIssues","orthopedicIssues","neuroscienceIssues","womensChildrensIssues","allData","allIssues"], body: () => {
+define({id: "9f43d801", outputs: ["cardiovascularIssues","orthopedicIssues","neuroscienceIssues","womensChildrensIssues","allData","allIssues"], body: () => {
 // ============================================
 // SAMPLE DATA (Replace with Linear API later)
 // ============================================
 
 const cardiovascularIssues = [
-  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, projectedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
+  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
 ];
 
 const orthopedicIssues = [
-  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106 to 4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, projectedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106 to 4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
 ];
 
 const neuroscienceIssues = [
-  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, projectedRevenue: null, serviceLine: "neuroscience" },
-  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, projectedRevenue: null, labels: ["blocked"], serviceLine: "neuroscience" },
+  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "neuroscience" },
+  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, labels: ["blocked"], serviceLine: "neuroscience" },
 ];
 
 const womensChildrensIssues = [
-  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Larry Shields, MD", archetype: "re-evaluation", completion: 80, projectedSavings: null, projectedRevenue: null, serviceLine: "womens-childrens" },
+  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Larry Shields, MD", archetype: "re-evaluation", completion: 80, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "womens-childrens" },
 ];
 
 const allData = {
@@ -158,39 +158,61 @@ function setView(id) {
 return {viewOptions,selectedViewState,selectedViewId,setView};
 }});
 
-define({id: "bbcc6bec", inputs: ["serviceLines"], outputs: ["calculateSavings","calculateRevenue","getUpcomingKaizens","getServiceLineName"], body: (serviceLines) => {
+define({id: "82b9df95", inputs: ["serviceLines"], outputs: ["parseFinancialValue","formatFinancialValue","calculateSavings","calculateRevenue","calculateTotalSavings","calculateTotalRevenue","getUpcomingKaizens","getServiceLineName"], body: (serviceLines) => {
 // ============================================
 // HELPER FUNCTIONS
 // ============================================
 
-function calculateSavings(issues) {
-  let low = 0, high = 0;
-  issues.forEach(i => {
-    if (i.projectedSavings) {
-      const match = i.projectedSavings.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
-      if (match) {
-        low += parseFloat(match[1]);
-        high += match[2] ? parseFloat(match[2]) : parseFloat(match[1]);
-      }
-    }
-  });
-  if (low === 0) return "—";
+function parseFinancialValue(value) {
+  if (!value) return { low: 0, high: 0 };
+  const match = value.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
+  if (match) {
+    const low = parseFloat(match[1]);
+    const high = match[2] ? parseFloat(match[2]) : low;
+    return { low, high };
+  }
+  return { low: 0, high: 0 };
+}
+
+function formatFinancialValue(low, high) {
+  if (low === 0 && high === 0) return "—";
   return low === high ? `$${low}M` : `$${low}-${high}M`;
 }
 
-function calculateRevenue(issues) {
+function calculateSavings(issues, type = "projected") {
   let low = 0, high = 0;
+  const field = type === "realized" ? "realizedSavings" : "projectedSavings";
   issues.forEach(i => {
-    if (i.projectedRevenue) {
-      const match = i.projectedRevenue.match(/\$?([\d.]+)(?:-([\d.]+))?\s*M?/i);
-      if (match) {
-        low += parseFloat(match[1]);
-        high += match[2] ? parseFloat(match[2]) : parseFloat(match[1]);
-      }
-    }
+    const parsed = parseFinancialValue(i[field]);
+    low += parsed.low;
+    high += parsed.high;
   });
-  if (low === 0) return "—";
-  return low === high ? `$${low}M` : `$${low}-${high}M`;
+  return formatFinancialValue(low, high);
+}
+
+function calculateRevenue(issues, type = "projected") {
+  let low = 0, high = 0;
+  const field = type === "realized" ? "realizedRevenue" : "projectedRevenue";
+  issues.forEach(i => {
+    const parsed = parseFinancialValue(i[field]);
+    low += parsed.low;
+    high += parsed.high;
+  });
+  return formatFinancialValue(low, high);
+}
+
+function calculateTotalSavings(issues) {
+  return {
+    projected: calculateSavings(issues, "projected"),
+    realized: calculateSavings(issues, "realized")
+  };
+}
+
+function calculateTotalRevenue(issues) {
+  return {
+    projected: calculateRevenue(issues, "projected"),
+    realized: calculateRevenue(issues, "realized")
+  };
 }
 
 function getUpcomingKaizens(issues) {
@@ -204,10 +226,10 @@ function getServiceLineName(id) {
   const sl = serviceLines.find(s => s.id === id);
   return sl ? sl.name : id;
 }
-return {calculateSavings,calculateRevenue,getUpcomingKaizens,getServiceLineName};
+return {parseFinancialValue,formatFinancialValue,calculateSavings,calculateRevenue,calculateTotalSavings,calculateTotalRevenue,getUpcomingKaizens,getServiceLineName};
 }});
 
-define({id: "293944c0", inputs: ["isPortfolioView","html","allIssues","serviceLines","calculateSavings","calculateRevenue","selectedView","currentIssues","currentLeaders","display"], body: async (isPortfolioView,html,allIssues,serviceLines,calculateSavings,calculateRevenue,selectedView,currentIssues,currentLeaders,display) => {
+define({id: "41c4d0c9", inputs: ["isPortfolioView","html","allIssues","serviceLines","calculateSavings","calculateRevenue","selectedView","currentIssues","currentLeaders","display"], body: async (isPortfolioView,html,allIssues,serviceLines,calculateSavings,calculateRevenue,selectedView,currentIssues,currentLeaders,display) => {
 display(await(
 // ============================================
 // PORTFOLIO HERO SECTION
@@ -222,7 +244,7 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(6, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Total Items</div>
       <div style="font-size: 36px; font-weight: 800;">${allIssues.length}</div>
@@ -233,11 +255,19 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateSavings(allIssues)}</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "projected")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">New Revenue</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateRevenue(allIssues)}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Savings</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "realized")}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "projected")}</div>
+    </div>
+    <div class="stat-card">
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Revenue</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "realized")}</div>
     </div>
   </div>
 </div>` : html`<div class="hero-section compact">
@@ -249,29 +279,31 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(5, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
       <div style="font-size: 36px; font-weight: 800;">${currentIssues.length}</div>
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateSavings(currentIssues)}</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(currentIssues, "projected")}</div>
+      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateSavings(currentIssues, "realized")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">New Revenue</div>
-      <div style="font-size: 28px; font-weight: 800;">${calculateRevenue(currentIssues)}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
+      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(currentIssues, "projected")}</div>
+      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateRevenue(currentIssues, "realized")}</div>
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
-      <div style="font-size: 18px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
+      <div style="font-size: 16px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
     </div>
   </div>
 </div>`
 ))
 }});
 
-define({id: "58106fb5", inputs: ["isPortfolioView","html","serviceLines","allData","setView","brand","calculateSavings","display"], body: async (isPortfolioView,html,serviceLines,allData,setView,brand,calculateSavings,display) => {
+define({id: "2984ce64", inputs: ["isPortfolioView","html","serviceLines","allData","setView","brand","calculateSavings","display"], body: async (isPortfolioView,html,serviceLines,allData,setView,brand,calculateSavings,display) => {
 display(await(
 // ============================================
 // SERVICE LINE CARDS (Portfolio View Only)
@@ -310,8 +342,12 @@ isPortfolioView ? html`
           <span style="font-weight: 700; color: #ef4444;">${blocked}</span>
         </div>` : ""}
         <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Savings</span>
-          <span style="font-weight: 700; color: ${brand.teal};">${calculateSavings(issues)}</span>
+          <span style="color: ${brand.grayLight};">Proj. Savings</span>
+          <span style="font-weight: 700; color: ${brand.teal};">${calculateSavings(issues, "projected")}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
+          <span style="color: ${brand.grayLight};">Realized</span>
+          <span style="font-weight: 700; color: #10B981;">${calculateSavings(issues, "realized")}</span>
         </div>
         <div style="margin-top: 12px; text-align: center; font-size: 12px; color: ${sl.color}; font-weight: 600;">
           View Details →
@@ -405,7 +441,7 @@ isPortfolioView ? html`
 ))
 }});
 
-define({id: "89f511df", inputs: ["kanbanStates","html","brand","swimlanes","columnDescriptions","serviceLines"], outputs: ["renderKanban"], body: (kanbanStates,html,brand,swimlanes,columnDescriptions,serviceLines) => {
+define({id: "9eb208ef", inputs: ["kanbanStates","html","brand","swimlanes","columnDescriptions","serviceLines"], outputs: ["renderKanban"], body: (kanbanStates,html,brand,swimlanes,columnDescriptions,serviceLines) => {
 // Render Kanban board
 function renderKanban(issues, showServiceLine = false) {
   const columns = kanbanStates;
@@ -459,10 +495,12 @@ function renderKanban(issues, showServiceLine = false) {
                           </div>
                           ${showServiceLine ? html`<div style="font-size: 10px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
                           <div style="font-size: 10px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
-                          ${issue.projectedSavings || issue.projectedRevenue ? html`
+                          ${issue.projectedSavings || issue.realizedSavings || issue.projectedRevenue || issue.realizedRevenue ? html`
                             <div style="font-size: 10px; margin-top: 6px; font-weight: 600;">
-                              ${issue.projectedSavings ? html`<span style="color: ${brand.teal};">${issue.projectedSavings}</span>` : ""}
-                              ${issue.projectedRevenue ? html`<span style="color: ${brand.magenta}; margin-left: 6px;">+${issue.projectedRevenue}</span>` : ""}
+                              ${issue.projectedSavings ? html`<span style="color: ${brand.teal};" title="Projected Savings">📊 ${issue.projectedSavings}</span>` : ""}
+                              ${issue.realizedSavings ? html`<span style="color: #10B981; margin-left: 4px;" title="Realized Savings">✓ ${issue.realizedSavings}</span>` : ""}
+                              ${issue.projectedRevenue ? html`<span style="color: ${brand.magenta}; margin-left: 6px;" title="Projected Revenue">📊 +${issue.projectedRevenue}</span>` : ""}
+                              ${issue.realizedRevenue ? html`<span style="color: #10B981; margin-left: 4px;" title="Realized Revenue">✓ +${issue.realizedRevenue}</span>` : ""}
                             </div>
                           ` : ""}
                           <div style="font-size: 10px; color: ${brand.purple}; margin-top: 6px;">
@@ -490,41 +528,60 @@ renderKanban(currentIssues, isPortfolioView)
 ))
 }});
 
-define({id: "9fab95ae", inputs: ["currentIssues"], outputs: ["savingsItems","revenueItems","quantifiedCount"], body: (currentIssues) => {
-const savingsItems = currentIssues.filter(i => i.projectedSavings);
-const revenueItems = currentIssues.filter(i => i.projectedRevenue);
-const quantifiedCount = new Set([...savingsItems, ...revenueItems].map(i => i.id)).size;
-return {savingsItems,revenueItems,quantifiedCount};
+define({id: "30c795b0", inputs: ["currentIssues"], outputs: ["projectedSavingsItems","realizedSavingsItems","projectedRevenueItems","realizedRevenueItems","quantifiedCount","realizedCount"], body: (currentIssues) => {
+const projectedSavingsItems = currentIssues.filter(i => i.projectedSavings);
+const realizedSavingsItems = currentIssues.filter(i => i.realizedSavings);
+const projectedRevenueItems = currentIssues.filter(i => i.projectedRevenue);
+const realizedRevenueItems = currentIssues.filter(i => i.realizedRevenue);
+const quantifiedCount = new Set([...projectedSavingsItems, ...projectedRevenueItems].map(i => i.id)).size;
+const realizedCount = new Set([...realizedSavingsItems, ...realizedRevenueItems].map(i => i.id)).size;
+return {projectedSavingsItems,realizedSavingsItems,projectedRevenueItems,realizedRevenueItems,quantifiedCount,realizedCount};
 }});
 
-define({id: "8a8a34bf", inputs: ["html","brand","quantifiedCount","currentIssues","savingsItems","revenueItems","serviceLines","isPortfolioView","display"], body: async (html,brand,quantifiedCount,currentIssues,savingsItems,revenueItems,serviceLines,isPortfolioView,display) => {
+define({id: "6aecc148", inputs: ["html","brand","quantifiedCount","calculateSavings","currentIssues","calculateRevenue","realizedCount","projectedSavingsItems","realizedSavingsItems","serviceLines","isPortfolioView","projectedRevenueItems","realizedRevenueItems","display"], body: async (html,brand,quantifiedCount,calculateSavings,currentIssues,calculateRevenue,realizedCount,projectedSavingsItems,realizedSavingsItems,serviceLines,isPortfolioView,projectedRevenueItems,realizedRevenueItems,display) => {
 display(await(
 html`<div class="card">
-  <h4 style="margin-bottom: 16px;">Financial Quantification Progress</h4>
+  <h4 style="margin-bottom: 16px;">Financial Impact Summary</h4>
 
-  <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-    <span style="color: ${brand.grayLight}; font-size: 14px;">Items quantified</span>
-    <span style="font-weight: 600;">${quantifiedCount} of ${currentIssues.length}</span>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+    <div style="padding: 12px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid ${brand.teal};">
+      <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Projected</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${quantifiedCount} items quantified</div>
+      <div style="font-size: 18px; font-weight: 700; color: ${brand.teal}; margin-top: 4px;">${calculateSavings(currentIssues, "projected")} savings</div>
+      <div style="font-size: 14px; color: ${brand.magenta};">${calculateRevenue(currentIssues, "projected")} revenue</div>
+    </div>
+    <div style="padding: 12px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #10B981;">
+      <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Realized</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${realizedCount} items realized</div>
+      <div style="font-size: 18px; font-weight: 700; color: #10B981; margin-top: 4px;">${calculateSavings(currentIssues, "realized")} savings</div>
+      <div style="font-size: 14px; color: #10B981;">${calculateRevenue(currentIssues, "realized")} revenue</div>
+    </div>
   </div>
 
-  <div style="width: 100%; height: 8px; background: #f1f5f9; border-radius: 4px; margin-bottom: 20px;">
-    <div style="width: ${(quantifiedCount / Math.max(currentIssues.length, 1)) * 100}%; height: 100%; background: ${brand.teal}; border-radius: 4px;"></div>
-  </div>
-
-  ${savingsItems.length > 0 || revenueItems.length > 0 ? html`
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      ${savingsItems.map(item => {
+  ${projectedSavingsItems.length > 0 || realizedSavingsItems.length > 0 ? html`
+    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Savings Detail</h5>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
+      ${projectedSavingsItems.map(item => {
         const sl = serviceLines.find(s => s.id === item.serviceLine);
         return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0fdfa; border-radius: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0f9ff; border-radius: 6px;">
           <div>
             <span style="color: ${brand.gray};">${item.title}</span>
             ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
           </div>
-          <span style="font-weight: 600; color: ${brand.teal};">${item.projectedSavings}</span>
+          <div style="text-align: right;">
+            <div style="font-weight: 600; color: ${brand.teal};">📊 ${item.projectedSavings}</div>
+            ${item.realizedSavings ? html`<div style="font-size: 12px; color: #10B981;">✓ ${item.realizedSavings}</div>` : ""}
+          </div>
         </div>
       `})}
-      ${revenueItems.map(item => {
+    </div>
+  ` : ""}
+
+  ${projectedRevenueItems.length > 0 || realizedRevenueItems.length > 0 ? html`
+    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Revenue Detail</h5>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      ${projectedRevenueItems.map(item => {
         const sl = serviceLines.find(s => s.id === item.serviceLine);
         return html`
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #fdf4f8; border-radius: 6px;">
@@ -532,11 +589,16 @@ html`<div class="card">
             <span style="color: ${brand.gray};">${item.title}</span>
             ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
           </div>
-          <span style="font-weight: 600; color: ${brand.magenta};">+${item.projectedRevenue}</span>
+          <div style="text-align: right;">
+            <div style="font-weight: 600; color: ${brand.magenta};">📊 +${item.projectedRevenue}</div>
+            ${item.realizedRevenue ? html`<div style="font-size: 12px; color: #10B981;">✓ +${item.realizedRevenue}</div>` : ""}
+          </div>
         </div>
       `})}
     </div>
-  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
+  ` : ""}
+
+  ${projectedSavingsItems.length === 0 && projectedRevenueItems.length === 0 ? html`<p style="color: ${brand.grayLight};">No items quantified yet</p>` : ""}
 </div>`
 ))
 }});
@@ -558,29 +620,29 @@ html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px;
 <div>Contents</div>
 <ol>
 <li class="observablehq-secondary-link"><a href="#product-and-sourcing-kanban">Product &amp; Sourcing Kanban</a></li>
-<li class="observablehq-secondary-link"><a href="#quantified-items">Quantified Items</a></li>
+<li class="observablehq-secondary-link"><a href="#financial-impact">Financial Impact</a></li>
 </ol>
 </nav>
 </aside>
 <main id="observablehq-main" class="observablehq">
-<div class="observablehq observablehq--block"><!--:e976c6e0:--></div>
-<div class="observablehq observablehq--block"><!--:6bda6829:--></div>
+<div class="observablehq observablehq--block"><!--:9ec8e7a3:--></div>
+<div class="observablehq observablehq--block"><!--:9f43d801:--></div>
 <div class="observablehq observablehq--block"><!--:1224a20d:--></div>
 <div class="observablehq observablehq--block">
   <div class="observablehq--inspect observablehq--error">SyntaxError: Unterminated template (49:3)</div>
 </div>
-<div class="observablehq observablehq--block"><!--:bbcc6bec:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:293944c0:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:58106fb5:--></div>
+<div class="observablehq observablehq--block"><!--:82b9df95:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:41c4d0c9:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:2984ce64:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:14046e4c:--></div>
 <div class="observablehq observablehq--block"><!--:37c2261c:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:a6fa1916:--></div>
 <h2 id="product-and-sourcing-kanban" tabindex="-1"><a class="observablehq-header-anchor" href="#product-and-sourcing-kanban">Product &amp; Sourcing Kanban</a></h2>
-<div class="observablehq observablehq--block"><!--:89f511df:--></div>
+<div class="observablehq observablehq--block"><!--:9eb208ef:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:bf58b735:--></div>
-<h2 id="quantified-items" tabindex="-1"><a class="observablehq-header-anchor" href="#quantified-items">Quantified Items</a></h2>
-<div class="observablehq observablehq--block"><!--:9fab95ae:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:8a8a34bf:--></div>
+<h2 id="financial-impact" tabindex="-1"><a class="observablehq-header-anchor" href="#financial-impact">Financial Impact</a></h2>
+<div class="observablehq observablehq--block"><!--:30c795b0:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:6aecc148:--></div>
 <hr>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:bbc33935:--></div>
 </main>
