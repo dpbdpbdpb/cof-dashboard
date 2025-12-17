@@ -18,7 +18,7 @@
 
 import {define} from "./_observablehq/client.fedf0981.js";
 
-define({id: "a8130a37", outputs: ["brand","serviceLines","pillarLeaders","kanbanStates","swimlanes","columnDescriptions"], body: () => {
+define({id: "00d62835", outputs: ["brand","serviceLines","pillarLeaders","kanbanStates","swimlanes","columnDescriptions"], body: () => {
 // ============================================
 // CONFIGURATION & BRAND COLORS
 // ============================================
@@ -85,7 +85,7 @@ const columnDescriptions = {
   },
   "sourcing": {
     "Funnel": "S0/K1: Category assessed, urgency documented",
-    "Reviewing": "S1/K2: Coalition building, Kaizen scheduled",
+    "Reviewing": "S1/K2: Coalition building, analysis, Kaizen scheduled",
     "Analyzing": "S2-S3/K3-K4: Equivalence analysis, Kaizen decision",
     "Backlog": "K5: Strategy APPROVED, awaiting contract execution",
     "Implementing": "S4/K5-K6: Contract execution, vendor transition",
@@ -220,7 +220,7 @@ const currentLeaders = isPortfolioView ? null : pillarLeaders[selectedView.id];
 return {isPortfolioView,currentIssues,currentLeaders};
 }});
 
-define({id: "82b9df95", inputs: ["serviceLines"], outputs: ["parseFinancialValue","formatFinancialValue","calculateSavings","calculateRevenue","calculateTotalSavings","calculateTotalRevenue","getUpcomingKaizens","getServiceLineName"], body: (serviceLines) => {
+define({id: "18a399ee", inputs: ["serviceLines"], outputs: ["parseFinancialValue","formatFinancialValue","calculateSavings","calculateRevenue","calculateImpact","getUpcomingKaizens","getServiceLineName"], body: (serviceLines) => {
 // ============================================
 // HELPER FUNCTIONS
 // ============================================
@@ -263,18 +263,17 @@ function calculateRevenue(issues, type = "projected") {
   return formatFinancialValue(low, high);
 }
 
-function calculateTotalSavings(issues) {
-  return {
-    projected: calculateSavings(issues, "projected"),
-    realized: calculateSavings(issues, "realized")
-  };
-}
-
-function calculateTotalRevenue(issues) {
-  return {
-    projected: calculateRevenue(issues, "projected"),
-    realized: calculateRevenue(issues, "realized")
-  };
+function calculateImpact(issues, type = "projected") {
+  let low = 0, high = 0;
+  const savingsField = type === "realized" ? "realizedSavings" : "projectedSavings";
+  const revenueField = type === "realized" ? "realizedRevenue" : "projectedRevenue";
+  issues.forEach(i => {
+    const savings = parseFinancialValue(i[savingsField]);
+    const revenue = parseFinancialValue(i[revenueField]);
+    low += savings.low + revenue.low;
+    high += savings.high + revenue.high;
+  });
+  return formatFinancialValue(low, high);
 }
 
 function getUpcomingKaizens(issues) {
@@ -288,10 +287,10 @@ function getServiceLineName(id) {
   const sl = serviceLines.find(s => s.id === id);
   return sl ? sl.name : id;
 }
-return {parseFinancialValue,formatFinancialValue,calculateSavings,calculateRevenue,calculateTotalSavings,calculateTotalRevenue,getUpcomingKaizens,getServiceLineName};
+return {parseFinancialValue,formatFinancialValue,calculateSavings,calculateRevenue,calculateImpact,getUpcomingKaizens,getServiceLineName};
 }});
 
-define({id: "41c4d0c9", inputs: ["isPortfolioView","html","allIssues","serviceLines","calculateSavings","calculateRevenue","selectedView","currentIssues","currentLeaders","display"], body: async (isPortfolioView,html,allIssues,serviceLines,calculateSavings,calculateRevenue,selectedView,currentIssues,currentLeaders,display) => {
+define({id: "4b5156db", inputs: ["isPortfolioView","html","allIssues","serviceLines","calculateImpact","selectedView","currentIssues","currentLeaders","display"], body: async (isPortfolioView,html,allIssues,serviceLines,calculateImpact,selectedView,currentIssues,currentLeaders,display) => {
 display(await(
 // ============================================
 // PORTFOLIO HERO SECTION
@@ -306,7 +305,7 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(6, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Total Items</div>
       <div style="font-size: 36px; font-weight: 800;">${allIssues.length}</div>
@@ -316,20 +315,12 @@ isPortfolioView ? html`<div class="hero-section">
       <div style="font-size: 36px; font-weight: 800;">${serviceLines.length}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "projected")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(allIssues, "projected")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Savings</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(allIssues, "realized")}</div>
-    </div>
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "projected")}</div>
-    </div>
-    <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Revenue</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(allIssues, "realized")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(allIssues, "realized")}</div>
     </div>
   </div>
 </div>` : html`<div class="hero-section compact">
@@ -341,20 +332,18 @@ isPortfolioView ? html`<div class="hero-section">
     </div>
   </div>
 
-  <div class="stat-grid" style="grid-template-columns: repeat(5, 1fr);">
+  <div class="stat-grid" style="grid-template-columns: repeat(4, 1fr);">
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Active Items</div>
       <div style="font-size: 36px; font-weight: 800;">${currentIssues.length}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Savings</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateSavings(currentIssues, "projected")}</div>
-      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateSavings(currentIssues, "realized")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(currentIssues, "projected")}</div>
     </div>
     <div class="stat-card">
-      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Projected Revenue</div>
-      <div style="font-size: 24px; font-weight: 800;">${calculateRevenue(currentIssues, "projected")}</div>
-      <div style="font-size: 11px; opacity: 0.7; margin-top: 4px;">Realized: ${calculateRevenue(currentIssues, "realized")}</div>
+      <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Realized Impact</div>
+      <div style="font-size: 28px; font-weight: 800;">${calculateImpact(currentIssues, "realized")}</div>
     </div>
     <div class="stat-card">
       <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">Clinical Champion</div>
@@ -365,7 +354,7 @@ isPortfolioView ? html`<div class="hero-section">
 ))
 }});
 
-define({id: "1ed7ae8e", inputs: ["isPortfolioView","html","serviceLines","allData","setView","brand","calculateSavings","calculateRevenue","display"], body: async (isPortfolioView,html,serviceLines,allData,setView,brand,calculateSavings,calculateRevenue,display) => {
+define({id: "a2c3a57d", inputs: ["isPortfolioView","html","serviceLines","allData","setView","brand","calculateImpact","display"], body: async (isPortfolioView,html,serviceLines,allData,setView,brand,calculateImpact,display) => {
 display(await(
 // ============================================
 // SERVICE LINE CARDS (Portfolio View Only)
@@ -403,20 +392,12 @@ isPortfolioView ? html`
           <span style="font-weight: 700; color: ${blocked > 0 ? '#ef4444' : brand.grayLight};">${blocked}</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Proj. Savings</span>
-          <span style="font-weight: 700; color: ${brand.teal};">${calculateSavings(issues, "projected")}</span>
+          <span style="color: ${brand.grayLight};">Proj. Impact</span>
+          <span style="font-weight: 700; color: ${brand.teal};">${calculateImpact(issues, "projected")}</span>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Realized Savings</span>
-          <span style="font-weight: 700; color: #10B981;">${calculateSavings(issues, "realized")}</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Proj. Revenue</span>
-          <span style="font-weight: 700; color: ${brand.magenta};">${calculateRevenue(issues, "projected")}</span>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 4px;">
-          <span style="color: ${brand.grayLight};">Realized Revenue</span>
-          <span style="font-weight: 700; color: #10B981;">${calculateRevenue(issues, "realized")}</span>
+          <span style="color: ${brand.grayLight};">Realized Impact</span>
+          <span style="font-weight: 700; color: #10B981;">${calculateImpact(issues, "realized")}</span>
         </div>
         <div style="margin-top: 12px; text-align: center; font-size: 12px; color: ${sl.color}; font-weight: 600;">
           View Details →
@@ -597,17 +578,13 @@ renderKanban(currentIssues, isPortfolioView)
 ))
 }});
 
-define({id: "30c795b0", inputs: ["currentIssues"], outputs: ["projectedSavingsItems","realizedSavingsItems","projectedRevenueItems","realizedRevenueItems","quantifiedCount","realizedCount"], body: (currentIssues) => {
-const projectedSavingsItems = currentIssues.filter(i => i.projectedSavings);
-const realizedSavingsItems = currentIssues.filter(i => i.realizedSavings);
-const projectedRevenueItems = currentIssues.filter(i => i.projectedRevenue);
-const realizedRevenueItems = currentIssues.filter(i => i.realizedRevenue);
-const quantifiedCount = new Set([...projectedSavingsItems, ...projectedRevenueItems].map(i => i.id)).size;
-const realizedCount = new Set([...realizedSavingsItems, ...realizedRevenueItems].map(i => i.id)).size;
-return {projectedSavingsItems,realizedSavingsItems,projectedRevenueItems,realizedRevenueItems,quantifiedCount,realizedCount};
+define({id: "240f56d8", inputs: ["currentIssues"], outputs: ["quantifiedItems","realizedItems"], body: (currentIssues) => {
+const quantifiedItems = currentIssues.filter(i => i.projectedSavings || i.projectedRevenue);
+const realizedItems = currentIssues.filter(i => i.realizedSavings || i.realizedRevenue);
+return {quantifiedItems,realizedItems};
 }});
 
-define({id: "6aecc148", inputs: ["html","brand","quantifiedCount","calculateSavings","currentIssues","calculateRevenue","realizedCount","projectedSavingsItems","realizedSavingsItems","serviceLines","isPortfolioView","projectedRevenueItems","realizedRevenueItems","display"], body: async (html,brand,quantifiedCount,calculateSavings,currentIssues,calculateRevenue,realizedCount,projectedSavingsItems,realizedSavingsItems,serviceLines,isPortfolioView,projectedRevenueItems,realizedRevenueItems,display) => {
+define({id: "e7cd89b2", inputs: ["html","brand","quantifiedItems","calculateImpact","currentIssues","realizedItems","serviceLines","isPortfolioView","display"], body: async (html,brand,quantifiedItems,calculateImpact,currentIssues,realizedItems,serviceLines,isPortfolioView,display) => {
 display(await(
 html`<div class="card">
   <h4 style="margin-bottom: 16px;">Financial Impact Summary</h4>
@@ -615,59 +592,40 @@ html`<div class="card">
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
     <div style="padding: 12px; background: #f0f9ff; border-radius: 8px; border-left: 4px solid ${brand.teal};">
       <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Projected</div>
-      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${quantifiedCount} items quantified</div>
-      <div style="font-size: 18px; font-weight: 700; color: ${brand.teal}; margin-top: 4px;">${calculateSavings(currentIssues, "projected")} savings</div>
-      <div style="font-size: 14px; color: ${brand.magenta};">${calculateRevenue(currentIssues, "projected")} revenue</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${quantifiedItems.length} items quantified</div>
+      <div style="font-size: 24px; font-weight: 700; color: ${brand.teal}; margin-top: 4px;">${calculateImpact(currentIssues, "projected")}</div>
     </div>
     <div style="padding: 12px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #10B981;">
       <div style="font-size: 11px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 4px;">Realized</div>
-      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${realizedCount} items realized</div>
-      <div style="font-size: 18px; font-weight: 700; color: #10B981; margin-top: 4px;">${calculateSavings(currentIssues, "realized")} savings</div>
-      <div style="font-size: 14px; color: #10B981;">${calculateRevenue(currentIssues, "realized")} revenue</div>
+      <div style="font-size: 14px; font-weight: 600; color: ${brand.gray};">${realizedItems.length} items realized</div>
+      <div style="font-size: 24px; font-weight: 700; color: #10B981; margin-top: 4px;">${calculateImpact(currentIssues, "realized")}</div>
     </div>
   </div>
 
-  ${projectedSavingsItems.length > 0 || realizedSavingsItems.length > 0 ? html`
-    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Savings Detail</h5>
-    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px;">
-      ${projectedSavingsItems.map(item => {
-        const sl = serviceLines.find(s => s.id === item.serviceLine);
-        return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f0f9ff; border-radius: 6px;">
-          <div>
-            <span style="color: ${brand.gray};">${item.title}</span>
-            ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
-          </div>
-          <div style="text-align: right;">
-            <div style="font-weight: 600; color: ${brand.teal};">📊 ${item.projectedSavings}</div>
-            ${item.realizedSavings ? html`<div style="font-size: 12px; color: #10B981;">✓ ${item.realizedSavings}</div>` : ""}
-          </div>
-        </div>
-      `})}
-    </div>
-  ` : ""}
-
-  ${projectedRevenueItems.length > 0 || realizedRevenueItems.length > 0 ? html`
-    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Revenue Detail</h5>
+  ${quantifiedItems.length > 0 ? html`
+    <h5 style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 8px;">Item Detail</h5>
     <div style="display: flex; flex-direction: column; gap: 8px;">
-      ${projectedRevenueItems.map(item => {
+      ${quantifiedItems.map(item => {
         const sl = serviceLines.find(s => s.id === item.serviceLine);
+        const hasSavings = item.projectedSavings || item.realizedSavings;
+        const hasRevenue = item.projectedRevenue || item.realizedRevenue;
         return html`
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #fdf4f8; border-radius: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #f8fafc; border-radius: 6px;">
           <div>
             <span style="color: ${brand.gray};">${item.title}</span>
             ${isPortfolioView ? html`<span style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-left: 8px;">${sl?.icon} ${sl?.name}</span>` : ""}
+            <div style="font-size: 11px; color: ${brand.grayLight}; margin-top: 2px;">${hasSavings ? "Savings" : ""}${hasSavings && hasRevenue ? " + " : ""}${hasRevenue ? "Revenue" : ""}</div>
           </div>
           <div style="text-align: right;">
-            <div style="font-weight: 600; color: ${brand.magenta};">📊 +${item.projectedRevenue}</div>
+            ${item.projectedSavings ? html`<div style="font-weight: 600; color: ${brand.teal};">📊 ${item.projectedSavings}</div>` : ""}
+            ${item.projectedRevenue ? html`<div style="font-weight: 600; color: ${brand.magenta};">📊 +${item.projectedRevenue}</div>` : ""}
+            ${item.realizedSavings ? html`<div style="font-size: 12px; color: #10B981;">✓ ${item.realizedSavings}</div>` : ""}
             ${item.realizedRevenue ? html`<div style="font-size: 12px; color: #10B981;">✓ +${item.realizedRevenue}</div>` : ""}
           </div>
         </div>
       `})}
     </div>
-  ` : ""}
-
-  ${projectedSavingsItems.length === 0 && projectedRevenueItems.length === 0 ? html`<p style="color: ${brand.grayLight};">No items quantified yet</p>` : ""}
+  ` : html`<p style="color: ${brand.grayLight};">No items quantified yet</p>`}
 </div>`
 ))
 }});
@@ -694,14 +652,14 @@ html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px;
 </nav>
 </aside>
 <main id="observablehq-main" class="observablehq">
-<div class="observablehq observablehq--block"><!--:a8130a37:--></div>
+<div class="observablehq observablehq--block"><!--:00d62835:--></div>
 <div class="observablehq observablehq--block"><!--:9f43d801:--></div>
 <div class="observablehq observablehq--block"><!--:1224a20d:--></div>
 <div class="observablehq observablehq--block"><!--:4ba7ae9a:--></div>
 <div class="observablehq observablehq--block"><!--:8a3b3b72:--></div>
-<div class="observablehq observablehq--block"><!--:82b9df95:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:41c4d0c9:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:1ed7ae8e:--></div>
+<div class="observablehq observablehq--block"><!--:18a399ee:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4b5156db:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:a2c3a57d:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:14046e4c:--></div>
 <div class="observablehq observablehq--block"><!--:37c2261c:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:a6fa1916:--></div>
@@ -709,8 +667,8 @@ html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px;
 <div class="observablehq observablehq--block"><!--:9eb208ef:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:bf58b735:--></div>
 <h2 id="financial-impact" tabindex="-1"><a class="observablehq-header-anchor" href="#financial-impact">Financial Impact</a></h2>
-<div class="observablehq observablehq--block"><!--:30c795b0:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:6aecc148:--></div>
+<div class="observablehq observablehq--block"><!--:240f56d8:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:e7cd89b2:--></div>
 <hr>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:bbc33935:--></div>
 </main>
