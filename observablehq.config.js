@@ -10,8 +10,5 @@ export default {
   header: false,
   pages: [
     { name: "🏠 Portfolio Overview", path: "/" },
-    { name: "❤️ Cardiovascular", path: "/cardiovascular" },
-    { name: "🦴 Orthopedic", path: "/orthopedic" },
-    { name: "🧠 Neuroscience", path: "/neuroscience" },
   ]
 };
