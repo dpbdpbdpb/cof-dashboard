@@ -158,12 +158,12 @@ function clearFilter() {
 return {filterState,activeFilter,setFilter,clearFilter};
 }});
 
-define({id: "820f1669", inputs: ["activeFilter","allData","allIssues","serviceLines"], outputs: ["isFiltered","currentIssues","activeServiceLine"], body: (activeFilter,allData,allIssues,serviceLines) => {
+define({id: "ece6020d", inputs: ["activeFilter","allData","allIssues","serviceLines"], outputs: ["isFiltered","currentIssues","activeServiceLine"], body: (activeFilter,allData,allIssues,serviceLines) => {
 // ============================================
 // FILTERED DATA
 // ============================================
 
-const isFiltered = activeFilter !== null;
+const isFiltered = activeFilter != null && activeFilter !== undefined;
 const currentIssues = isFiltered ? (allData[activeFilter] || []) : allIssues;
 const activeServiceLine = isFiltered ? serviceLines.find(s => s.id === activeFilter) : null;
 return {isFiltered,currentIssues,activeServiceLine};
@@ -516,7 +516,7 @@ display(renderKanban(currentIssues, !isFiltered))
 <div class="observablehq observablehq--block"><!--:4a13c198:--></div>
 <div class="observablehq observablehq--block"><!--:513c2c43:--></div>
 <div class="observablehq observablehq--block"><!--:c9cda80e:--></div>
-<div class="observablehq observablehq--block"><!--:820f1669:--></div>
+<div class="observablehq observablehq--block"><!--:ece6020d:--></div>
 <div class="observablehq observablehq--block"><!--:18a399ee:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:99be97d5:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:dd963e73:--></div>
