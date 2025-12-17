@@ -22,17 +22,19 @@ const brand = {
 };
 
 const serviceLines = [
-  { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", color: brand.magenta, champion: "Dr. Nezar Falluji" },
-  { id: "orthopedic", name: "Orthopedic", icon: "🦴", color: brand.teal, champion: "Dr. Ranjan Gupta" },
-  { id: "neuroscience", name: "Neuroscience", icon: "🧠", color: brand.purple, champion: "Dr. Tom Devlin" },
-  { id: "womens-childrens", name: "Women's & Children's", icon: "👶", color: brand.magentaLight, champion: "Larry Shields, MD" },
+  { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", color: brand.magenta, champion: "Dr. Nezar Falluji", dyad: "Mary Osborne" },
+  { id: "orthopedic", name: "Orthopedic", icon: "🦴", color: brand.teal, champion: "Dr. Ranjan Gupta", dyad: "Amy Magin" },
+  { id: "neuroscience", name: "Neuroscience", icon: "🧠", color: brand.purple, champion: "Dr. Tom Devlin", dyad: "Anu LoCricchio" },
+  { id: "womens-childrens", name: "Women's & Children's", icon: "👶", color: brand.magentaLight, champion: "Dr. Larry Shields", dyad: "Mindy Foster" },
+  { id: "cross-disciplinary", name: "Cross-Disciplinary", icon: "🔗", color: brand.grayDark, champion: "TBD", dyad: "TBD" },
 ];
 
 const pillarLeaders = {
   cardiovascular: { clinical: "Dr. Nezar Falluji", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   orthopedic: { clinical: "Dr. Ranjan Gupta", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   neuroscience: { clinical: "Dr. Tom Devlin", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
-  "womens-childrens": { clinical: "Larry Shields, MD", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
+  "womens-childrens": { clinical: "Dr. Larry Shields", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
+  "cross-disciplinary": { clinical: "TBD", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
 };
 
 const kanbanStates = [
@@ -45,9 +47,9 @@ const kanbanStates = [
 ];
 
 const swimlanes = [
+  { id: "sourcing", label: "🎯 Sourcing Strategy", color: brand.magenta },
   { id: "new-product", label: "📦 New Product Evaluation", color: brand.teal },
   { id: "re-evaluation", label: "🔄 Product Re-evaluation", color: "#D97706" },
-  { id: "sourcing", label: "🎯 Sourcing Strategy", color: brand.magenta },
 ];
 
 const columnDescriptions = {
@@ -63,17 +65,17 @@ const columnDescriptions = {
     "Funnel": "K1: Trigger identified (safety, evidence, utilization)",
     "Reviewing": "K2: Stakeholders engaged, Kaizen scheduled",
     "Analyzing": "K3-K4: Lookback analysis, Kaizen decision",
-    "Backlog": "K5: APPROVED, awaiting implementation capacity",
+    "Backlog": "K5: COMPLETE, awaiting capacity",
     "Implementing": "K5-K6: Sustain/Modify/Remove executing",
-    "Done": "K8: Formulary updated, transition complete",
+    "Done": "K8: No change required or deimplementation complete",
   },
   "sourcing": {
     "Funnel": "S0/K1: Category assessed, urgency documented",
     "Reviewing": "S1/K2: Coalition building, analysis, Kaizen scheduled",
-    "Analyzing": "S2-S3/K3-K4: Equivalence analysis, Kaizen decision",
+    "Analyzing": "S2-S3/K3-K4: Value analysis, Kaizen decision",
     "Backlog": "K5: Strategy APPROVED, awaiting contract execution",
     "Implementing": "S4/K5-K6: Contract execution, vendor transition",
-    "Done": "S5/K8: Contract live, savings realized",
+    "Done": "S5/K8: Contract live, savings realized, prepare next cycle",
   },
 };
 ```
@@ -97,8 +99,11 @@ const orthopedicIssues = [
   { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106 to 4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
   { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
   { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
   { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
+];
+
+const crossDisciplinaryIssues = [
+  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cross-disciplinary" },
 ];
 
 const neuroscienceIssues = [
@@ -107,7 +112,7 @@ const neuroscienceIssues = [
 ];
 
 const womensChildrensIssues = [
-  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Larry Shields, MD", archetype: "re-evaluation", completion: 80, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "womens-childrens" },
+  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Dr. Larry Shields", archetype: "re-evaluation", completion: 80, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "womens-childrens" },
 ];
 
 const allData = {
@@ -115,87 +120,41 @@ const allData = {
   orthopedic: orthopedicIssues,
   neuroscience: neuroscienceIssues,
   "womens-childrens": womensChildrensIssues,
+  "cross-disciplinary": crossDisciplinaryIssues,
 };
 
 // Combined data for portfolio view
-const allIssues = [...cardiovascularIssues, ...orthopedicIssues, ...neuroscienceIssues, ...womensChildrensIssues];
+const allIssues = [...cardiovascularIssues, ...orthopedicIssues, ...neuroscienceIssues, ...womensChildrensIssues, ...crossDisciplinaryIssues];
 ```
 
 ```js
 // ============================================
-// VIEW STATE (Using Mutable for tab navigation)
+// FILTER STATE (Service line filter via cards)
 // ============================================
 
-const viewOptions = [
-  { id: "portfolio", name: "Portfolio", icon: "📊", color: brand.gray },
-  ...serviceLines
-];
+const filterState = Mutable(null); // null = show all, or service line id
+const activeFilter = filterState.generator;
 
-const selectedViewState = Mutable("portfolio");
-const selectedViewId = selectedViewState.generator;
+function setFilter(id) {
+  // Toggle: if already filtered to this, clear filter
+  filterState.value = (filterState.value === id) ? null : id;
+}
 
-function setView(id) {
-  selectedViewState.value = id;
+function clearFilter() {
+  filterState.value = null;
 }
 ```
 
 ```js
 // ============================================
-// TAB NAVIGATION BAR
+// FILTERED DATA
 // ============================================
 
-const selectedView = viewOptions.find(v => v.id === selectedViewId) || viewOptions[0];
-
-html`<div style="
-  display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
-  padding: 4px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  overflow-x: auto;
-">
-  ${viewOptions.map(v => {
-    const isActive = v.id === selectedViewId;
-    return html`
-      <button
-        onclick=${() => setView(v.id)}
-        style="
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          padding: 8px 14px;
-          border: none;
-          border-radius: 6px;
-          font-size: 13px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.15s ease;
-          white-space: nowrap;
-          background: ${isActive ? v.color : 'transparent'};
-          color: ${isActive ? 'white' : brand.gray};
-        "
-        onmouseover=${(e) => { if (!isActive) { e.target.style.background = '#f1f5f9'; }}}
-        onmouseout=${(e) => { if (!isActive) { e.target.style.background = 'transparent'; }}}
-      >
-        <span style="font-size: 14px;">${v.icon}</span>
-        <span>${v.name}</span>
-      </button>
-    `;
-  })}
-</div>`
+const isFiltered = activeFilter != null && activeFilter !== undefined;
+const currentIssues = isFiltered ? (allData[activeFilter] || []) : allIssues;
+const activeServiceLine = isFiltered ? serviceLines.find(s => s.id === activeFilter) : null;
 ```
 
-```js
-// ============================================
-// CURRENT DATA BASED ON VIEW
-// ============================================
-
-const isPortfolioView = selectedView.id === "portfolio";
-const currentIssues = isPortfolioView ? allIssues : (allData[selectedView.id] || []);
-const currentLeaders = isPortfolioView ? null : pillarLeaders[selectedView.id];
-```
 
 ```js
 // ============================================
@@ -268,35 +227,25 @@ function getServiceLineName(id) {
 
 ```js
 // ============================================
-// PORTFOLIO HERO SECTION
+// HERO SECTION
 // ============================================
 
-isPortfolioView ? html`<div class="hero-section" style="padding: 16px 24px; margin-bottom: 16px;">
+html`<div class="hero-section" style="padding: 16px 24px; margin-bottom: 16px;">
   <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
     <div style="display: flex; align-items: center; gap: 12px;">
-      <span style="font-size: 28px;">📊</span>
-      <h1 style="font-size: 1.5rem; margin: 0;">COF Portfolio</h1>
-    </div>
-    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
-      <div style="text-align: center;">
-        <div style="font-size: 26px; font-weight: 800;">${allIssues.length}</div>
-        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Items</div>
-      </div>
-      <div style="text-align: center;">
-        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(allIssues, "projected")}</div>
-        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Projected</div>
-      </div>
-      <div style="text-align: center;">
-        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(allIssues, "realized")}</div>
-        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Realized</div>
-      </div>
-    </div>
-  </div>
-</div>` : html`<div class="hero-section" style="padding: 16px 24px; margin-bottom: 16px;">
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <span style="font-size: 28px;">${selectedView.icon}</span>
-      <h1 style="font-size: 1.5rem; margin: 0;">${selectedView.name}</h1>
+      ${isFiltered && activeServiceLine ? html`
+        <span style="font-size: 28px;">${activeServiceLine.icon}</span>
+        <div>
+          <h1 style="font-size: 1.5rem; margin: 0;">${activeServiceLine.name}</h1>
+          <div style="font-size: 11px; opacity: 0.8;">Clinical-Operational-Financial Portfolio</div>
+        </div>
+        <button onclick=${clearFilter} style="margin-left: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">✕ Clear</button>
+      ` : html`
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 2px;">CommonSpirit Health</div>
+          <h1 style="font-size: 1.5rem; margin: 0;">Clinical-Operational-Financial (COF) Portfolio</h1>
+        </div>
+      `}
     </div>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
       <div style="text-align: center;">
@@ -304,16 +253,16 @@ isPortfolioView ? html`<div class="hero-section" style="padding: 16px 24px; marg
         <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Items</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(currentIssues, "projected")}</div>
-        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Projected</div>
+        <div style="font-size: 26px; font-weight: 800;">${currentIssues.filter(i => i.status === "Implementing").length}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Active</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 26px; font-weight: 800;">${calculateImpact(currentIssues, "realized")}</div>
-        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Realized</div>
+        <div style="font-size: 26px; font-weight: 800;">${currentIssues.filter(i => i.labels?.some(l => l.toLowerCase().includes("blocked"))).length}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Blocked</div>
       </div>
       <div style="text-align: center;">
-        <div style="font-size: 15px; font-weight: 700;">${currentLeaders?.clinical || "—"}</div>
-        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Champion</div>
+        <div style="font-size: 26px; font-weight: 800;">${currentIssues.filter(i => i.status === "Done").length}</div>
+        <div style="font-size: 12px; text-transform: uppercase; opacity: 0.8;">Done</div>
       </div>
     </div>
   </div>
@@ -322,14 +271,14 @@ isPortfolioView ? html`<div class="hero-section" style="padding: 16px 24px; marg
 
 ```js
 // ============================================
-// PIPELINE BY STATUS (Portfolio View Only)
+// PIPELINE BY STATUS
 // ============================================
 
-isPortfolioView ? html`
+html`
 <div class="card" style="margin-bottom: 16px; padding: 16px;">
   <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
     ${kanbanStates.map(state => {
-      const count = allIssues.filter(i => i.status === state.id).length;
+      const count = currentIssues.filter(i => i.status === state.id).length;
       return html`
         <div style="text-align: center;">
           <div style="font-size: 26px; font-weight: 800; color: ${state.color};">${count}</div>
@@ -338,86 +287,70 @@ isPortfolioView ? html`
       `;
     })}
   </div>
-</div>` : ""
+</div>`
 ```
 
 ```js
 // ============================================
-// SERVICE LINE CARDS (Portfolio View Only)
+// SERVICE LINE CARDS (Filter buttons)
 // ============================================
 
-isPortfolioView ? html`
-<div class="grid-4" style="margin-bottom: 16px;">
+html`
+<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 16px;">
   ${serviceLines.map(sl => {
     const issues = allData[sl.id] || [];
     const implementing = issues.filter(i => i.status === "Implementing").length;
+    const done = issues.filter(i => i.status === "Done").length;
     const blocked = issues.filter(i => i.labels?.some(l => l.toLowerCase().includes("blocked"))).length;
+    const isActive = activeFilter === sl.id;
     return html`
-      <div class="card" style="border-top: 3px solid ${sl.color}; cursor: pointer; transition: all 0.2s ease; padding: 14px;"
-        onclick=${() => setView(sl.id)}
-        onmouseover=${(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'; }}
-        onmouseout=${(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = ''; }}>
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-          <span style="font-size: 22px;">${sl.icon}</span>
+      <div class="card" style="border-top: 3px solid ${sl.color}; cursor: pointer; transition: all 0.2s ease; padding: 16px; ${isActive ? `background: ${sl.color}10; box-shadow: 0 0 0 2px ${sl.color};` : ''}"
+        onclick=${() => setFilter(sl.id)}
+        onmouseover=${(e) => { if (!isActive) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)'; }}}
+        onmouseout=${(e) => { if (!isActive) { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = ''; }}}>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+          <span style="font-size: 26px;">${sl.icon}</span>
           <div>
-            <div style="font-weight: 700; font-size: 14px; color: ${brand.gray};">${sl.name}</div>
-            <div style="font-size: 12px; color: ${brand.grayLight};">${sl.champion}</div>
+            <div style="font-weight: 700; font-size: 16px; color: ${brand.gray};">${sl.name}</div>
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 13px; text-align: center;">
+        <div style="font-size: 13px; color: ${brand.grayLight}; margin-bottom: 10px; line-height: 1.5;">
+          <div><strong style="color: ${brand.gray};">Clinical:</strong> ${sl.champion} <span style="opacity: 0.5;">·</span> <strong style="color: ${brand.gray};">Admin:</strong> ${sl.dyad}</div>
+          <div><strong style="color: ${brand.gray};">Operations:</strong> ${pillarLeaders[sl.id]?.operations || "TBD"}</div>
+          <div><strong style="color: ${brand.gray};">Financial:</strong> ${pillarLeaders[sl.id]?.financial || "TBD"}</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; font-size: 15px; text-align: center;">
           <div>
             <div style="font-weight: 700; color: ${brand.gray};">${issues.length}</div>
-            <div style="color: ${brand.grayLight}; font-size: 11px;">Items</div>
+            <div style="color: ${brand.grayLight}; font-size: 12px;">Items</div>
           </div>
           <div>
             <div style="font-weight: 700; color: ${brand.magenta};">${implementing}</div>
-            <div style="color: ${brand.grayLight}; font-size: 11px;">Active</div>
+            <div style="color: ${brand.grayLight}; font-size: 12px;">Active</div>
           </div>
           <div>
             <div style="font-weight: 700; color: ${blocked > 0 ? '#ef4444' : brand.grayLight};">${blocked}</div>
-            <div style="color: ${brand.grayLight}; font-size: 11px;">Blocked</div>
+            <div style="color: ${brand.grayLight}; font-size: 12px;">Blocked</div>
           </div>
-        </div>
-        <div style="margin-top: 10px; display: flex; justify-content: space-between; font-size: 13px;">
-          <span style="color: ${brand.teal};" title="Projected Impact">📊 ${calculateImpact(issues, "projected")}</span>
-          <span style="color: #10B981;" title="Realized Impact">✓ ${calculateImpact(issues, "realized")}</span>
+          <div>
+            <div style="font-weight: 700; color: ${done > 0 ? '#10B981' : brand.grayLight};">${done}</div>
+            <div style="color: ${brand.grayLight}; font-size: 12px;">Done</div>
+          </div>
         </div>
       </div>
     `;
   })}
-</div>` : ""
+</div>`
 ```
 
 ```js
 // ============================================
-// THREE-PILLAR REPRESENTATIVES (Service Line View Only)
+// UPCOMING KAIZENS
 // ============================================
 
-!isPortfolioView && currentLeaders ? html`
-<div class="grid-3" style="margin-bottom: 16px;">
-  <div class="card" style="border-left: 3px solid ${brand.magenta}; padding: 14px;">
-    <div style="font-size: 12px; text-transform: uppercase; color: ${brand.magenta}; margin-bottom: 4px;">Clinical</div>
-    <div style="font-size: 14px; font-weight: 600;">${currentLeaders.clinical}</div>
-  </div>
-  <div class="card" style="border-left: 3px solid ${brand.purple}; padding: 14px;">
-    <div style="font-size: 12px; text-transform: uppercase; color: ${brand.purple}; margin-bottom: 4px;">Operations</div>
-    <div style="font-size: 14px; font-weight: 600;">${currentLeaders.operations}</div>
-  </div>
-  <div class="card" style="border-left: 3px solid ${brand.teal}; padding: 14px;">
-    <div style="font-size: 12px; text-transform: uppercase; color: ${brand.teal}; margin-bottom: 4px;">Financial</div>
-    <div style="font-size: 14px; font-weight: 600;">${currentLeaders.financial}</div>
-  </div>
-</div>` : ""
-```
+const upcomingKaizens = getUpcomingKaizens(currentIssues);
 
-```js
-// ============================================
-// UPCOMING KAIZENS (Portfolio View Only)
-// ============================================
-
-const upcomingKaizens = getUpcomingKaizens(allIssues);
-
-isPortfolioView && upcomingKaizens.length > 0 ? html`
+upcomingKaizens.length > 0 ? html`
 <div class="card" style="margin-bottom: 16px; padding: 14px;">
   <div style="font-size: 12px; text-transform: uppercase; color: ${brand.grayLight}; margin-bottom: 10px;">Upcoming Kaizens</div>
   <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -437,9 +370,11 @@ isPortfolioView && upcomingKaizens.length > 0 ? html`
 </div>` : ""
 ```
 
-## Product & Sourcing Kanban
-
 ```js
+// ============================================
+// KANBAN BOARD
+// ============================================
+
 // Render Kanban board
 function renderKanban(issues, showServiceLine = false) {
   const columns = kanbanStates;
@@ -455,45 +390,49 @@ function renderKanban(issues, showServiceLine = false) {
     return formatFinancialValue(low, high);
   }
 
+  const swimlaneCount = swimlanes.length;
+
   return html`
-    <div class="card" style="padding: 24px; overflow-x: auto;">
+    <div class="card" style="padding: 16px; overflow-x: auto; display: flex; flex-direction: column; height: calc(100vh - 520px); min-height: 300px;">
       <!-- Column Headers -->
-      <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 12px; min-width: 1000px;">
-        <div style="font-size: 12px; color: ${brand.grayLight}; padding: 4px 8px;">Archetype</div>
+      <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 8px; min-width: 1000px; flex-shrink: 0;">
+        <div></div>
         ${columns.map(col => html`
-          <div style="font-size: 12px; font-weight: 600; color: white; background: ${col.color}; padding: 8px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <div style="font-size: 11px; font-weight: 600; color: white; background: ${col.color}; padding: 6px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
             ${col.label}
           </div>
         `)}
       </div>
 
-      <!-- Swimlanes -->
-      ${swimlanes.map(swimlane => {
-        const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
-        const descriptions = columnDescriptions[swimlane.id];
+      <!-- Swimlanes Container -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 1000px; overflow: hidden;">
+        ${swimlanes.map(swimlane => {
+          const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
+          const descriptions = columnDescriptions[swimlane.id];
 
-        return html`
-          <div style="margin-bottom: 20px; min-width: 1000px;">
-            <!-- Swimlane Header -->
-            <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 4px;">
-              <div style="font-size: 13px; font-weight: 600; color: ${swimlane.color}; background: ${swimlane.color}15; padding: 10px; border-radius: 8px; overflow: hidden;">
-                ${swimlane.label}
-              </div>
-              ${columns.map(col => html`
-                <div style="font-size: 11px; color: ${brand.grayLight}; padding: 4px; line-height: 1.3; overflow: hidden;">
-                  ${descriptions[col.id]}
+          return html`
+            <div style="flex: 1; display: flex; flex-direction: column; min-height: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+              <!-- Swimlane Header -->
+              <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px; padding: 8px; background: ${swimlane.color}08; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;">
+                <div style="font-size: 12px; font-weight: 600; color: ${swimlane.color}; overflow: hidden;">
+                  ${swimlane.label}
                 </div>
-              `)}
-            </div>
+                ${columns.map(col => html`
+                  <div style="font-size: 10px; color: ${brand.grayLight}; line-height: 1.3; overflow: hidden;">
+                    ${descriptions[col.id]}
+                  </div>
+                `)}
+              </div>
 
-            <!-- Issue Cards -->
-            <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px;">
-              <div></div>
-              ${columns.map(col => {
-                const cellIssues = swimlaneIssues.filter(i => i.status === col.id);
-                return html`
-                  <div style="min-height: 60px; background: #f8fafc; border-radius: 6px; padding: 6px;">
-                    ${cellIssues.map(issue => {
+              <!-- Issue Cards (Scrollable) -->
+              <div style="flex: 1; overflow-y: auto; padding: 8px;">
+                <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px;">
+                  <div></div>
+                  ${columns.map(col => {
+                    const cellIssues = swimlaneIssues.filter(i => i.status === col.id);
+                    return html`
+                      <div style="min-height: 40px; background: #f8fafc; border-radius: 6px; padding: 6px;">
+                        ${cellIssues.map(issue => {
                       const isBlocked = issue.labels?.some(l => l.toLowerCase().includes("blocked"));
                       const sl = serviceLines.find(s => s.id === issue.serviceLine);
                       const hasFinancial = issue.projectedSavings || issue.realizedSavings || issue.projectedRevenue || issue.realizedRevenue;
@@ -507,38 +446,33 @@ function renderKanban(issues, showServiceLine = false) {
                           </div>
                           ${showServiceLine ? html`<div style="font-size: 11px; color: ${sl?.color || brand.grayLight}; margin-top: 2px;">${sl?.icon} ${sl?.name}</div>` : ""}
                           <div style="font-size: 11px; color: ${brand.grayLight}; margin-top: 4px;">${issue.brief}</div>
-                          ${hasFinancial ? html`
-                            <div style="font-size: 12px; margin-top: 6px; font-weight: 600; display: flex; flex-direction: column; gap: 2px;">
-                              ${projectedImpact !== "—" ? html`<div style="color: ${brand.teal};">📊 ${projectedImpact} <span style="font-weight: 400; font-size: 10px;">projected</span></div>` : ""}
-                              ${realizedImpact !== "—" ? html`<div style="color: #10B981;">✓ ${realizedImpact} <span style="font-weight: 400; font-size: 10px;">realized</span></div>` : ""}
-                            </div>
-                          ` : ""}
-                          <div style="font-size: 11px; color: ${brand.purple}; margin-top: 6px;">
-                            ${issue.kaizenDate || "TBD"}
+                          <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 8px;">
+                            <div style="font-size: 11px; color: ${brand.purple};">${issue.kaizenDate || "TBD"}</div>
+                            ${hasFinancial ? html`
+                              <div style="font-size: 11px; font-weight: 600; text-align: right;">
+                                ${projectedImpact !== "—" ? html`<div style="color: ${brand.teal};">📊 ${projectedImpact}</div>` : ""}
+                                ${realizedImpact !== "—" ? html`<div style="color: #10B981;">✓ ${realizedImpact}</div>` : ""}
+                              </div>
+                            ` : ""}
                           </div>
                         </a>
                       `;
-                    })}
-                  </div>
-                `;
-              })}
+                        })}
+                      </div>
+                    `;
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-        `;
-      })}
+          `;
+        })}
+      </div>
     </div>
   `;
 }
 ```
 
 ```js
-renderKanban(currentIssues, isPortfolioView)
-```
-
----
-
-```js
-html`<div style="text-align: center; color: ${brand.grayLight}; font-size: 12px; margin-top: 32px;">
-  <a href="https://linear.app/commonspirit" target="_blank" style="color: ${brand.purple};">Open Linear →</a>
-</div>`
+// Render the kanban board reactively
+display(renderKanban(currentIssues, !isFiltered))
 ```
