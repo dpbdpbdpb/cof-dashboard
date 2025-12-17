@@ -18,7 +18,7 @@
 
 import {define} from "./_observablehq/client.fedf0981.js";
 
-define({id: "1c9723cf", outputs: ["brand","serviceLines","pillarLeaders","kanbanStates","swimlanes","columnDescriptions"], body: () => {
+define({id: "4a13c198", outputs: ["brand","serviceLines","pillarLeaders","kanbanStates","swimlanes","columnDescriptions"], body: () => {
 // ============================================
 // CONFIGURATION & BRAND COLORS
 // ============================================
@@ -79,9 +79,9 @@ const columnDescriptions = {
     "Funnel": "K1: Trigger identified (safety, evidence, utilization)",
     "Reviewing": "K2: Stakeholders engaged, Kaizen scheduled",
     "Analyzing": "K3-K4: Lookback analysis, Kaizen decision",
-    "Backlog": "K5: APPROVED, awaiting implementation capacity",
+    "Backlog": "K5: COMPLETE, awaiting capacity",
     "Implementing": "K5-K6: Sustain/Modify/Remove executing",
-    "Done": "K8: Formulary updated, transition complete",
+    "Done": "K8: No change required or deimplementation complete",
   },
   "sourcing": {
     "Funnel": "S0/K1: Category assessed, urgency documented",
@@ -239,7 +239,7 @@ function getServiceLineName(id) {
 return {parseFinancialValue,formatFinancialValue,calculateSavings,calculateRevenue,calculateImpact,getUpcomingKaizens,getServiceLineName};
 }});
 
-define({id: "60aa8abb", inputs: ["html","isFiltered","activeServiceLine","clearFilter","currentIssues","display"], body: async (html,isFiltered,activeServiceLine,clearFilter,currentIssues,display) => {
+define({id: "99be97d5", inputs: ["html","isFiltered","activeServiceLine","clearFilter","currentIssues","display"], body: async (html,isFiltered,activeServiceLine,clearFilter,currentIssues,display) => {
 display(await(
 // ============================================
 // HERO SECTION
@@ -256,8 +256,10 @@ html`<div class="hero-section" style="padding: 16px 24px; margin-bottom: 16px;">
         </div>
         <button onclick=${clearFilter} style="margin-left: 8px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 4px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;">✕ Clear</button>
       ` : html`
-        <span style="font-size: 28px;">📊</span>
-        <h1 style="font-size: 1.5rem; margin: 0;">Clinical-Operational-Financial (COF) Portfolio</h1>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 2px;">CommonSpirit Health</div>
+          <h1 style="font-size: 1.5rem; margin: 0;">Clinical-Operational-Financial (COF) Portfolio</h1>
+        </div>
       `}
     </div>
     <div style="display: flex; gap: 24px; flex-wrap: wrap;">
@@ -306,7 +308,7 @@ html`
 ))
 }});
 
-define({id: "a17c54e7", inputs: ["html","serviceLines","allData","activeFilter","setFilter","brand","calculateImpact","display"], body: async (html,serviceLines,allData,activeFilter,setFilter,brand,calculateImpact,display) => {
+define({id: "f3212fcd", inputs: ["html","serviceLines","allData","activeFilter","setFilter","brand","calculateImpact","display"], body: async (html,serviceLines,allData,activeFilter,setFilter,brand,calculateImpact,display) => {
 display(await(
 // ============================================
 // SERVICE LINE CARDS (Filter buttons)
@@ -344,12 +346,12 @@ html`
             <div style="color: ${brand.grayLight}; font-size: 10px;">Active</div>
           </div>
           <div>
-            <div style="font-weight: 700; color: ${done > 0 ? '#10B981' : brand.grayLight};">${done}</div>
-            <div style="color: ${brand.grayLight}; font-size: 10px;">Done</div>
-          </div>
-          <div>
             <div style="font-weight: 700; color: ${blocked > 0 ? '#ef4444' : brand.grayLight};">${blocked}</div>
             <div style="color: ${brand.grayLight}; font-size: 10px;">Blocked</div>
+          </div>
+          <div>
+            <div style="font-weight: 700; color: ${done > 0 ? '#10B981' : brand.grayLight};">${done}</div>
+            <div style="color: ${brand.grayLight}; font-size: 10px;">Done</div>
           </div>
         </div>
         <div style="margin-top: 10px; display: flex; justify-content: space-between; font-size: 12px;">
@@ -391,7 +393,7 @@ upcomingKaizens.length > 0 ? html`
 return {upcomingKaizens};
 }});
 
-define({id: "80ec79a2", inputs: ["kanbanStates","parseFinancialValue","formatFinancialValue","html","swimlanes","columnDescriptions","brand","serviceLines"], outputs: ["renderKanban"], body: (kanbanStates,parseFinancialValue,formatFinancialValue,html,swimlanes,columnDescriptions,brand,serviceLines) => {
+define({id: "18e9c1ef", inputs: ["kanbanStates","parseFinancialValue","formatFinancialValue","swimlanes","html","columnDescriptions","brand","serviceLines"], outputs: ["renderKanban"], body: (kanbanStates,parseFinancialValue,formatFinancialValue,swimlanes,html,columnDescriptions,brand,serviceLines) => {
 // ============================================
 // KANBAN BOARD
 // ============================================
@@ -411,45 +413,49 @@ function renderKanban(issues, showServiceLine = false) {
     return formatFinancialValue(low, high);
   }
 
+  const swimlaneCount = swimlanes.length;
+
   return html`
-    <div class="card" style="padding: 24px; overflow-x: auto;">
+    <div class="card" style="padding: 16px; overflow-x: auto; display: flex; flex-direction: column; height: calc(100vh - 340px); min-height: 400px;">
       <!-- Column Headers -->
-      <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 12px; min-width: 1000px;">
+      <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 8px; min-width: 1000px; flex-shrink: 0;">
         <div></div>
         ${columns.map(col => html`
-          <div style="font-size: 12px; font-weight: 600; color: white; background: ${col.color}; padding: 8px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+          <div style="font-size: 11px; font-weight: 600; color: white; background: ${col.color}; padding: 6px; border-radius: 6px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
             ${col.label}
           </div>
         `)}
       </div>
 
-      <!-- Swimlanes -->
-      ${swimlanes.map(swimlane => {
-        const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
-        const descriptions = columnDescriptions[swimlane.id];
+      <!-- Swimlanes Container -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 1000px; overflow: hidden;">
+        ${swimlanes.map(swimlane => {
+          const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
+          const descriptions = columnDescriptions[swimlane.id];
 
-        return html`
-          <div style="margin-bottom: 20px; min-width: 1000px;">
-            <!-- Swimlane Header -->
-            <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px; margin-bottom: 4px;">
-              <div style="font-size: 13px; font-weight: 600; color: ${swimlane.color}; background: ${swimlane.color}15; padding: 10px; border-radius: 8px; overflow: hidden;">
-                ${swimlane.label}
-              </div>
-              ${columns.map(col => html`
-                <div style="font-size: 11px; color: ${brand.grayLight}; padding: 4px; line-height: 1.3; overflow: hidden;">
-                  ${descriptions[col.id]}
+          return html`
+            <div style="flex: 1; display: flex; flex-direction: column; min-height: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+              <!-- Swimlane Header -->
+              <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px; padding: 8px; background: ${swimlane.color}08; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;">
+                <div style="font-size: 12px; font-weight: 600; color: ${swimlane.color}; overflow: hidden;">
+                  ${swimlane.label}
                 </div>
-              `)}
-            </div>
+                ${columns.map(col => html`
+                  <div style="font-size: 10px; color: ${brand.grayLight}; line-height: 1.3; overflow: hidden;">
+                    ${descriptions[col.id]}
+                  </div>
+                `)}
+              </div>
 
-            <!-- Issue Cards -->
-            <div style="display: grid; grid-template-columns: 180px repeat(${columns.length}, 1fr); gap: 8px;">
-              <div></div>
-              ${columns.map(col => {
-                const cellIssues = swimlaneIssues.filter(i => i.status === col.id);
-                return html`
-                  <div style="min-height: 60px; background: #f8fafc; border-radius: 6px; padding: 6px;">
-                    ${cellIssues.map(issue => {
+              <!-- Issue Cards (Scrollable) -->
+              <div style="flex: 1; overflow-y: auto; padding: 8px;">
+                <div style="display: grid; grid-template-columns: 160px repeat(${columns.length}, 1fr); gap: 8px;">
+                  <div></div>
+                  ${columns.map(col => {
+                    const cellIssues = swimlaneIssues.filter(i => i.status === col.id);
+                    return html`
+                      <div style="min-height: 40px; background: #f8fafc; border-radius: 6px; padding: 6px;">
+                        ${cellIssues.map(issue => {
                       const isBlocked = issue.labels?.some(l => l.toLowerCase().includes("blocked"));
                       const sl = serviceLines.find(s => s.id === issue.serviceLine);
                       const hasFinancial = issue.projectedSavings || issue.realizedSavings || issue.projectedRevenue || issue.realizedRevenue;
@@ -474,14 +480,16 @@ function renderKanban(issues, showServiceLine = false) {
                           </div>
                         </a>
                       `;
-                    })}
-                  </div>
-                `;
-              })}
+                        })}
+                      </div>
+                    `;
+                  })}
+                </div>
+              </div>
             </div>
-          </div>
-        `;
-      })}
+          `;
+        })}
+      </div>
     </div>
   `;
 }
@@ -502,16 +510,16 @@ display(renderKanban(currentIssues, !isFiltered))
 </nav>
 </aside>
 <main id="observablehq-main" class="observablehq">
-<div class="observablehq observablehq--block"><!--:1c9723cf:--></div>
+<div class="observablehq observablehq--block"><!--:4a13c198:--></div>
 <div class="observablehq observablehq--block"><!--:513c2c43:--></div>
 <div class="observablehq observablehq--block"><!--:c9cda80e:--></div>
 <div class="observablehq observablehq--block"><!--:820f1669:--></div>
 <div class="observablehq observablehq--block"><!--:18a399ee:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:60aa8abb:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:99be97d5:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:dd963e73:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:a17c54e7:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:f3212fcd:--></div>
 <div class="observablehq observablehq--block"><!--:ebae053c:--></div>
-<div class="observablehq observablehq--block"><!--:80ec79a2:--></div>
+<div class="observablehq observablehq--block"><!--:18e9c1ef:--></div>
 <div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:6b0bf2d2:--></div>
 </main>
 </div>
