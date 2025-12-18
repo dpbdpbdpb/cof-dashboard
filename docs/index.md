@@ -82,49 +82,25 @@ const columnDescriptions = {
 
 ```js
 // ============================================
-// SAMPLE DATA (Replace with Linear API later)
+// DATA FROM LINEAR API
 // ============================================
 
-const cardiovascularIssues = [
-  { id: "COM-380", title: "AGENT Drug-Coated Balloon", brief: "Peripheral artery disease intervention", status: "Implementing", priority: "High", kaizenDate: "2025-10-08", champion: "Dr. Falluji", archetype: "new-product", completion: 90, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-386", title: "T/EVAR Sourcing", brief: "Aortic stent graft consolidation", status: "Implementing", priority: "High", kaizenDate: null, champion: "CVSL Council", archetype: "sourcing", completion: 75, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-387", title: "Renal Denervation", brief: "Resistant hypertension treatment hubs", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 65, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-396", title: "EVOQUE", brief: "Tricuspid valve replacement system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 50, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-395", title: "DETOUR", brief: "Femoropopliteal bypass system", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-397", title: "ESPRIT-BTK", brief: "Below-the-knee drug-eluting stent", status: "Analyzing", priority: "Medium", kaizenDate: null, champion: "Dr. Falluji", archetype: "new-product", completion: 0, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
-  { id: "COM-457", title: "GE Cath Lab Modernization", brief: "Imaging equipment standardization", status: "Implementing", priority: "Urgent", kaizenDate: null, champion: "Mary Osborne", archetype: "sourcing", completion: 60, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cardiovascular" },
-];
+const linearData = await FileAttachment("data/linear-issues.json").json();
 
-const orthopedicIssues = [
-  { id: "COM-381", title: "Hip/Knee Sourcing Strategy", brief: "$161M implant consolidation, 106 to 4 vendors", status: "Analyzing", priority: "Urgent", kaizenDate: "2026-01-12", champion: "Dr. Ranjan Gupta", archetype: "sourcing", completion: 60, projectedSavings: "$10-16M", realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-426", title: "Trauma & Distal Extremity", brief: "$84M nails, plates, external fixation", status: "Funnel", priority: "High", kaizenDate: null, champion: "Dr. Cliff Jones", archetype: "sourcing", completion: 20, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-427", title: "Sports Medicine Sourcing", brief: "$42M anchors, shavers, RF pumps", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 40, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
-  { id: "COM-425", title: "Shoulders Sourcing", brief: "$38M total/reverse shoulder implants", status: "Funnel", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 25, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "orthopedic" },
-];
-
-const crossDisciplinaryIssues = [
-  { id: "COM-428", title: "Spine Sourcing Strategy", brief: "$94M implants, 50 vendors, ortho+neuro", status: "Funnel", priority: "High", kaizenDate: null, champion: "TBD", archetype: "sourcing", completion: 30, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "cross-disciplinary" },
-];
-
-const neuroscienceIssues = [
-  { id: "COM-383", title: "Robotic TCD for PFO Detection", brief: "Automated stroke risk screening, 3x better than echo", status: "Reviewing", priority: "High", kaizenDate: "2026-01-15", champion: "Dr. Tom Devlin", archetype: "new-product", completion: 75, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "neuroscience" },
-  { id: "COM-307", title: "Medivis AI Navigation", brief: "AR surgical navigation for spine procedures", status: "Reviewing", priority: "Medium", kaizenDate: null, champion: "TBD", archetype: "new-product", completion: 20, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, labels: ["blocked"], serviceLine: "neuroscience" },
-];
-
-const womensChildrensIssues = [
-  { id: "COM-500", title: "Fetal Pillow De-implementation", brief: "First unified three-pillar clinical-supply chain-quality communication", status: "Implementing", priority: "High", kaizenDate: null, champion: "Dr. Larry Shields", archetype: "re-evaluation", completion: 80, projectedSavings: null, realizedSavings: null, projectedRevenue: null, realizedRevenue: null, serviceLine: "womens-childrens" },
-];
-
+// Map Linear data to dashboard structure
 const allData = {
-  cardiovascular: cardiovascularIssues,
-  orthopedic: orthopedicIssues,
-  neuroscience: neuroscienceIssues,
-  "womens-childrens": womensChildrensIssues,
-  "cross-disciplinary": crossDisciplinaryIssues,
+  cardiovascular: linearData.cardiovascular || [],
+  orthopedic: linearData.orthopedic || [],
+  neuroscience: linearData.neuroscience || [],
+  "womens-childrens": linearData.womensChildren || [],
+  "cross-disciplinary": linearData.crossDisciplinary || [],
 };
 
 // Combined data for portfolio view
-const allIssues = [...cardiovascularIssues, ...orthopedicIssues, ...neuroscienceIssues, ...womensChildrensIssues, ...crossDisciplinaryIssues];
+const allIssues = linearData.all || [];
+
+// Show last sync time
+const lastUpdated = linearData.metadata?.lastUpdated ? new Date(linearData.metadata.lastUpdated).toLocaleString() : "Unknown";
 ```
 
 ```js
@@ -137,10 +113,7 @@ const activeFilter = filterState.generator;
 
 function setFilter(id) {
   // Toggle: if already filtered to this, clear filter
-  const newValue = (filterState.value === id) ? null : id;
-  console.log("setFilter called:", { id, currentValue: filterState.value, newValue });
-  filterState.value = newValue;
-  console.log("filterState.value after set:", filterState.value);
+  filterState.value = (filterState.value === id) ? null : id;
 }
 
 function clearFilter() {
@@ -153,11 +126,9 @@ function clearFilter() {
 // FILTERED DATA
 // ============================================
 
-console.log("Filtered data cell running, activeFilter:", activeFilter);
 const isFiltered = activeFilter != null && activeFilter !== undefined;
 const currentIssues = isFiltered ? (allData[activeFilter] || []) : allIssues;
 const activeServiceLine = isFiltered ? serviceLines.find(s => s.id === activeFilter) : null;
-console.log("Filtered data result:", { isFiltered, issueCount: currentIssues.length, activeServiceLine: activeServiceLine?.name });
 ```
 
 
@@ -249,6 +220,7 @@ html`<div class="hero-section" style="padding: 16px 24px; margin-bottom: 16px;">
         <div>
           <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 2px;">CommonSpirit Health</div>
           <h1 style="font-size: 1.5rem; margin: 0;">Clinical-Operational-Financial (COF) Portfolio</h1>
+          <div style="font-size: 10px; opacity: 0.7; margin-top: 4px;">🔄 Synced: ${lastUpdated}</div>
         </div>
       `}
     </div>
@@ -398,7 +370,7 @@ function renderKanban(issues, showServiceLine = false) {
   const swimlaneCount = swimlanes.length;
 
   return html`
-    <div class="card" style="padding: 12px; overflow-x: auto; display: flex; flex-direction: column; height: calc(100vh - 380px); min-height: 300px;">
+    <div class="card" style="padding: 12px; overflow-x: auto; display: flex; flex-direction: column; height: calc(100vh - 380px); min-height: 380px;">
       <!-- Column Headers -->
       <div style="display: grid; grid-template-columns: 140px repeat(${columns.length}, 1fr); gap: 6px; margin-bottom: 6px; min-width: 1000px; flex-shrink: 0;">
         <div></div>
@@ -416,7 +388,7 @@ function renderKanban(issues, showServiceLine = false) {
           const descriptions = columnDescriptions[swimlane.id];
 
           return html`
-            <div style="flex: 1 1 0; display: flex; flex-direction: column; min-height: 0; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+            <div style="flex: 1 1 0; display: flex; flex-direction: column; min-height: 100px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
               <!-- Swimlane Header -->
               <div style="display: grid; grid-template-columns: 140px repeat(${columns.length}, 1fr); gap: 6px; padding: 5px; background: ${swimlane.color}08; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;">
                 <div style="font-size: 11px; font-weight: 600; color: ${swimlane.color}; overflow: hidden;">
