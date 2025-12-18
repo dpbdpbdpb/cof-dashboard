@@ -51,32 +51,23 @@
     { "id": "Done", "label": "Done", "color": "#54585A" }
   ],
   "swimlanes": [
-    { "id": "new-product", "label": "📦 New Product Evaluation", "color": "#008B8B" },
-    { "id": "re-evaluation", "label": "🔄 Product Re-evaluation", "color": "#D97706" },
-    { "id": "sourcing", "label": "🎯 Sourcing Strategy", "color": "#C4177A" }
+    { "id": "formulary", "label": "📋 Formulary Decisions", "color": "#008B8B" },
+    { "id": "vendor", "label": "🎯 Vendor Decisions", "color": "#C4177A" }
   ],
   "columnDescriptions": {
-    "new-product": {
-      "Funnel": "Request received, initial triage",
-      "Reviewing": "Evidence gathering, clinical review",
-      "Analyzing": "Financial modeling, 3-pillar prep",
-      "Backlog": "Awaiting Kaizen scheduling",
+    "formulary": {
+      "Funnel": "Request/trigger received, champion identified",
+      "Reviewing": "Coalition forming, Kaizen scheduled",
+      "Analyzing": "Analysis complete, Kaizen decision",
+      "Backlog": "Approved, awaiting implementation",
       "Implementing": "Pilot/rollout in progress",
-      "Done": "Formulary decision complete"
+      "Done": "Lookback complete, formulary finalized"
     },
-    "re-evaluation": {
-      "Funnel": "Trigger identified (safety, evidence)",
-      "Reviewing": "Lookback data collection",
-      "Analyzing": "Impact assessment, alternatives",
-      "Backlog": "Awaiting reassessment Kaizen",
-      "Implementing": "Sustain/Modify/Remove action",
-      "Done": "Reassessment complete"
-    },
-    "sourcing": {
-      "Funnel": "Category identified, RFI/RFP prep",
-      "Reviewing": "Vendor submissions, evaluations",
-      "Analyzing": "Clinical equivalence, pricing",
-      "Backlog": "Awaiting strategy Kaizen",
+    "vendor": {
+      "Funnel": "Category assessed, urgency documented",
+      "Reviewing": "Coalition building, Kaizen scheduled",
+      "Analyzing": "Value analysis, Kaizen decision",
+      "Backlog": "Strategy approved, awaiting contract",
       "Implementing": "Contract execution, transition",
       "Done": "Contract live, savings realized"
     }

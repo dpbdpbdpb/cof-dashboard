@@ -141,9 +141,10 @@ function mapPriority(priority) {
 
 function detectArchetype(labels) {
   const labelNames = labels.map(l => l.name.toLowerCase());
-  if (labelNames.some(l => l.includes("sourcing") || l.includes("rfp") || l.includes("vendor"))) return "sourcing";
-  if (labelNames.some(l => l.includes("re-eval") || l.includes("lookback"))) return "re-evaluation";
-  return "new-product";
+  // Vendor decisions: sourcing, RFP, vendor-related labels
+  if (labelNames.some(l => l.includes("sourcing") || l.includes("rfp") || l.includes("vendor"))) return "vendor";
+  // Everything else is formulary (new products + re-evaluations)
+  return "formulary";
 }
 
 function estimateCompletion(stateName) {

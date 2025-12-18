@@ -47,35 +47,26 @@ const kanbanStates = [
 ];
 
 const swimlanes = [
-  { id: "sourcing", label: "🎯 Sourcing Strategy", color: brand.magenta },
-  { id: "new-product", label: "📦 New Product Evaluation", color: brand.teal },
-  { id: "re-evaluation", label: "🔄 Product Re-evaluation", color: "#D97706" },
+  { id: "formulary", label: "📋 Formulary Decisions", color: brand.teal },
+  { id: "vendor", label: "🎯 Vendor Decisions", color: brand.magenta },
 ];
 
 const columnDescriptions = {
-  "new-product": {
-    "Funnel": "K1: Request received, champion identified",
+  "formulary": {
+    "Funnel": "K1: Request/trigger received, champion identified",
     "Reviewing": "K2: Coalition forming, Kaizen scheduled",
-    "Analyzing": "K3-K4: 8-agent analysis, Kaizen decision",
-    "Backlog": "K5: APPROVED, awaiting implementation capacity",
+    "Analyzing": "K3-K4: Analysis complete, Kaizen decision",
+    "Backlog": "K5: APPROVED, awaiting implementation",
     "Implementing": "K5-K6: Pilot/rollout in progress",
     "Done": "K8: Lookback complete, formulary finalized",
   },
-  "re-evaluation": {
-    "Funnel": "K1: Trigger identified (safety, evidence, utilization)",
-    "Reviewing": "K2: Stakeholders engaged, Kaizen scheduled",
-    "Analyzing": "K3-K4: Lookback analysis, Kaizen decision",
-    "Backlog": "K5: COMPLETE, awaiting capacity",
-    "Implementing": "K5-K6: Sustain/Modify/Remove executing",
-    "Done": "K8: No change required or deimplementation complete",
-  },
-  "sourcing": {
+  "vendor": {
     "Funnel": "S0/K1: Category assessed, urgency documented",
-    "Reviewing": "S1/K2: Coalition building, analysis, Kaizen scheduled",
+    "Reviewing": "S1/K2: Coalition building, Kaizen scheduled",
     "Analyzing": "S2-S3/K3-K4: Value analysis, Kaizen decision",
-    "Backlog": "K5: Strategy APPROVED, awaiting contract execution",
-    "Implementing": "S4/K5-K6: Contract execution, vendor transition",
-    "Done": "S5/K8: Contract live, savings realized, prepare next cycle",
+    "Backlog": "K5: Strategy APPROVED, awaiting contract",
+    "Implementing": "S4/K5-K6: Contract execution, transition",
+    "Done": "S5/K8: Contract live, savings realized",
   },
 };
 ```
