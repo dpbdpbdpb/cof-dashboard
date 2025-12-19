@@ -25,6 +25,7 @@ const serviceLines = [
   { id: "cardiovascular", name: "Cardiovascular", icon: "❤️", color: brand.magenta, champion: "Dr. Nezar Falluji", dyad: "Mary Osborne" },
   { id: "orthopedic", name: "Orthopedic", icon: "🦴", color: brand.teal, champion: "Dr. Ranjan Gupta", dyad: "Amy Magin" },
   { id: "neuroscience", name: "Neuroscience", icon: "🧠", color: brand.purple, champion: "Dr. Tom Devlin", dyad: "Anu LoCricchio" },
+  { id: "surgery", name: "General Surgery", icon: "🩺", color: "#2563EB", champion: "Dr. Gagliano", dyad: "TBD" },
   { id: "womens-childrens", name: "Women's & Children's", icon: "👶", color: brand.magentaLight, champion: "Dr. Larry Shields", dyad: "Mindy Foster" },
   { id: "cross-disciplinary", name: "Cross-Disciplinary", icon: "🔗", color: brand.grayDark, champion: "TBD", dyad: "TBD" },
 ];
@@ -33,6 +34,7 @@ const pillarLeaders = {
   cardiovascular: { clinical: "Dr. Nezar Falluji", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   orthopedic: { clinical: "Dr. Ranjan Gupta", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   neuroscience: { clinical: "Dr. Tom Devlin", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
+  surgery: { clinical: "Dr. Gagliano", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   "womens-childrens": { clinical: "Dr. Larry Shields", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
   "cross-disciplinary": { clinical: "TBD", operations: "TBD (Terika Designee)", financial: "TBD (JP Designee)" },
 };
@@ -83,6 +85,7 @@ const allData = {
   cardiovascular: linearData.cardiovascular || [],
   orthopedic: linearData.orthopedic || [],
   neuroscience: linearData.neuroscience || [],
+  surgery: linearData.surgery || [],
   "womens-childrens": linearData.womensChildren || [],
   "cross-disciplinary": linearData.crossDisciplinary || [],
 };
@@ -264,7 +267,7 @@ html`
 // ============================================
 
 html`
-<div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 12px; align-items: stretch;">
+<div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 12px; align-items: stretch;">
   ${serviceLines.map(sl => {
     const issues = allData[sl.id] || [];
     const implementing = issues.filter(i => i.status === "Implementing").length;
@@ -361,7 +364,7 @@ function renderKanban(issues, showServiceLine = false) {
   const swimlaneCount = swimlanes.length;
 
   return html`
-    <div class="card" style="padding: 12px; overflow-x: auto; display: flex; flex-direction: column; height: calc(100vh - 380px); min-height: 380px;">
+    <div class="card" style="padding: 12px; overflow-x: auto; display: flex; flex-direction: column;">
       <!-- Column Headers -->
       <div style="display: grid; grid-template-columns: 140px repeat(${columns.length}, 1fr); gap: 6px; margin-bottom: 6px; min-width: 1000px; flex-shrink: 0;">
         <div></div>
@@ -373,13 +376,13 @@ function renderKanban(issues, showServiceLine = false) {
       </div>
 
       <!-- Swimlanes Container -->
-      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 1000px; overflow: hidden;">
+      <div style="display: flex; flex-direction: column; gap: 6px; min-width: 1000px;">
         ${swimlanes.map(swimlane => {
           const swimlaneIssues = issues.filter(i => i.archetype === swimlane.id);
           const descriptions = columnDescriptions[swimlane.id];
 
           return html`
-            <div style="flex: 1 1 0; display: flex; flex-direction: column; min-height: 100px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+            <div style="display: flex; flex-direction: column; height: calc((100vh - 520px) / 2); min-height: 180px; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
               <!-- Swimlane Header -->
               <div style="display: grid; grid-template-columns: 140px repeat(${columns.length}, 1fr); gap: 6px; padding: 5px; background: ${swimlane.color}08; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;">
                 <div style="font-size: 11px; font-weight: 600; color: ${swimlane.color}; overflow: hidden;">

@@ -9,8 +9,9 @@ const LINEAR_API_URL = "https://api.linear.app/graphql";
 // Linear Project IDs for COF Service Lines
 const PROJECT_IDS = {
   cardiovascular: "67cab51b-1c35-4d13-b4fa-20800fafb8fa",
-  orthopedic: "f94960e7-254e-4987-92bc-a2d36d643cf5", 
+  orthopedic: "f94960e7-254e-4987-92bc-a2d36d643cf5",
   neuroscience: "14140c87-a1a4-4c2a-bcf7-936ad14174f7",
+  surgery: "d8385a2c-bb0c-4235-aa13-03507eb55ad9",
   crossDisciplinary: "1541827a-2a47-43ed-bdbb-ed1892c17b43",
   womensChildren: "34d99d83-890a-46f3-a939-d8f8f703220e",
   gastroenterology: "4cc643cb-34fd-4f79-90ee-b690bcb66714",
@@ -25,6 +26,7 @@ const STATE_MAPPING = {
   "Triage": "Funnel",
   "Backlog": "Backlog",
   "Todo": "Backlog",
+  "Analyzing": "Analyzing",
   "In Progress": "Implementing",
   "In Review": "Reviewing",
   "Done": "Done",
@@ -93,6 +95,7 @@ const SERVICE_LINE_MAP = {
   "cardiovascular": "cardiovascular",
   "orthopedic": "orthopedic",
   "neuroscience": "neuroscience",
+  "surgery": "surgery",
   "crossDisciplinary": "cross-disciplinary",
   "womensChildren": "womens-childrens",
   "gastroenterology": "gastroenterology",
@@ -149,7 +152,7 @@ function detectArchetype(labels) {
 
 function estimateCompletion(stateName) {
   const estimates = {
-    "Triage": 10, "Backlog": 30, "Todo": 40,
+    "Triage": 10, "Backlog": 30, "Todo": 40, "Analyzing": 50,
     "In Progress": 60, "In Review": 80, "Done": 100
   };
   return estimates[stateName] || 0;
@@ -179,6 +182,7 @@ async function main() {
     cardiovascular,
     orthopedic,
     neuroscience,
+    surgery,
     crossDisciplinary,
     womensChildren,
     gastroenterology,
@@ -190,6 +194,7 @@ async function main() {
     fetchProjectIssues(PROJECT_IDS.cardiovascular, "cardiovascular"),
     fetchProjectIssues(PROJECT_IDS.orthopedic, "orthopedic"),
     fetchProjectIssues(PROJECT_IDS.neuroscience, "neuroscience"),
+    fetchProjectIssues(PROJECT_IDS.surgery, "surgery"),
     fetchProjectIssues(PROJECT_IDS.crossDisciplinary, "crossDisciplinary"),
     fetchProjectIssues(PROJECT_IDS.womensChildren, "womensChildren"),
     fetchProjectIssues(PROJECT_IDS.gastroenterology, "gastroenterology"),
@@ -203,6 +208,7 @@ async function main() {
     ...cardiovascular,
     ...orthopedic,
     ...neuroscience,
+    ...surgery,
     ...crossDisciplinary,
     ...womensChildren,
     ...gastroenterology,
@@ -217,6 +223,7 @@ async function main() {
     cardiovascular,
     orthopedic,
     neuroscience,
+    surgery,
     crossDisciplinary,
     womensChildren,
     gastroenterology,
@@ -233,6 +240,7 @@ async function main() {
         cardiovascular: cardiovascular.length,
         orthopedic: orthopedic.length,
         neuroscience: neuroscience.length,
+        surgery: surgery.length,
         crossDisciplinary: crossDisciplinary.length,
         womensChildren: womensChildren.length,
         gastroenterology: gastroenterology.length,
