@@ -103,7 +103,6 @@ const lastUpdated = linearData.metadata?.lastUpdated ? new Date(linearData.metad
 // ============================================
 
 const filterState = Mutable(null); // null = show all, or service line id
-const activeFilter = filterState.generator;
 
 function setFilter(id) {
   // Toggle: if already filtered to this, clear filter
@@ -117,10 +116,12 @@ function clearFilter() {
 
 ```js
 // ============================================
-// FILTERED DATA
+// FILTERED DATA (reactive to filterState)
 // ============================================
 
-const isFiltered = activeFilter != null && activeFilter !== undefined;
+// Read the current value from the Mutable - cell re-runs when filterState changes
+const activeFilter = filterState.value;
+const isFiltered = activeFilter != null;
 const currentIssues = isFiltered ? (allData[activeFilter] || []) : allIssues;
 const activeServiceLine = isFiltered ? serviceLines.find(s => s.id === activeFilter) : null;
 ```

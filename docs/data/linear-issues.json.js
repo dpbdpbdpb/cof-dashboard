@@ -58,6 +58,9 @@ async function fetchProjectIssues(projectId, projectName) {
             assignee {
               name
             }
+            parent {
+              id
+            }
             completedAt
             createdAt
             updatedAt
@@ -82,8 +85,11 @@ async function fetchProjectIssues(projectId, projectName) {
 
     const data = await response.json();
     const issues = data.data?.project?.issues?.nodes || [];
-    
-    return issues.map(issue => transformIssue(issue, projectName));
+
+    // Only include top-level issues (no parent) - these are program epics
+    const topLevelIssues = issues.filter(issue => !issue.parent);
+
+    return topLevelIssues.map(issue => transformIssue(issue, projectName));
   } catch (error) {
     console.error(`Error fetching ${projectName}:`, error);
     return [];
